@@ -1,0 +1,113 @@
+upstream ${SERVER_NAME_JUPYTER} {
+        ip_hash;
+        server ${LOCALHOST}:${JUPYTER_PORT} fail_timeout=5580s max_fails=1000;
+}
+
+upstream ${SERVER_NAME_SUPERSET} {
+        ip_hash;
+        server ${LOCALHOST}:${SUPERSET_PORT} fail_timeout=5580s max_fails=1000;
+}
+
+server {
+
+
+        listen 80;
+        server_name ${DOMAIN_JUPYTER};
+        server_tokens off;
+        #return 301 https://$host$request_uri;
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+        location / {
+            proxy_pass http://${SERVER_NAME_JUPYTER};
+        }
+
+}
+
+
+server {
+
+
+
+        client_max_body_size 20M;
+        listen 80;
+        server_name ${DOMAIN_SUPERSET};
+        server_tokens off;
+        #return 301 https://$host$request_uri;
+            location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+        
+        location / {
+            proxy_pass http://${SERVER_NAME_SUPERSET};
+        }
+
+}
+
+
+server {
+
+    listen 443 ssl;
+    server_name ${DOMAIN_JUPYTER};
+    server_tokens off;
+
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN_JUPYTER}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN_JUPYTER}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+        proxy_pass  http://${SERVER_NAME_JUPYTER};
+        proxy_set_header    Host                $http_host;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+    }
+
+location ~ /api/kernels/ {
+proxy_pass http://${SERVER_NAME_JUPYTER};
+proxy_set_header Host $http_host;
+# websocket support
+proxy_http_version 1.1;
+proxy_set_header Upgrade "websocket";
+proxy_set_header Connection "Upgrade";
+proxy_read_timeout 86400;
+}
+location ~ /terminals/ {
+proxy_pass http://${SERVER_NAME_JUPYTER};
+proxy_set_header Host $http_host;
+# websocket support
+proxy_http_version 1.1;
+proxy_set_header Upgrade "websocket";
+proxy_set_header Connection "Upgrade";
+proxy_read_timeout 86400;
+}
+
+
+
+
+
+
+
+
+}
+
+
+server {
+    client_max_body_size 20M;
+    listen 443 ssl;
+    server_name ${DOMAIN_SUPERSET};
+    server_tokens off;
+
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN_SUPERSET}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN_SUPERSET}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+        proxy_pass  http://${SERVER_NAME_SUPERSET};
+        proxy_set_header    Host                $http_host;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+    }
+
+}
