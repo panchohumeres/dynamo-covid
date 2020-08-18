@@ -36,10 +36,24 @@ Business Intelligence stack, based on **Apache Superset-PostGres** for **data wa
  1. `docker-compose up`--->Start the stack
  2. `docker-compose up docker-compose_local.yaml`---->Start the stack in local mode (without nginx nor certbot, for testing in local environment).
  3. `docker-compose up --build`--->Start the stack recreating the services after changes in environment variables.
+<<<<<<< HEAD
 
 ## File Structure
 
 Relevant File structure
+=======
+## ETL DOCS
+See [specific documentation](/ETLdocs/readme.md)
+
+## File Structure
+## File Structure
+### Root de Jupyter Notebook
+
+Root of **Jupyter Notebook** endpoint (served by **Jupyter** container):
+
+![](jupyter_root.png)
+#### Relevant File structure
+>>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
 ```
 📦EJK
 ┣ 📂CRONTAB
@@ -47,6 +61,7 @@ Relevant File structure
 ┃ ┃Logs folder, where crontab status and output of Jupyter ETL scripts are stored.
 ┃ ┗ 📜crontab.sh
 ┃   Crontab script, which runs on Jupyter container at startup. Edit for configuration of ETL scheduling.
+<<<<<<< HEAD
 ┣ 📂ETL
 ┃  ETL scripts (jupyter notebooks)
 ┣ 📂backup_utils
@@ -56,6 +71,16 @@ Relevant File structure
 ┃   Kibana backup utility (python3)
 ┣ 📂certs
 ┃  Docker-compose files for creating TSL certificates for internal communications between Elasticsearch-Kibana.
+=======
+┣ 📂args
+┃ Folder for python arguments (for being used by Jupyter Notebook container)
+┣ 📂superset
+┃ ┃ Superset config. files.
+┃ ┗ 📜superset_config.py
+┃   Superset config. file, which will be read by the container at startup.
+┣ 📂ETL
+┃  ETL scripts (jupyter notebooks)
+>>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
 ┣ 📂jupyter
 ┃   Jupyter configuration files, including Dockerfile.
 ┣ 📂modules
@@ -73,6 +98,7 @@ Relevant File structure
 ┃    Certbot setup script.
 ┣ 📜docker-compose.yml
 ┃    Stack docker-compose file.
+<<<<<<< HEAD
 ┣ 📜ebak.env
 ┃    .env file for elastic dump utility.
 ┣ 📜.env
@@ -80,3 +106,38 @@ Relevant File structure
 ┗ 📜elastic_backup.sh
     Wrapper for elastic dump utility.
 ```
+=======
+┣ 📜.env
+┃    .env file for EJK stack docker-compose file.
+```
+## TROUBLESHOOTING:
+* **Jupyter Notebooks**:
+   - `Permission denied: <filename>` when creating files or folders on Jupyter Notebook endpoint:
+      * **Cause**: Permission problems with mounted volumes. Jupyter container has by default a "jovyan" user, which Linux id is 1000. The container will only recognize as "writable" files and folders that in **the host** belong to the same Linux id==1000 (independent of the name of user and group).
+      * **Diagnostic**:
+         1. `docker-compose exec jupyter bash`.
+         2. `id`------>This will list the jovyan user properties, including its Linux ID.
+         3. `cd` into any of the mounted folders, then `ls -all`, check the folders and files owners and groups, if they do not belong to UID==1000, then there will be trouble.
+         4. `exit` and `cd` into any of the mounted folders in the **host**, check who really owns the folders or files.
+      * **Solution**, either:
+         - **Copy permissions from a folder that works**
+            * `sudo chmod -R --reference=<source_folder> <target_folder>`
+            * `sudo chown -R --reference=<source_folder> <target_folder>`
+         - **Change the owner of the folders to UID==1000**
+            * `sudo chmod -R g+rwx <target_folder>`
+            * `sudo chgrp -R 1000 <target_folder>`
+            * `sudo chown -R 1000 <target_folder>`
+      * **References**:
+         - https://github.com/jupyter/docker-stacks/issues/114
+         - https://discourse.jupyter.org/t/what-is-with-the-weird-jovyan-user/1673
+
+* **Superset**:
+   - `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"> <title>400 Bad Request</title> <h1>Bad Request</h1> <p>The CSRF session token is missing.</p>` appears on embedded Dashboards (as iframe):
+      * **Diagnostic:** On superset docker logs will appear as a `CSRF token missing` Flask error.
+      * **Solution:** This happens usually when testing in local environment and in Chrome browser. Just try with the website hosted in a web-host (even github-pages) and the embedded dashboard should display correctly.
+      * **References**: 
+         - https://nickjanetakis.com/blog/fix-missing-csrf-token-issues-with-flask
+         - https://github.com/apache/incubator-superset/issues/8382
+   - `Invalid login. Please try again` on superset login, despite user have been created correctly on environmente variables.
+      * **Solution**: Check that first you have created an `admin` user (step 7 of Setup), through superset container's console.
+>>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
