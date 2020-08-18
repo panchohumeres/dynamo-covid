@@ -90,8 +90,4 @@ services:
 
 volumes:
   postgres:
-<<<<<<< HEAD
   redis:
-=======
-  redis:
->>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
