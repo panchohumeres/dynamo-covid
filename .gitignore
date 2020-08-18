@@ -12,3 +12,7 @@ nginx-config/test
 ebak.env
 CRONTAB/logs/**
 passwords.txt
+<<<<<<< HEAD
+=======
+replace.txt
+>>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
