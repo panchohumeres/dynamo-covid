@@ -21,7 +21,7 @@ services:
       - ${HOST_DATA_PATH}:/data
       - ${HOST_DATA_PATH}/ETLcache:/home/jovyan/work/ETLcache
       - ${PWD}/jupyter:/home/jovyan/.jupyter/
-      - ${PWD}/backup_utils:/home/jovyan/work/backup_kibana
+      - ${PWD}/backup_utils:/home/jovyan/work/backup
       - ${PWD}/ETL:/home/jovyan/work/ETL
       - ${PWD}/ETLdocs:/home/jovyan/work/ETLdocs
       - ${PWD}/CRONTAB:/home/jovyan/work/CRONTAB
