@@ -19,6 +19,7 @@ services:
     volumes:
       - ${PWD}/notebooks:/home/jovyan/work
       - ${HOST_DATA_PATH}:/data
+      - ${HOST_DATA_PATH}/ETLcache:/home/jovyan/work/ETLcache
       - ${PWD}/jupyter:/home/jovyan/.jupyter/
       - ${PWD}/backup_utils:/home/jovyan/work/backup_kibana
       - ${PWD}/ETL:/home/jovyan/work/ETL
