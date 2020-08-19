@@ -13,6 +13,11 @@ ebak.env
 CRONTAB/logs/**
 passwords.txt
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 replace.txt
 >>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
+=======
+replace.txt
+ETL/.ipynb_checkpoints/*
+>>>>>>> a0fcf6dfe0f2759f163f224bc6693aa236472223
