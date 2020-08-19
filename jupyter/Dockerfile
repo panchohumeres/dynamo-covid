@@ -30,6 +30,7 @@ RUN conda install --quiet --yes -c \
     papermill \
     seaborn \
     sqlalchemy \
+    scikit-learn \
     psycopg2
 
 
