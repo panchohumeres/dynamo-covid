@@ -9,6 +9,7 @@ services:
     environment:
       - NB_UID=1002 #change to host user id in case it's not 1000
       - POSTGRES_DB=$POSTGRES_DB
+      - DB_NAME=$DB_NAME
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_USER=$POSTGRES_USER
