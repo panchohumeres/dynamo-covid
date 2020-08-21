@@ -31,7 +31,8 @@ RUN conda install --quiet --yes -c \
     seaborn \
     sqlalchemy \
     scikit-learn \
-    psycopg2
+    psycopg2 \
+    boto3
 
 
 RUN pip install -U elasticsearch
