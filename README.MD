@@ -36,12 +36,6 @@ Business Intelligence stack, based on **Apache Superset-PostGres** for **data wa
  1. `docker-compose up`--->Start the stack
  2. `docker-compose up docker-compose_local.yaml`---->Start the stack in local mode (without nginx nor certbot, for testing in local environment).
  3. `docker-compose up --build`--->Start the stack recreating the services after changes in environment variables.
-<<<<<<< HEAD
-
-## File Structure
-
-Relevant File structure
-=======
 ## ETL DOCS
 See [specific documentation](/ETLdocs/readme.md)
 
@@ -53,7 +47,6 @@ Root of **Jupyter Notebook** endpoint (served by **Jupyter** container):
 
 ![](jupyter_root.png)
 #### Relevant File structure
->>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
 ```
 📦EJK
 ┣ 📂CRONTAB
@@ -61,17 +54,6 @@ Root of **Jupyter Notebook** endpoint (served by **Jupyter** container):
 ┃ ┃Logs folder, where crontab status and output of Jupyter ETL scripts are stored.
 ┃ ┗ 📜crontab.sh
 ┃   Crontab script, which runs on Jupyter container at startup. Edit for configuration of ETL scheduling.
-<<<<<<< HEAD
-┣ 📂ETL
-┃  ETL scripts (jupyter notebooks)
-┣ 📂backup_utils
-┃ ┣ 📂elastic_dump
-┃ ┃  Elastic dump utility (node.js).
-┃ ┗ 📂kibana
-┃   Kibana backup utility (python3)
-┣ 📂certs
-┃  Docker-compose files for creating TSL certificates for internal communications between Elasticsearch-Kibana.
-=======
 ┣ 📂args
 ┃ Folder for python arguments (for being used by Jupyter Notebook container)
 ┣ 📂superset
@@ -80,7 +62,6 @@ Root of **Jupyter Notebook** endpoint (served by **Jupyter** container):
 ┃   Superset config. file, which will be read by the container at startup.
 ┣ 📂ETL
 ┃  ETL scripts (jupyter notebooks)
->>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
 ┣ 📂jupyter
 ┃   Jupyter configuration files, including Dockerfile.
 ┣ 📂modules
@@ -98,15 +79,6 @@ Root of **Jupyter Notebook** endpoint (served by **Jupyter** container):
 ┃    Certbot setup script.
 ┣ 📜docker-compose.yml
 ┃    Stack docker-compose file.
-<<<<<<< HEAD
-┣ 📜ebak.env
-┃    .env file for elastic dump utility.
-┣ 📜.env
-┃    .env file for EJK stack docker-compose file.
-┗ 📜elastic_backup.sh
-    Wrapper for elastic dump utility.
-```
-=======
 ┣ 📜.env
 ┃    .env file for EJK stack docker-compose file.
 ```
@@ -140,4 +112,3 @@ Root of **Jupyter Notebook** endpoint (served by **Jupyter** container):
          - https://github.com/apache/incubator-superset/issues/8382
    - `Invalid login. Please try again` on superset login, despite user have been created correctly on environmente variables.
       * **Solution**: Check that first you have created an `admin` user (step 7 of Setup), through superset container's console.
->>>>>>> 01e8ba77dac88cca600bc65622e52ac9defb808b
