@@ -34,7 +34,8 @@ RUN conda install --quiet --yes -c \
     scikit-learn \
     psycopg2 \
     boto3 \
-    patool
+    patool \
+    xlrd
 
 
 RUN pip install -U elasticsearch
