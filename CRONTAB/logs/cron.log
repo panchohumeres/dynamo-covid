@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 time="2020-08-21T08:33:10Z" level=info msg="read crontab: /home/jovyan/work/CRONTAB/crontab.sh"
 time="2020-08-21T12:00:00Z" level=info msg=starting iteration=0 job.command="papermill /home/jovyan/work/ETL/covid-chile.ipynb /home/jovyan/work/CRONTAB/logs/covid-chile_`date +\\%Y\\%m\\%d\\%H\\%M\\%S`.ipynb" job.position=0 job.schedule="0 */6 * * *"
 time="2020-08-21T12:00:00Z" level=info msg="Input Notebook:  /home/jovyan/work/ETL/covid-chile.ipynb" channel=stderr iteration=0 job.command="papermill /home/jovyan/work/ETL/covid-chile.ipynb /home/jovyan/work/CRONTAB/logs/covid-chile_`date +\\%Y\\%m\\%d\\%H\\%M\\%S`.ipynb" job.position=0 job.schedule="0 */6 * * *"
@@ -840,3 +841,9 @@ time="2020-08-24T06:26:02Z" level=info msg="   1120                 # Yielding a
 time="2020-08-24T06:26:02Z" level=info channel=stderr iteration=11 job.command="papermill /home/jovyan/work/ETL/cleanETL.ipynb /home/jovyan/work/CRONTAB/logs/cleanETL_`date +\\%Y\\%m\\%d\\%H\\%M\\%S`.ipynb" job.position=3 job.schedule="26 */6 * * *"
 time="2020-08-24T06:26:02Z" level=info msg="FileNotFoundError: [Errno 2] No such file or directory: '../CRONTAB/logs'" channel=stderr iteration=11 job.command="papermill /home/jovyan/work/ETL/cleanETL.ipynb /home/jovyan/work/CRONTAB/logs/cleanETL_`date +\\%Y\\%m\\%d\\%H\\%M\\%S`.ipynb" job.position=3 job.schedule="26 */6 * * *"
 time="2020-08-24T06:26:02Z" level=info channel=stderr iteration=11 job.command="papermill /home/jovyan/work/ETL/cleanETL.ipynb /home/jovyan/work/CRONTAB/logs/cleanETL_`date +\\%Y\\%m\\%d\\%H\\%M\\%S`.ipynb" job.position=3 job.schedule="26 */6 * * *"
+=======
+time="2020-08-08T22:40:48Z" level=info msg="read crontab: /home/jovyan/work/CRONTAB/crontab.sh"
+time="2020-08-08T23:08:05Z" level=info msg="received terminated, shutting down"
+time="2020-08-08T23:08:05Z" level=info msg="waiting for jobs to finish"
+time="2020-08-08T23:08:05Z" level=info msg=exiting
+>>>>>>> c74e1d329aad6e8dd7c56bbc7c9e3c9ed32d0461
