@@ -37,9 +37,24 @@ def activos_func(df,cols=[],min_periods=0,window=14):
     activos['Promedio']=activos.mean(axis=1)
     activos['Min']=activos.min(axis=1)
     activos['Max']=activos.max(axis=1)
+    activos=pd.concat([activos,activos.quantile([.5,.95],axis=1).T],axis=1)
     activos[cols_diff]=df[cols_diff]
 
     return activos
+
+def casos_nuevos_desc(df,cols=[],numeric_col_string='confirmados',group_col=None):
+    df=df.copy()
+    cols=[x for x in df.columns if numeric_col_string in str(x)]
+    nuevos=df[cols]
+    cols_diff=list(set(df.columns.to_list())-set(nuevos.columns.to_list()))
+    nuevos['Promedio']=nuevos.mean(axis=1)
+    nuevos['Min']=nuevos.min(axis=1)
+    nuevos['Max']=nuevos.max(axis=1)
+    nuevos=pd.concat([nuevos,nuevos.quantile([.5,.95],axis=1).T],axis=1)
+    #nuevos[['05','95']]
+    nuevos[cols_diff]=df[cols_diff]
+
+    return nuevos
 
 def to_diff_std(df,group_col='Region',diff_col='Total'):
     df=df.copy()
@@ -78,7 +93,7 @@ def make_dummies(_df,fields=[],keep_strings=[],value_map={'metropolitana':{0:'Re
     
     return df
 
-def casos_activos(df,numeric_col_string='confirmados',group_col=None,min_periods=0,window=14):
+def casos_activos(df,numeric_col_string='confirmados',group_col=None,min_periods=0,window=7):
 
     df=df.copy()
 
