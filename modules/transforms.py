@@ -26,6 +26,17 @@ def to_diff(df):
     df.iloc[0]=DF.iloc[0]    
 
     return df
+
+def rolling(df,group_col='',window=7,numeric_col='',min_periods=0):
+    df=df.copy()
+
+    activos=[]
+    for g in df[group_col].unique():
+        activos.append(df.loc[df[group_col]==g,numeric_col].rolling(min_periods=min_periods, window=window).sum(errors='coerce'))
+    activos=pd.concat(activos)
+
+
+    return activos
     
 def activos_func(df,cols=[],min_periods=0,window=14):
 
