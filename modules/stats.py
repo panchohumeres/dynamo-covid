@@ -1,0 +1,79 @@
+import pandas as pd
+import sqlalchemy 
+import psycopg2
+import os
+import numpy as np
+import requests
+import re
+import copy
+from pandas.api.types import is_numeric_dtype
+from sklearn.linear_model import LinearRegression
+from sqlalchemy import create_engine
+import datetime
+from datetime import datetime as dt
+import seaborn as sns; sns.set()
+import matplotlib.pyplot as plt
+
+def regression(_df,term1='LOG',term2='_TOT'):
+    dfm=_df.copy()
+    
+    
+    logs=[x for x in dfm.columns if term1 in x]
+    X=[x for x in logs if term2 in x]
+    Y=[y for y in logs if term2 not in y]
+    
+    for x,y in zip(X,Y):
+        df=dfm[[x,y]]
+        #print(df)
+        df=df.replace(0,np.nan)
+        df=df.replace([np.inf, -np.inf], np.nan)
+        df=df.dropna()
+        
+        _X=df[x].values.reshape(-1, 1)
+        _y=df[y].values.reshape(-1, 1)
+        linear_regressor = LinearRegression()
+        linear_regressor.fit(_X, _y)
+        Y_pred = linear_regressor.predict(dfm[x].values.reshape(-1, 1))
+        
+        name=x+'_Regress'
+        
+        dfm[name]=Y_pred
+        
+    return dfm
+    
+def log_log_plot(df,timestamp='',path='',x='',y='',z='',xlabel='',ylabel='',x_label='',y_label='',title='',ax=''):
+    
+    if ax!='':
+        ax = sns.lineplot(x=x, y=y, data=df,marker="o",ax=axes[ax])
+        ax = sns.lineplot(x=x, y=z, data=df,ax=axes[ax])
+    else:
+        ax = sns.lineplot(x=x, y=y, data=df,marker="o")
+        ax = sns.lineplot(x=x, y=z, data=df)        
+    x_ticks=df[x].dropna().iloc[::30]
+    if xlabel=='Fecha':
+        x_labels=df.loc[x_ticks.index,xlabel].dt.strftime('%Y-%m-%d')
+    else:
+        x_labels=df.loc[x_ticks.index,xlabel]
+    y_ticks=df[y].dropna().iloc[::30]
+    y_labels=df.loc[y_ticks.index,ylabel]
+    ax.set(xticks=x_ticks,yticks=y_ticks,xlabel=x_label,ylabel=y_label,title=title)
+    ax.set_xticklabels(x_labels, rotation='vertical', fontsize=9)
+    ax.set_yticklabels(y_labels, fontsize=9)
+    filename=path+title.replace(' ','_').replace('ó','o')+'.png'
+    print('saving to file: '+filename)
+    plt.savefig(filename)
+    backup=path+title.replace(' ','_').replace('ó','o')+timestamp+'.png'
+    print('saving backup: '+backup)
+    plt.savefig(backup)
+    plt.show()
+    
+def log_inv(_df,term1='LOG',term2='_Regress'):
+    df=_df.copy()
+    logs=[x for x in df.columns if term1 in x]
+    Y=[y for y in logs if term2 in y]
+    
+    for y in Y:
+        name=y.replace(term1,'').replace('(','').replace(')','')
+        df[name]=np.exp(df[y])
+        
+    return df
