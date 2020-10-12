@@ -35,7 +35,9 @@ RUN conda install --quiet --yes -c \
     psycopg2 \
     boto3 \
     patool \
-    xlrd
+    xlrd \
+    geopandas \
+    mapbox
 
 
 RUN pip install -U elasticsearch
