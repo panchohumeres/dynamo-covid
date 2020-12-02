@@ -40,7 +40,10 @@ RUN conda install --quiet --yes -c \
     mapbox
 
 
-RUN pip install -U elasticsearch
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir elasticsearch && \
+    pip install --no-cache-dir topojson \
+    pip install --no-cache-dir roman
 
 
 VOLUME /home/jovyan/work
