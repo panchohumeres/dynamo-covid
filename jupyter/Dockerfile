@@ -37,7 +37,8 @@ RUN conda install --quiet --yes -c \
     patool \
     xlrd \
     geopandas \
-    mapbox
+    mapbox \
+    markdown
 
 
 RUN pip install --upgrade pip && \
