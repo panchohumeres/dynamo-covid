@@ -38,7 +38,8 @@ RUN conda install --quiet --yes -c \
     xlrd \
     geopandas \
     mapbox \
-    markdown
+    markdown \
+    bs4
 
 
 RUN pip install --upgrade pip && \
