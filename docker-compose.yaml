@@ -18,6 +18,9 @@ services:
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
       - S3_BUCKET=$S3_BUCKET
+      - MAPBOX_API_KEY=$MAPBOX_API_KEY
+      - MAPBOX_API_UPLOAD_KEY=$MAPBOX_API_UPLOAD_KEY
+
     command: /bin/sh -c "/home/jovyan/.jupyter/jupyter-docker-entrypoint.sh"
     volumes:
       - ${PWD}/notebooks:/home/jovyan/work
@@ -38,7 +41,7 @@ services:
     volumes:
       - ${HOST_DATA_PATH}/redis:/data
   postgres:
-    image: postgres
+    image: postgis/postgis
     restart: always
     environment:
       POSTGRES_DB: $POSTGRES_DB
@@ -54,6 +57,7 @@ services:
       - redis
     environment:
       MAPBOX_API_KEY: ${MAPBOX_API_KEY}
+      MAPBOX_API_UPLOAD_KEY: ${MAPBOX_API_UPLOAD_KEY}
       ADMIN_USERNAME: ${ADMIN_USERNAME}
       ADMIN_FIRST_NAME: ${ADMIN_FIRST_NAME}
       ADMIN_LAST_NAME: ${ADMIN_LAST_NAME}
