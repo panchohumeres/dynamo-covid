@@ -39,7 +39,9 @@ RUN conda install --quiet --yes -c \
     geopandas \
     mapbox \
     markdown \
-    bs4
+    bs4 \
+    geoalchemy2 \
+    conda-forge descartes
 
 
 RUN pip install --upgrade pip && \
