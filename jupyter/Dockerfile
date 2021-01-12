@@ -41,7 +41,9 @@ RUN conda install --quiet --yes -c \
     markdown \
     bs4 \
     geoalchemy2 \
-    conda-forge descartes
+    conda-forge descartes \
+    dateparser \
+    carto
 
 
 RUN pip install --upgrade pip && \
