@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>movilidad</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>consolidado_nacional</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14262,20 +14262,23 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
-<span class="kn">import</span> <span class="nn">patoolib</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy</span> 
 <span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">mapbox</span> <span class="kn">import</span> <span class="n">Uploader</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_numeric_dtype</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">inspect</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="k">as</span> <span class="nn">sqld</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14303,12 +14306,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">]</span>
-<span class="n">postgres_psswd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">]</span>
-<span class="n">postgres_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">]</span>
-<span class="n">postgres_port</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">])</span>
-<span class="n">mapbox_api</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAPBOX_API_KEY&#39;</span><span class="p">]</span>
-<span class="n">mapbox_up</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAPBOX_API_UPLOAD_KEY&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">modules.transforms</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
      </div>
@@ -14320,6 +14318,23 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">]</span>
+<span class="n">postgres_psswd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">]</span>
+<span class="n">postgres_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">]</span>
+<span class="n">postgres_port</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A long string that contains the necessary Postgres login information</span>
@@ -14336,10 +14351,13 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://matiascerda.carto.com/api/v2/sql?format=CSV&amp;filename=datos-movilidad-isci.csv&amp;q=select%20*</span><span class="si">%20f</span><span class="s1">rom</span><span class="si">%20d</span><span class="s1">ata_variacion&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#guardar paso en csv</span>
+<span class="n">path</span><span class="o">=</span><span class="s1">&#39;/data/ETLcache/&#39;</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;_</span><span class="si">%d</span><span class="s2">%m%Y_%H%M%S&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14350,17 +14368,54 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span><span class="o">=</span><span class="s2">&quot;select * from geo.zonas_censales&quot;</span>
-<span class="n">zonas</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span>
-<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pop</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;producto1_Covid_19&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;producto1&#39;</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">)</span> 
+<span class="n">pop</span><span class="o">=</span><span class="n">pop</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">)[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">popTOT</span><span class="o">=</span><span class="n">pop</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">popTOT</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>19458310.0</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14369,7 +14424,42 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_14_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#----------------------------DEIS--------------------------------------------------------------------</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;DEIS&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;DEIS_2020&quot;</span>
+<span class="n">DEIS</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">DEIS</span><span class="o">=</span><span class="n">DEIS</span><span class="p">[</span><span class="n">DEIS</span><span class="p">[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<span class="c1">#fallecidos nuevos regionales (DEIS)</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">DEIS</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">,</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">])[</span><span class="s1">&#39;FECHA_STR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">fr</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">fr</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Region Metropolitana&#39;</span><span class="p">,</span><span class="s1">&#39;Fallecidos Nuevos&#39;</span><span class="p">]</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">fr</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region Metropolitana&#39;</span><span class="p">])</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">fr</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">fr</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">fr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">fr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; (DEIS)&#39;</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">fr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1">#fallecidos regional acumulado (deis)</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">fr</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fra</span><span class="o">=</span><span class="n">fr</span><span class="p">[</span><span class="n">fr</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">fra</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Nuevos&#39;</span><span class="p">,</span><span class="s1">&#39;Acumulados&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fra</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="c1">#concatenar</span>
+<span class="n">fr</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">fr</span><span class="p">,</span><span class="n">fra</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">deis</span><span class="o">=</span><span class="n">DEIS</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">)[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">deis</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Fallecidos DEIS Diarios&#39;</span><span class="p">]</span>
+<span class="n">deis</span><span class="o">=</span><span class="n">deis</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">DEIS</span><span class="p">[</span><span class="n">DEIS</span><span class="p">[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Covid PCR+&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">)[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;index&#39;</span><span class="p">:</span><span class="s1">&#39;Fallecidos DEIS Diarios (PCR+)&#39;</span><span class="p">}),</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">deis</span><span class="o">=</span><span class="n">deis</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">DEIS</span><span class="p">[</span><span class="n">DEIS</span><span class="p">[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Covid Sospechoso&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">)[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;index&#39;</span><span class="p">:</span><span class="s1">&#39;Fallecidos DEIS Diarios (Covid Sospechoso)&#39;</span><span class="p">}),</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS (PCR+) Acumulado&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS Diarios (PCR+)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS (Covid Sospechoso) Acumulado&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS Diarios (Covid Sospechoso)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS Acumulado&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS Diarios&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS (PCR+) x Millón/Hab.&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS (PCR+) Acumulado&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">popTOT</span><span class="o">/</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS (Covid Sospechoso) x Millón/Hab.&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS (Covid Sospechoso) Acumulado&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">popTOT</span><span class="o">/</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS x Millón/Hab.&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Fallecidos DEIS Acumulado&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">popTOT</span><span class="o">/</span><span class="mi">1000000</span><span class="p">)</span>
+
+
+<span class="n">DEIS</span><span class="o">=</span><span class="n">deis</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="c1">#----------------------------DEIS--------------------------------------------------------------------</span>
 </pre></div>
 
      </div>
@@ -14383,85 +14473,118 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crs</span><span class="o">=</span><span class="n">zonas</span><span class="o">.</span><span class="n">crs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#----------------------------ICOVID--------------------------------------------------------------------</span>
+
+<span class="c1">#casos nuevos según fecha de inicio de síntomas (icovid)</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto53&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto53_confirmados_&quot;</span>
+<span class="n">nuevos</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">nuevos</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nuevos</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">)[</span><span class="s1">&#39;Promedio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">nuevos</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Casos Nuevos (ICOVID)&#39;</span><span class="p">]</span>
+<span class="n">nuevos</span><span class="p">[</span><span class="s1">&#39;Incidencia Nuevos (ICOVID) x 100 K Hab.&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">nuevos</span><span class="p">[</span><span class="s1">&#39;Casos Nuevos (ICOVID)&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">popTOT</span><span class="o">*</span><span class="mi">100000</span>
+<span class="n">nuevos</span><span class="p">[</span><span class="s1">&#39;Casos Acumulados (ICOVID)&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">nuevos</span><span class="p">[</span><span class="s1">&#39;Casos Nuevos (ICOVID)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="c1">#casos activos según fecha de inicio de síntomas (icovid)</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto53&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto53_confirmados_regionale_casos_activos&quot;</span>
+<span class="n">activos</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">activos</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">activos</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">)[</span><span class="s1">&#39;Promedio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">activos</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Casos Activos (ICOVID)&#39;</span><span class="p">]</span>
+<span class="n">activos</span><span class="p">[</span><span class="s1">&#39;Incidencia Activos (ICOVID) x 100 K Hab.&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">activos</span><span class="p">[</span><span class="s1">&#39;Casos Activos (ICOVID)&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">popTOT</span><span class="o">*</span><span class="mi">100000</span>
+
+<span class="c1">#activos regional icovid</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto53&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto53_confirmados_regionale_casos_activos&quot;</span>
+<span class="n">ar</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">ar</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ar</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])[[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">,</span><span class="s1">&#39;Promedio&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">ar</span><span class="o">=</span><span class="n">ar</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">ar</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">ar</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">ar</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Casos Activos (ICOVID)&#39;</span>
+<span class="n">ar</span><span class="o">=</span><span class="n">ar</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">ar</span><span class="o">=</span><span class="n">ar</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fecha&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">})</span>
+
+<span class="c1">#nuevos regionales icovid</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto53&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto53_confirmados_regionale&quot;</span>
+<span class="n">nr</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">nr</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nr</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])[[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">,</span><span class="s1">&#39;Promedio&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">nr</span><span class="o">=</span><span class="n">nr</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">nr</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">nr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">nr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Casos Nuevos (ICOVID)&#39;</span>
+<span class="n">nr</span><span class="o">=</span><span class="n">nr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">nr</span><span class="o">=</span><span class="n">nr</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fecha&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">})</span>
+
+<span class="c1">#icovid consolidado</span>
+<span class="n">icovid</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">nuevos</span><span class="p">,</span><span class="n">activos</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">icovid</span><span class="o">=</span><span class="n">icovid</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">icovid</span><span class="o">=</span><span class="n">icovid</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fecha&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">})</span>
+
+<span class="n">icovid</span><span class="o">=</span><span class="n">icovid</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="c1">#----------------------------ICOVID--------------------------------------------------------------------</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#diferencias entre entradas y salidas de zonas censales estimadas por ISCI-entel Ocean</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="c1">#diferencias entre entradas</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_entrada&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="c1">#diferencias entre salidas</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;the_geom&#39;</span><span class="p">,</span><span class="s1">&#39;cartodb_id&#39;</span><span class="p">,</span><span class="s1">&#39;the_geom_webmercator&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zonas</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2020-&#39;</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-6&#39;</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%W-%w&#39;</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">]</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-11-39a840ff3a8b&gt;:4: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
-  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-11-39a840ff3a8b&gt;:4: FutureWarning: The default value of regex will change from True to False in a future version.
-  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-11-39a840ff3a8b&gt;:7: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
-  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-11-39a840ff3a8b&gt;:7: FutureWarning: The default value of regex will change from True to False in a future version.
-  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Variabilidad PONDERADA</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="s1">&#39;comuna&#39;</span><span class="p">])[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;comuna&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">})</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="c1">#ISCIentel[&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;]</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pop_comuna</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;comuna&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="c1">#% de personas 15 a 64 años comunal por zona censal</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">]</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas_comunal_ponderada&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#----------------------------MINSAL--------------------------------------------------------------------</span>
+
+<span class="c1">#casos MINSAL</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto5&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto5_TotalesNacionales_T&quot;</span>
+<span class="n">minsal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">minsal</span><span class="o">=</span><span class="n">minsal</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">minsal</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="s1">&#39; (MINSAL)&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">minsal</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">minsal</span><span class="o">=</span><span class="n">minsal</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Fecha (MINSAL)&#39;</span><span class="p">:</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">})</span>
+<span class="n">minsal</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">minsal</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="c1">#casos MINSAL regionales</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto3&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto3_TotalesPorRegion_std&quot;</span>
+<span class="n">minsalr</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="c1">#minsal=minsal.drop(&#39;index&#39;,axis=1)</span>
+<span class="c1">#minsal.columns=[x+&#39; (MINSAL)&#39; for x in minsal.columns]</span>
+<span class="c1">#minsal=minsal.rename(columns={&#39;Fecha (MINSAL)&#39;: &#39;Fecha&#39;})</span>
+<span class="c1">#minsal[&#39;Fecha&#39;]=pd.to_datetime(minsal[&#39;Fecha&#39;],errors=&#39;coerce&#39;)</span>
+
+<span class="c1">#casos nuevos regional minsal</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto13&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto13_CasosNuevosCumulativo_std&quot;</span>
+<span class="n">nrm</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">nrm</span><span class="o">=</span><span class="n">nrm</span><span class="p">[</span><span class="n">nrm</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span>
+<span class="n">nrm</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nrm</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">nrm</span><span class="o">=</span><span class="n">nrm</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">nrm</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Casos Nuevos (MINSAL) &#39;</span><span class="o">+</span><span class="n">nrm</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">nrm</span><span class="o">=</span><span class="n">nrm</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1">#casos activos por fecha inicio de sintomas regional (minsal)</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto19&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto19_CasosActivosPorComuna_std&quot;</span>
+<span class="n">arms</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">arms</span><span class="o">=</span><span class="n">arms</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">arms</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">arms</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])[</span><span class="s1">&#39;Casos activos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">arms</span><span class="o">=</span><span class="n">arms</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">arms</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Casos Activos (MINSAL) &#39;</span><span class="o">+</span><span class="n">arms</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">arms</span><span class="o">=</span><span class="n">arms</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1">#activos regional minsal</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;producto25&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;producto25_CasosActualesPorComuna_std&quot;</span>
+<span class="n">arm</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">arm</span><span class="o">=</span><span class="n">arm</span><span class="p">[</span><span class="n">arm</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span>
+<span class="n">arm</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">arm</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])[[</span><span class="s1">&#39;Casos actuales&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">arm</span><span class="o">=</span><span class="n">arm</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region_Metropolitana&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">arm</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">arm</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">arm</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; (MINSAL)&#39;</span>
+<span class="n">arm</span><span class="o">=</span><span class="n">arm</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="c1">#arm=arm.rename(columns={&#39;fecha&#39;:&#39;Fecha&#39;})</span>
+
+<span class="n">minsal</span><span class="o">=</span><span class="n">minsal</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">arm</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">nrm</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">arms</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="c1">#----------------------------MINSAL--------------------------------------------------------------------</span>
 </pre></div>
 
      </div>
@@ -14472,11 +14595,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">minsal</span>
 </pre></div>
 
      </div>
@@ -14492,7 +14614,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 
 
 
@@ -14515,149 +14637,149 @@ a.anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>zona_censal</th>
-      <th>comuna</th>
-      <th>region</th>
-      <th>week</th>
-      <th>dif_salida</th>
-      <th>dif_entrada</th>
-      <th>dif_entrada_lim_inf</th>
-      <th>dif_entrada_lim_sup</th>
-      <th>dif_salida_lim_inf</th>
-      <th>dif_salida_lim_sup</th>
+      <th>Fecha</th>
+      <th>Casos nuevos con sintomas (MINSAL)</th>
+      <th>Casos totales (MINSAL)</th>
+      <th>Casos recuperados (MINSAL)</th>
+      <th>Fallecidos (MINSAL)</th>
+      <th>Casos activos (MINSAL)</th>
+      <th>Casos nuevos sin sintomas (MINSAL)</th>
+      <th>Casos nuevos totales (MINSAL)</th>
+      <th>Casos activos por FD (MINSAL)</th>
+      <th>Casos activos por FIS (MINSAL)</th>
       <th>...</th>
-      <th>PERSONAS_15_A_64_AÑOS</th>
-      <th>PERSONAS_MAS_65_AÑOS</th>
-      <th>PERSONAS_6_A_64_AÑOS</th>
-      <th>date</th>
-      <th>salidas</th>
-      <th>PERSONAS_MOVILIZADAS</th>
-      <th>index</th>
-      <th>PERSONAS_6_A_64_AÑOS_COMUNA</th>
-      <th>PERSONAS_6_A_64_AÑOS_FACTOR</th>
-      <th>salidas_comunal_ponderada</th>
+      <th>Casos probables acumulados (MINSAL)</th>
+      <th>Casos activos probables (MINSAL)</th>
+      <th>Casos nuevos sin notificar (MINSAL)</th>
+      <th>Casos \nactivos confirmados (MINSAL)</th>
+      <th>Casos actuales Región Metropolitana (MINSAL)</th>
+      <th>Casos actuales Resto de Chile (MINSAL)</th>
+      <th>Casos Nuevos (MINSAL) Región Metropolitana</th>
+      <th>Casos Nuevos (MINSAL) Resto de Chile</th>
+      <th>Casos Activos (MINSAL) Región Metropolitana</th>
+      <th>Casos Activos (MINSAL) Resto de Chile</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>16109011002</td>
-      <td>YUNGAY</td>
-      <td>REGIÓN DE ÑUBLE</td>
-      <td>36</td>
-      <td>[-40%,-21%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-40</td>
-      <td>-21</td>
+      <td>2020-03-02</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>NaN</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>2738.0</td>
-      <td>585.0</td>
-      <td>3105.0</td>
-      <td>2020-09-12</td>
-      <td>-30.5</td>
-      <td>2157.975</td>
-      <td>315.0</td>
-      <td>10143.0</td>
-      <td>0.306122</td>
-      <td>-9.336735</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>4106011001</td>
-      <td>VICUÑA</td>
-      <td>REGIÓN DE COQUIMBO</td>
-      <td>31</td>
-      <td>[-40%,-21%,]</td>
-      <td>[-21%,+20%,]</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>-40</td>
-      <td>-21</td>
+      <td>2020-03-03</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>1.000</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>2626.0</td>
-      <td>355.0</td>
-      <td>3166.0</td>
-      <td>2020-08-08</td>
-      <td>-30.5</td>
-      <td>2200.370</td>
-      <td>306.0</td>
-      <td>13188.0</td>
-      <td>0.240067</td>
-      <td>-7.322035</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>13119161003</td>
-      <td>MAIPÚ</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>42</td>
-      <td>[-40%,-21%,]</td>
-      <td>[+41%,+60%,]</td>
-      <td>41</td>
-      <td>60</td>
-      <td>-40</td>
-      <td>-21</td>
+      <td>2020-03-04</td>
+      <td>2.000</td>
+      <td>3.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>3.000</td>
+      <td>NaN</td>
+      <td>2.000</td>
+      <td>3.000</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>3870.0</td>
-      <td>474.0</td>
-      <td>4290.0</td>
-      <td>2020-10-24</td>
-      <td>-30.5</td>
-      <td>2981.550</td>
-      <td>151.0</td>
-      <td>424316.0</td>
-      <td>0.010110</td>
-      <td>-0.308367</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>7304021005</td>
-      <td>MOLINA</td>
-      <td>REGIÓN DEL MAULE</td>
-      <td>9</td>
-      <td>[-21%,+20%,]</td>
-      <td>[-21%,+20%,]</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>-21</td>
-      <td>20</td>
+      <td>2020-03-05</td>
+      <td>1.000</td>
+      <td>4.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>4.000</td>
+      <td>NaN</td>
+      <td>1.000</td>
+      <td>4.000</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>2001.0</td>
-      <td>346.0</td>
-      <td>2267.0</td>
-      <td>2020-03-07</td>
-      <td>-0.5</td>
-      <td>2255.665</td>
-      <td>162.0</td>
-      <td>29234.0</td>
-      <td>0.077547</td>
-      <td>-0.038773</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>4101031003</td>
-      <td>LA SERENA</td>
-      <td>REGIÓN DE COQUIMBO</td>
-      <td>30</td>
-      <td>[-40%,-21%,]</td>
-      <td>[-40%,-21%,]</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>-40</td>
-      <td>-21</td>
+      <td>2020-03-06</td>
+      <td>1.000</td>
+      <td>5.000</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>5.000</td>
+      <td>NaN</td>
+      <td>1.000</td>
+      <td>5.000</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>3292.0</td>
-      <td>198.0</td>
-      <td>3575.0</td>
-      <td>2020-08-01</td>
-      <td>-30.5</td>
-      <td>2484.625</td>
-      <td>117.0</td>
-      <td>157671.0</td>
-      <td>0.022674</td>
-      <td>-0.691551</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14684,128 +14806,128 @@ a.anchor-link {
       <td>...</td>
     </tr>
     <tr>
-      <th>214055</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>48</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
+      <th>269</th>
+      <td>2020-11-26</td>
+      <td>1082.000</td>
+      <td>545662.000</td>
+      <td>NaN</td>
+      <td>15235.000</td>
+      <td>8872.000</td>
+      <td>469.000</td>
+      <td>1564.000</td>
+      <td>19224.000</td>
+      <td>8872.000</td>
       <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-05</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
+      <td>74661.000</td>
+      <td>1974.000</td>
+      <td>13.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>280.0</td>
+      <td>1284.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>214056</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>49</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
+      <th>270</th>
+      <td>2020-11-27</td>
+      <td>1014.000</td>
+      <td>547223.000</td>
+      <td>NaN</td>
+      <td>15278.000</td>
+      <td>9379.000</td>
+      <td>537.000</td>
+      <td>1570.000</td>
+      <td>19193.000</td>
+      <td>9379.000</td>
       <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-12</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
+      <td>74942.000</td>
+      <td>2040.000</td>
+      <td>19.000</td>
+      <td>NaN</td>
+      <td>5088.0</td>
+      <td>17772.0</td>
+      <td>331.0</td>
+      <td>1239.0</td>
+      <td>1987.0</td>
+      <td>2154.0</td>
     </tr>
     <tr>
-      <th>214057</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>50</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
+      <th>271</th>
+      <td>2020-11-28</td>
+      <td>1133.000</td>
+      <td>548941.000</td>
+      <td>NaN</td>
+      <td>15322.000</td>
+      <td>9519.000</td>
+      <td>575.000</td>
+      <td>1718.000</td>
+      <td>19265.000</td>
+      <td>9519.000</td>
       <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-19</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
+      <td>75190.000</td>
+      <td>2010.000</td>
+      <td>10.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>420.0</td>
+      <td>1298.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>214058</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>51</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
+      <th>272</th>
+      <td>2020-11-29</td>
+      <td>993.000</td>
+      <td>550430.000</td>
+      <td>NaN</td>
+      <td>15356.000</td>
+      <td>9554.000</td>
+      <td>485.000</td>
+      <td>1489.000</td>
+      <td>19157.000</td>
+      <td>9554.000</td>
       <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-26</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
+      <td>75531.000</td>
+      <td>2109.000</td>
+      <td>11.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>344.0</td>
+      <td>1145.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>214059</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>52</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
+      <th>273</th>
+      <td>2020-11-30</td>
+      <td>884.000</td>
+      <td>551743.000</td>
+      <td>NaN</td>
+      <td>15410.000</td>
+      <td>9418.000</td>
+      <td>410.000</td>
+      <td>1313.000</td>
+      <td>19139.000</td>
+      <td>9418.000</td>
       <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2021-01-02</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
+      <td>75606.000</td>
+      <td>1933.000</td>
+      <td>19.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>302.0</td>
+      <td>1011.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>214060 rows × 37 columns</p>
+<p>274 rows × 24 columns</p>
 </div>
 </div>
 
@@ -14813,21 +14935,39 @@ a.anchor-link {
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#movilidad</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;movilidad&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;isci_entel&quot;</span>
+<span class="n">arms</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">mov</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">)</span>
+<span class="n">mov_chile</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mov</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">})</span>
+<span class="n">mov_rm</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mov</span><span class="p">[</span><span class="n">mov</span><span class="p">[</span><span class="s1">&#39;REGION&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;13&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
+                                                                                                                          <span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_MOVILIZADAS_RM&#39;</span><span class="p">})</span>
+<span class="n">mov_resto_chile</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mov</span><span class="p">[</span><span class="n">mov</span><span class="p">[</span><span class="s1">&#39;REGION&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;13&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
+                                                                                                                                  <span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_MOVILIZADAS_RESTO_CHILE&#39;</span><span class="p">})</span>
+<span class="n">mov</span><span class="o">=</span><span class="n">mov_chile</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mov_rm</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mov_resto_chile</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;isci_entel&#39;</span>
-<span class="n">schema</span><span class="o">=</span><span class="s1">&#39;movilidad&#39;</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
-    <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">schema</span><span class="p">))</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mov</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14843,30 +14983,299 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>schema movilidad exists, will not be created
-</pre>
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>PERSONAS_MOVILIZADAS</th>
+      <th>PERSONAS_MOVILIZADAS_RM</th>
+      <th>PERSONAS_MOVILIZADAS_RESTO_CHILE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020-03-07</td>
+      <td>13614325.550</td>
+      <td>6191274.730</td>
+      <td>7423050.820</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020-03-14</td>
+      <td>13595685.090</td>
+      <td>6187748.430</td>
+      <td>7407936.660</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020-03-21</td>
+      <td>12699112.270</td>
+      <td>5761242.670</td>
+      <td>6937869.600</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020-03-28</td>
+      <td>11036079.810</td>
+      <td>5008535.730</td>
+      <td>6027544.080</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2020-04-04</td>
+      <td>10945147.930</td>
+      <td>4866717.690</td>
+      <td>6078430.240</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
 </div>
 
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#cuarentenas</span>
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;cuarentenas&quot;</span>
+<span class="n">n</span><span class="o">=</span><span class="s2">&quot;cuarentenas&quot;</span>
+<span class="n">cuarentenas</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;Lon&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cuarentenas</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[67]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>Fecha</th>
+      <th>CUT</th>
+      <th>COD_PASO</th>
+      <th>REG</th>
+      <th>COMUNA</th>
+      <th>Fecha2</th>
+      <th>T_POB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>2020-07-24</td>
+      <td>1101</td>
+      <td>1</td>
+      <td>Tarapacá</td>
+      <td>Iquique</td>
+      <td>2020-07-24 00:00:00</td>
+      <td>191468.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2020-07-25</td>
+      <td>1101</td>
+      <td>1</td>
+      <td>Tarapacá</td>
+      <td>Iquique</td>
+      <td>2020-07-25 00:00:00</td>
+      <td>191468.000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2020-07-26</td>
+      <td>1101</td>
+      <td>1</td>
+      <td>Tarapacá</td>
+      <td>Iquique</td>
+      <td>2020-07-26 00:00:00</td>
+      <td>191468.000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2020-07-27</td>
+      <td>1101</td>
+      <td>1</td>
+      <td>Tarapacá</td>
+      <td>Iquique</td>
+      <td>2020-07-27 00:00:00</td>
+      <td>191468.000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>2020-07-28</td>
+      <td>1101</td>
+      <td>1</td>
+      <td>Tarapacá</td>
+      <td>Iquique</td>
+      <td>2020-07-28 00:00:00</td>
+      <td>191468.000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>64013</th>
+      <td>64013</td>
+      <td>2020-04-18</td>
+      <td>16103</td>
+      <td>0.0</td>
+      <td>Ñuble</td>
+      <td>Chillán Viejo</td>
+      <td>18-abr</td>
+      <td>30907.000</td>
+    </tr>
+    <tr>
+      <th>64014</th>
+      <td>64014</td>
+      <td>2020-04-19</td>
+      <td>16103</td>
+      <td>0.0</td>
+      <td>Ñuble</td>
+      <td>Chillán Viejo</td>
+      <td>19-abr</td>
+      <td>30907.000</td>
+    </tr>
+    <tr>
+      <th>64015</th>
+      <td>64015</td>
+      <td>2020-04-20</td>
+      <td>16103</td>
+      <td>0.0</td>
+      <td>Ñuble</td>
+      <td>Chillán Viejo</td>
+      <td>20-abr</td>
+      <td>30907.000</td>
+    </tr>
+    <tr>
+      <th>64016</th>
+      <td>64016</td>
+      <td>2020-04-21</td>
+      <td>16103</td>
+      <td>0.0</td>
+      <td>Ñuble</td>
+      <td>Chillán Viejo</td>
+      <td>21-abr</td>
+      <td>30907.000</td>
+    </tr>
+    <tr>
+      <th>64017</th>
+      <td>64017</td>
+      <td>2020-04-22</td>
+      <td>16103</td>
+      <td>0.0</td>
+      <td>Ñuble</td>
+      <td>Chillán Viejo</td>
+      <td>22-abr</td>
+      <td>30907.000</td>
+    </tr>
+  </tbody>
+</table>
+<p>64018 rows × 8 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>pob_cuarentena=cuarentenas.groupby(['Fecha','COD_PASO'])['T_POB'].sum().reset_index()
+pob_cuarentena=pob_cuarentena.pivot(columns='COD_PASO',values='T_POB',index='Fecha').reset_index()
+pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cuarentena.columns]<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena_rm</span><span class="o">=</span><span class="n">cuarentenas</span><span class="p">[</span><span class="n">cuarentenas</span><span class="p">[</span><span class="s1">&#39;REG&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Metropolitana de Santiago&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">])[</span><span class="s1">&#39;T_POB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">pob_cuarentena_rm</span><span class="o">=</span><span class="n">pob_cuarentena_rm</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;T_POB&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">pob_cuarentena_rm</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_CUA_RM&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;Fecha&#39;</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pob_cuarentena_rm</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14886,9 +15295,10 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-15-f461c9b017e0&gt;:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;centroid&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
-
-  ISCIentel[&#39;geometry&#39;]=ISCIentel[&#39;geometry&#39;].centroid
+<pre>&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;ipython-input-69-86aae4bd7312&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+  pob_cuarentena_rm.columns=[str(x)+&#39;_CUA_RM&#39; if x is not &#39;Fecha&#39; else x for x in pob_cuarentena_rm.columns]
 </pre>
 </div>
 </div>
@@ -14897,93 +15307,15 @@ a.anchor-link {
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for r in ISCIentel[&#39;REGION&#39;].unique():</span>
-<span class="c1">#    name=&#39;isci_entel&#39;+str(r)</span>
-<span class="c1">#    print(&#39;saving table &#39;+name)</span>
-    <span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==r].to_postgis(name=name+&#39;_&#39;+str(r), schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
-<span class="c1">#    ISCIentel[ISCIentel[&#39;REGION&#39;]==r].to_sql(name, schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#geojson=ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;]</span>
-<span class="c1">#geojson[&#39;date&#39;]=geojson[&#39;date&#39;].astype(str)</span>
-<span class="c1">#geojson=geojson.to_json()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;].to_file(&quot;../ETLcache/mov_temp.geojson&quot;, driver=&#39;GeoJSON&#39;)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#with open(&quot;../ETLcache/mov_temp.geojson&quot;, &#39;rb&#39;) as src:</span>
-<span class="c1">#    upload_resp = service.upload(src, &#39;test_dataset&#39;)</span>
-<span class="c1">#upload_resp</span>
-<span class="c1">#upload_id = upload_resp.json()[&#39;id&#39;]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;isci_entel&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[82]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[70]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_movilidad.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
-          <span class="s1">&#39;/home/jovyan/work/ETL/movilidad.ipynb&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena_rCH</span><span class="o">=</span><span class="n">cuarentenas</span><span class="p">[</span><span class="n">cuarentenas</span><span class="p">[</span><span class="s1">&#39;REG&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;Metropolitana de Santiago&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">])[</span><span class="s1">&#39;T_POB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">pob_cuarentena_rCH</span><span class="o">=</span><span class="n">pob_cuarentena_rCH</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;T_POB&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">pob_cuarentena_rCH</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_CUA_RCH&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;Fecha&#39;</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pob_cuarentena_rCH</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14999,13 +15331,1063 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[82]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;ipython-input-70-a32158d47903&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+  pob_cuarentena_rCH.columns=[str(x)+&#39;_CUA_RCH&#39; if x is not &#39;Fecha&#39; else x for x in pob_cuarentena_rCH.columns]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena</span><span class="o">=</span><span class="n">pob_cuarentena</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pob_cuarentena_rm</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pob_cuarentena_rCH</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[72]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[72]:</div>
 
 
 
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>0</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>0.0_CUA</th>
+      <th>1_CUA</th>
+      <th>2_CUA</th>
+      <th>3_CUA</th>
+      <th>4_CUA</th>
+      <th>0.0_CUA_RM</th>
+      <th>1_CUA_RM</th>
+      <th>2_CUA_RM</th>
+      <th>3_CUA_RM</th>
+      <th>4_CUA_RM</th>
+      <th>0.0_CUA_RCH</th>
+      <th>1_CUA_RCH</th>
+      <th>2_CUA_RCH</th>
+      <th>3_CUA_RCH</th>
+      <th>4_CUA_RCH</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020-01-06</td>
+      <td>NaN</td>
+      <td>1205767.000</td>
+      <td>9969298.000</td>
+      <td>5450491.000</td>
+      <td>948309.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1205767.000</td>
+      <td>4807831.000</td>
+      <td>3499150.000</td>
+      <td>948309.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020-01-07</td>
+      <td>NaN</td>
+      <td>1205767.000</td>
+      <td>9969298.000</td>
+      <td>5450491.000</td>
+      <td>948309.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1205767.000</td>
+      <td>4807831.000</td>
+      <td>3499150.000</td>
+      <td>948309.000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020-01-08</td>
+      <td>NaN</td>
+      <td>1205767.000</td>
+      <td>9969298.000</td>
+      <td>5450491.000</td>
+      <td>948309.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1205767.000</td>
+      <td>4807831.000</td>
+      <td>3499150.000</td>
+      <td>948309.000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020-03-13</td>
+      <td>523.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>523.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2020-03-14</td>
+      <td>523.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>523.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>296</th>
+      <td>2021-01-13</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>9887949.000</td>
+      <td>6036658.000</td>
+      <td>310187.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>4726482.000</td>
+      <td>4085317.000</td>
+      <td>310187.000</td>
+    </tr>
+    <tr>
+      <th>297</th>
+      <td>2021-01-14</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>9887949.000</td>
+      <td>6036658.000</td>
+      <td>310187.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>4726482.000</td>
+      <td>4085317.000</td>
+      <td>310187.000</td>
+    </tr>
+    <tr>
+      <th>298</th>
+      <td>2021-01-15</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>9887949.000</td>
+      <td>6036658.000</td>
+      <td>310187.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>4726482.000</td>
+      <td>4085317.000</td>
+      <td>310187.000</td>
+    </tr>
+    <tr>
+      <th>299</th>
+      <td>2021-01-16</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>9887949.000</td>
+      <td>6036658.000</td>
+      <td>310187.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>4726482.000</td>
+      <td>4085317.000</td>
+      <td>310187.000</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>2021-01-17</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>9887949.000</td>
+      <td>6036658.000</td>
+      <td>310187.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5161467.000</td>
+      <td>1951341.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1339071.000</td>
+      <td>4726482.000</td>
+      <td>4085317.000</td>
+      <td>310187.000</td>
+    </tr>
+  </tbody>
+</table>
+<p>301 rows × 16 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[73]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="s1">&#39;@perez&#39;</span>
+<span class="n">n</span><span class="o">=</span><span class="s1">&#39;nacional@perez&#39;</span>
+<span class="n">nacional</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[74]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nacional</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[74]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>Fecha</th>
+      <th>Test_PCR_notificados_acumulados</th>
+      <th>Laboratorios_que_reportan_en_esa_fecha</th>
+      <th>Confirmados_acumulados_totales__incluye_asintomáticos_</th>
+      <th>Confirmados_asintomáticos_acumulados_totales</th>
+      <th>Muertes_acumuladas_totales</th>
+      <th>Pacientes_actualmente_en_UCI</th>
+      <th>Pacientes_covid_positivo_actualmenteen_cama_básica</th>
+      <th>Pacientescovid_positivoactualmenteen_cama_media</th>
+      <th>...</th>
+      <th>Pacientes_sospechosos_acumulados_en_Epivigila</th>
+      <th>Confirmados_acumulados_ingresados_en_Epivigila</th>
+      <th>Pacientes_acumulados_cn_info_de_ingreso_a_hospital</th>
+      <th>Pacientes_acumulados_cn_info_de_ingreso_a_UTI/UCI</th>
+      <th>Confirmados_dossemanas_atrasmenos_muertoshasta_día_actual</th>
+      <th>Nuevos_confirmados_dos_semanas_atrás_menos_nuevos_muertos_hoy</th>
+      <th>Camas UCI Desocupadas</th>
+      <th>VMI Desocupadas</th>
+      <th>VMI no-COVID</th>
+      <th>UCI no-COVID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>2020-03-06</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>7.000</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2020-03-07</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>9.000</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2020-03-08</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>12.000</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2020-03-09</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>17.000</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>2020-03-10</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>23.000</td>
+      <td>NaN</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>270.000</td>
+      <td>18.000</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>235</th>
+      <td>235</td>
+      <td>2020-10-27</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>236</th>
+      <td>236</td>
+      <td>2020-10-28</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>237</td>
+      <td>2020-10-29</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>238</th>
+      <td>238</td>
+      <td>2020-10-30</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>239</td>
+      <td>2020-10-31</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>240 rows × 39 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span><span class="o">=</span><span class="n">DEIS</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">icovid</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">minsal</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
+                                                       <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">movilidad</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
+                                                                          <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span><span class="o">=</span><span class="n">master</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">master</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>Fallecidos DEIS Diarios</th>
+      <th>Fallecidos DEIS Diarios PCR+</th>
+      <th>Fallecidos DEIS Diarios Covid Sospechoso</th>
+      <th>Fallecidos DEIS PCR+ Acumulado</th>
+      <th>Fallecidos DEIS Covid Sospechoso Acumulado</th>
+      <th>Fallecidos DEIS Acumulado</th>
+      <th>Fallecidos DEIS PCR+  Millón/Hab</th>
+      <th>Fallecidos DEIS Covid Sospechoso  Millón/Hab</th>
+      <th>Fallecidos DEIS  Millón/Hab</th>
+      <th>...</th>
+      <th>Casos probables acumulados MINSAL</th>
+      <th>Casos activos probables MINSAL</th>
+      <th>Casos nuevos sin notificar MINSAL</th>
+      <th>Casos \nactivos confirmados MINSAL</th>
+      <th>Casos actuales Región Metropolitana MINSAL</th>
+      <th>Casos actuales Resto de Chile MINSAL</th>
+      <th>Casos Nuevos MINSAL Región Metropolitana</th>
+      <th>Casos Nuevos MINSAL Resto de Chile</th>
+      <th>Casos Activos MINSAL Región Metropolitana</th>
+      <th>Casos Activos MINSAL Resto de Chile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>254</th>
+      <td>2020-03-01</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>255</th>
+      <td>2020-03-02</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>256</th>
+      <td>2020-03-03</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>257</th>
+      <td>2020-03-04</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000</td>
+      <td>1.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>258</th>
+      <td>2020-03-05</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>249</th>
+      <td>2020-11-28</td>
+      <td>23.000</td>
+      <td>18.000</td>
+      <td>5.000</td>
+      <td>15479.000</td>
+      <td>5126.000</td>
+      <td>20605.000</td>
+      <td>795.496</td>
+      <td>263.435</td>
+      <td>1058.931</td>
+      <td>...</td>
+      <td>75190.000</td>
+      <td>2010.000</td>
+      <td>10.000</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>420.000</td>
+      <td>1298.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>2020-11-29</td>
+      <td>59.000</td>
+      <td>49.000</td>
+      <td>10.000</td>
+      <td>15528.000</td>
+      <td>5136.000</td>
+      <td>20664.000</td>
+      <td>798.014</td>
+      <td>263.949</td>
+      <td>1061.963</td>
+      <td>...</td>
+      <td>75531.000</td>
+      <td>2109.000</td>
+      <td>11.000</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>344.000</td>
+      <td>1145.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>2020-11-30</td>
+      <td>42.000</td>
+      <td>30.000</td>
+      <td>12.000</td>
+      <td>15558.000</td>
+      <td>5148.000</td>
+      <td>20706.000</td>
+      <td>799.556</td>
+      <td>264.566</td>
+      <td>1064.121</td>
+      <td>...</td>
+      <td>75606.000</td>
+      <td>1933.000</td>
+      <td>19.000</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>302.000</td>
+      <td>1011.000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>252</th>
+      <td>2020-12-01</td>
+      <td>46.000</td>
+      <td>28.000</td>
+      <td>18.000</td>
+      <td>15586.000</td>
+      <td>5166.000</td>
+      <td>20752.000</td>
+      <td>800.995</td>
+      <td>265.491</td>
+      <td>1066.485</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>253</th>
+      <td>2020-12-02</td>
+      <td>7.000</td>
+      <td>3.000</td>
+      <td>4.000</td>
+      <td>15589.000</td>
+      <td>5170.000</td>
+      <td>20759.000</td>
+      <td>801.149</td>
+      <td>265.696</td>
+      <td>1066.845</td>
+      <td>...</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>277 rows × 50 columns</p>
+</div>
 </div>
 
 </div>
@@ -15017,10 +16399,17 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[83]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;consolidado_nacional&#39;</span>
+<span class="n">schema</span><span class="o">=</span><span class="s1">&#39;nacional&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
+    <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">schema</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
+<span class="n">master</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15040,7 +16429,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>
+<pre>schema nacional exists, will not be created
 </pre>
 </div>
 </div>
@@ -15049,18 +16438,42 @@ a.anchor-link {
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_covid-chile.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
+          <span class="s1">&#39;/home/jovyan/work/ETL/consolidado_nacional.ipynb&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
