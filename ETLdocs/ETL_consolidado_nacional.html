@@ -14259,7 +14259,7 @@ a.anchor-link {
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[52]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -14473,6 +14473,27 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">melt</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">id_var</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span><span class="n">Vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fallecidos Nuevos Región Metropolitana (DEIS)&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Fallecidos Nuevos Resto de Chile (DEIS)&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Fallecidos Acumulados Región Metropolitana (DEIS)&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Fallecidos Acumulados Resto de Chile (DEIS)&#39;</span><span class="p">]):</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">Vars</span><span class="o">+</span><span class="n">id_var</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="n">id_var</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#----------------------------ICOVID--------------------------------------------------------------------</span>
 
 <span class="c1">#casos nuevos según fecha de inicio de síntomas (icovid)</span>
@@ -14529,7 +14550,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#----------------------------MINSAL--------------------------------------------------------------------</span>
@@ -14595,7 +14616,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">minsal</span>
@@ -14614,7 +14635,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 
 
 
@@ -14940,7 +14961,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#movilidad</span>
@@ -14964,7 +14985,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mov</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -14983,7 +15004,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
 
 
 
@@ -15062,7 +15083,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#cuarentenas</span>
@@ -15079,7 +15100,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cuarentenas</span>
@@ -15098,7 +15119,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[67]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 
 
 
@@ -15265,12 +15286,50 @@ a.anchor-link {
 
 </div>
 
-</div>pob_cuarentena=cuarentenas.groupby(['Fecha','COD_PASO'])['T_POB'].sum().reset_index()
-pob_cuarentena=pob_cuarentena.pivot(columns='COD_PASO',values='T_POB',index='Fecha').reset_index()
-pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cuarentena.columns]<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena</span><span class="o">=</span><span class="n">cuarentenas</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">])[</span><span class="s1">&#39;T_POB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">pob_cuarentena</span><span class="o">=</span><span class="n">pob_cuarentena</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;T_POB&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">pob_cuarentena</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_CUA&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;Fecha&#39;</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pob_cuarentena</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;ipython-input-21-5540f1c347e8&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+  pob_cuarentena.columns=[str(x)+&#39;_CUA&#39; if x is not &#39;Fecha&#39; else x for x in pob_cuarentena.columns]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena_rm</span><span class="o">=</span><span class="n">cuarentenas</span><span class="p">[</span><span class="n">cuarentenas</span><span class="p">[</span><span class="s1">&#39;REG&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Metropolitana de Santiago&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">])[</span><span class="s1">&#39;T_POB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
@@ -15297,7 +15356,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
 &lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
-&lt;ipython-input-69-86aae4bd7312&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;ipython-input-18-86aae4bd7312&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
   pob_cuarentena_rm.columns=[str(x)+&#39;_CUA_RM&#39; if x is not &#39;Fecha&#39; else x for x in pob_cuarentena_rm.columns]
 </pre>
 </div>
@@ -15310,7 +15369,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[70]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena_rCH</span><span class="o">=</span><span class="n">cuarentenas</span><span class="p">[</span><span class="n">cuarentenas</span><span class="p">[</span><span class="s1">&#39;REG&#39;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;Metropolitana de Santiago&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;COD_PASO&#39;</span><span class="p">])[</span><span class="s1">&#39;T_POB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
@@ -15337,7 +15396,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>&lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
 &lt;&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
-&lt;ipython-input-70-a32158d47903&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
+&lt;ipython-input-19-a32158d47903&gt;:3: SyntaxWarning: &#34;is not&#34; with a literal. Did you mean &#34;!=&#34;?
   pob_cuarentena_rCH.columns=[str(x)+&#39;_CUA_RCH&#39; if x is not &#39;Fecha&#39; else x for x in pob_cuarentena_rCH.columns]
 </pre>
 </div>
@@ -15350,7 +15409,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena</span><span class="o">=</span><span class="n">pob_cuarentena</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pob_cuarentena_rm</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pob_cuarentena_rCH</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
@@ -15364,7 +15423,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[72]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pob_cuarentena</span>
@@ -15383,7 +15442,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[72]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
 
 
 
@@ -15649,7 +15708,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[73]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="s1">&#39;@perez&#39;</span>
@@ -15665,7 +15724,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[74]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nacional</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">])</span>
@@ -15684,7 +15743,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[74]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
 
 
 
@@ -16010,12 +16069,12 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span><span class="o">=</span><span class="n">DEIS</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">icovid</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">minsal</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
-                                                       <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">movilidad</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
-                                                                          <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+                                                       <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mov</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
+                                                                          <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pob_cuarentena</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16026,7 +16085,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span><span class="o">=</span><span class="n">master</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
@@ -16040,7 +16099,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">master</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
@@ -16051,13 +16110,33 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div>
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[58]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Versión pivoteada</span>
+<span class="n">master_melted</span><span class="o">=</span><span class="n">melt</span><span class="p">(</span><span class="n">master</span><span class="p">,</span><span class="n">id_var</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span><span class="n">Vars</span><span class="o">=</span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">master</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span><span class="o">!=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">])</span>
+<span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;Nivel&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;Nacional&#39;</span>
+<span class="n">master_melted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;RM&#39;</span><span class="p">),</span><span class="s1">&#39;Nivel&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;RM&#39;</span>
+<span class="n">master_melted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">),</span><span class="s1">&#39;Nivel&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;RM&#39;</span>
+<span class="n">master_melted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;Resto&#39;</span><span class="p">),</span><span class="s1">&#39;Nivel&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;Resto de Chile&#39;</span>
+<span class="n">master_melted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;RCH&#39;</span><span class="p">),</span><span class="s1">&#39;Nivel&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;Resto de Chile&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master_melted</span><span class="p">[</span><span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;Nivel&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Resto de Chile&#39;</span><span class="p">][</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16073,321 +16152,22 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[59]:</div>
 
 
 
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Fecha</th>
-      <th>Fallecidos DEIS Diarios</th>
-      <th>Fallecidos DEIS Diarios PCR+</th>
-      <th>Fallecidos DEIS Diarios Covid Sospechoso</th>
-      <th>Fallecidos DEIS PCR+ Acumulado</th>
-      <th>Fallecidos DEIS Covid Sospechoso Acumulado</th>
-      <th>Fallecidos DEIS Acumulado</th>
-      <th>Fallecidos DEIS PCR+  Millón/Hab</th>
-      <th>Fallecidos DEIS Covid Sospechoso  Millón/Hab</th>
-      <th>Fallecidos DEIS  Millón/Hab</th>
-      <th>...</th>
-      <th>Casos probables acumulados MINSAL</th>
-      <th>Casos activos probables MINSAL</th>
-      <th>Casos nuevos sin notificar MINSAL</th>
-      <th>Casos \nactivos confirmados MINSAL</th>
-      <th>Casos actuales Región Metropolitana MINSAL</th>
-      <th>Casos actuales Resto de Chile MINSAL</th>
-      <th>Casos Nuevos MINSAL Región Metropolitana</th>
-      <th>Casos Nuevos MINSAL Resto de Chile</th>
-      <th>Casos Activos MINSAL Región Metropolitana</th>
-      <th>Casos Activos MINSAL Resto de Chile</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>254</th>
-      <td>2020-03-01</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>255</th>
-      <td>2020-03-02</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>256</th>
-      <td>2020-03-03</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>257</th>
-      <td>2020-03-04</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.000</td>
-      <td>1.000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>258</th>
-      <td>2020-03-05</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.000</td>
-      <td>0.000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>249</th>
-      <td>2020-11-28</td>
-      <td>23.000</td>
-      <td>18.000</td>
-      <td>5.000</td>
-      <td>15479.000</td>
-      <td>5126.000</td>
-      <td>20605.000</td>
-      <td>795.496</td>
-      <td>263.435</td>
-      <td>1058.931</td>
-      <td>...</td>
-      <td>75190.000</td>
-      <td>2010.000</td>
-      <td>10.000</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>420.000</td>
-      <td>1298.000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>250</th>
-      <td>2020-11-29</td>
-      <td>59.000</td>
-      <td>49.000</td>
-      <td>10.000</td>
-      <td>15528.000</td>
-      <td>5136.000</td>
-      <td>20664.000</td>
-      <td>798.014</td>
-      <td>263.949</td>
-      <td>1061.963</td>
-      <td>...</td>
-      <td>75531.000</td>
-      <td>2109.000</td>
-      <td>11.000</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>344.000</td>
-      <td>1145.000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>251</th>
-      <td>2020-11-30</td>
-      <td>42.000</td>
-      <td>30.000</td>
-      <td>12.000</td>
-      <td>15558.000</td>
-      <td>5148.000</td>
-      <td>20706.000</td>
-      <td>799.556</td>
-      <td>264.566</td>
-      <td>1064.121</td>
-      <td>...</td>
-      <td>75606.000</td>
-      <td>1933.000</td>
-      <td>19.000</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>302.000</td>
-      <td>1011.000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>252</th>
-      <td>2020-12-01</td>
-      <td>46.000</td>
-      <td>28.000</td>
-      <td>18.000</td>
-      <td>15586.000</td>
-      <td>5166.000</td>
-      <td>20752.000</td>
-      <td>800.995</td>
-      <td>265.491</td>
-      <td>1066.485</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>253</th>
-      <td>2020-12-02</td>
-      <td>7.000</td>
-      <td>3.000</td>
-      <td>4.000</td>
-      <td>15589.000</td>
-      <td>5170.000</td>
-      <td>20759.000</td>
-      <td>801.149</td>
-      <td>265.696</td>
-      <td>1066.845</td>
-      <td>...</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>nan</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>277 rows × 50 columns</p>
-</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>array([&#39;Fallecidos Nuevos Resto de Chile DEIS&#39;,
+       &#39;Fallecidos Acumulados Resto de Chile DEIS&#39;,
+       &#39;Poblacion Resto de Chile Casos Activos ICOVID&#39;,
+       &#39;Promedio Resto de Chile Casos Activos ICOVID&#39;,
+       &#39;Poblacion Resto de Chile Casos Nuevos ICOVID&#39;,
+       &#39;Promedio Resto de Chile Casos Nuevos ICOVID&#39;,
+       &#39;Casos actuales Resto de Chile MINSAL&#39;,
+       &#39;Casos Nuevos MINSAL Resto de Chile&#39;,
+       &#39;Casos Activos MINSAL Resto de Chile&#39;, &#39;00_CUA_RCH&#39;, &#39;1_CUA_RCH&#39;,
+       &#39;2_CUA_RCH&#39;, &#39;3_CUA_RCH&#39;, &#39;4_CUA_RCH&#39;], dtype=object)</pre>
 </div>
 
 </div>
@@ -16399,7 +16179,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[55]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;consolidado_nacional&#39;</span>
@@ -16410,6 +16190,8 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
 <span class="n">master</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="n">name</span><span class="o">=</span><span class="s1">&#39;consolidado_nacional_melted&#39;</span>
+<span class="n">master_melted</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16441,10 +16223,10 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_covid-chile.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_consolidado_nacional.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
           <span class="s1">&#39;/home/jovyan/work/ETL/consolidado_nacional.ipynb&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -16461,7 +16243,7 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
 
 
 
@@ -16474,6 +16256,99 @@ pob_cuarentena.columns=[str(x)+'_CUA' if x is not 'Fecha' else x for x in pob_cu
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">master_melted</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[47]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>array([&#39;Fallecidos DEIS Diarios&#39;, &#39;Fallecidos DEIS Diarios PCR+&#39;,
+       &#39;Fallecidos DEIS Diarios Covid Sospechoso&#39;,
+       &#39;Fallecidos DEIS PCR+ Acumulado&#39;,
+       &#39;Fallecidos DEIS Covid Sospechoso Acumulado&#39;,
+       &#39;Fallecidos DEIS Acumulado&#39;, &#39;Fallecidos DEIS PCR+  Millón/Hab&#39;,
+       &#39;Fallecidos DEIS Covid Sospechoso  Millón/Hab&#39;,
+       &#39;Fallecidos DEIS  Millón/Hab&#39;,
+       &#39;Fallecidos Nuevos Región Metropolitana DEIS&#39;,
+       &#39;Fallecidos Nuevos Resto de Chile DEIS&#39;,
+       &#39;Fallecidos Acumulados Región Metropolitana DEIS&#39;,
+       &#39;Fallecidos Acumulados Resto de Chile DEIS&#39;, &#39;Casos Nuevos ICOVID&#39;,
+       &#39;Incidencia Nuevos ICOVID  100 K Hab&#39;, &#39;Casos Acumulados ICOVID&#39;,
+       &#39;Casos Activos ICOVID&#39;, &#39;Incidencia Activos ICOVID  100 K Hab&#39;,
+       &#39;Poblacion Región Metropolitana Casos Activos ICOVID&#39;,
+       &#39;Poblacion Resto de Chile Casos Activos ICOVID&#39;,
+       &#39;Promedio Región Metropolitana Casos Activos ICOVID&#39;,
+       &#39;Promedio Resto de Chile Casos Activos ICOVID&#39;,
+       &#39;Poblacion Región Metropolitana Casos Nuevos ICOVID&#39;,
+       &#39;Poblacion Resto de Chile Casos Nuevos ICOVID&#39;,
+       &#39;Promedio Región Metropolitana Casos Nuevos ICOVID&#39;,
+       &#39;Promedio Resto de Chile Casos Nuevos ICOVID&#39;,
+       &#39;Casos nuevos con sintomas MINSAL&#39;, &#39;Casos totales MINSAL&#39;,
+       &#39;Casos recuperados MINSAL&#39;, &#39;Fallecidos MINSAL&#39;,
+       &#39;Casos activos MINSAL&#39;, &#39;Casos nuevos sin sintomas MINSAL&#39;,
+       &#39;Casos nuevos totales MINSAL&#39;, &#39;Casos activos por FD MINSAL&#39;,
+       &#39;Casos activos por FIS MINSAL&#39;, &#39;Casos recuperados por FIS MINSAL&#39;,
+       &#39;Casos recuperados por FD MINSAL&#39;,
+       &#39;Casos confirmados recuperados MINSAL&#39;,
+       &#39;Casos activos confirmados MINSAL&#39;,
+       &#39;Casos probables acumulados MINSAL&#39;,
+       &#39;Casos activos probables MINSAL&#39;,
+       &#39;Casos nuevos sin notificar MINSAL&#39;,
+       &#39;Casos \nactivos confirmados MINSAL&#39;,
+       &#39;Casos actuales Región Metropolitana MINSAL&#39;,
+       &#39;Casos actuales Resto de Chile MINSAL&#39;,
+       &#39;Casos Nuevos MINSAL Región Metropolitana&#39;,
+       &#39;Casos Nuevos MINSAL Resto de Chile&#39;,
+       &#39;Casos Activos MINSAL Región Metropolitana&#39;,
+       &#39;Casos Activos MINSAL Resto de Chile&#39;, &#39;PERSONAS_MOVILIZADAS&#39;,
+       &#39;PERSONAS_MOVILIZADAS_RM&#39;, &#39;PERSONAS_MOVILIZADAS_RESTO_CHILE&#39;,
+       &#39;00_CUA&#39;, &#39;1_CUA&#39;, &#39;2_CUA&#39;, &#39;3_CUA&#39;, &#39;4_CUA&#39;, &#39;00_CUA_RM&#39;,
+       &#39;1_CUA_RM&#39;, &#39;2_CUA_RM&#39;, &#39;3_CUA_RM&#39;, &#39;4_CUA_RM&#39;, &#39;00_CUA_RCH&#39;,
+       &#39;1_CUA_RCH&#39;, &#39;2_CUA_RCH&#39;, &#39;3_CUA_RCH&#39;, &#39;4_CUA_RCH&#39;], dtype=object)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>
