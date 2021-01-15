@@ -43,7 +43,9 @@ RUN conda install --quiet --yes -c \
     geoalchemy2 \
     conda-forge descartes \
     dateparser \
-    carto
+    carto \
+    gspread \
+    oauth2client
 
 
 RUN pip install --upgrade pip && \
