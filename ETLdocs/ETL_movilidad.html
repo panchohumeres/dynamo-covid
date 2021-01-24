@@ -14276,6 +14276,8 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">mapbox</span> <span class="kn">import</span> <span class="n">Uploader</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 </pre></div>
 
      </div>
@@ -14322,6 +14324,21 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#usar en caso de requerir borrar la tabla para cargar todo de nuevo</span>
+<span class="c1">#cnx.execute(&#39;DROP TABLE IF EXISTS &quot;movilidad&quot;.&quot;isci_entel&quot;;&#39;)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A long string that contains the necessary Postgres login information</span>
 <span class="n">postgres_str</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;postgresql://&#39;</span><span class="o">+</span><span class="n">postgres_user</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">postgres_psswd</span><span class="o">+</span><span class="s1">&#39;@&#39;</span><span class="o">+</span><span class="n">DBname</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">postgres_port</span><span class="o">+</span><span class="s1">&#39;/superset&#39;</span><span class="p">)</span>
 <span class="c1"># Create the connection</span>
@@ -14336,7 +14353,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://matiascerda.carto.com/api/v2/sql?format=CSV&amp;filename=datos-movilidad-isci.csv&amp;q=select%20*</span><span class="si">%20f</span><span class="s1">rom</span><span class="si">%20d</span><span class="s1">ata_variacion&#39;</span>
@@ -14347,478 +14364,10 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span><span class="o">=</span><span class="s2">&quot;select * from geo.zonas_censales&quot;</span>
-<span class="n">zonas</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span>
-<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_14_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crs</span><span class="o">=</span><span class="n">zonas</span><span class="o">.</span><span class="n">crs</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#diferencias entre entradas y salidas de zonas censales estimadas por ISCI-entel Ocean</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="c1">#diferencias entre entradas</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_entrada&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="c1">#diferencias entre salidas</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;the_geom&#39;</span><span class="p">,</span><span class="s1">&#39;cartodb_id&#39;</span><span class="p">,</span><span class="s1">&#39;the_geom_webmercator&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zonas</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2020-&#39;</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-6&#39;</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%W-%w&#39;</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">]</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-11-39a840ff3a8b&gt;:4: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
-  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-11-39a840ff3a8b&gt;:4: FutureWarning: The default value of regex will change from True to False in a future version.
-  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-11-39a840ff3a8b&gt;:7: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
-  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-11-39a840ff3a8b&gt;:7: FutureWarning: The default value of regex will change from True to False in a future version.
-  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Variabilidad PONDERADA</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="s1">&#39;comuna&#39;</span><span class="p">])[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;comuna&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">})</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="c1">#ISCIentel[&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;]</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pop_comuna</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;comuna&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="c1">#% de personas 15 a 64 años comunal por zona censal</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">]</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas_comunal_ponderada&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>zona_censal</th>
-      <th>comuna</th>
-      <th>region</th>
-      <th>week</th>
-      <th>dif_salida</th>
-      <th>dif_entrada</th>
-      <th>dif_entrada_lim_inf</th>
-      <th>dif_entrada_lim_sup</th>
-      <th>dif_salida_lim_inf</th>
-      <th>dif_salida_lim_sup</th>
-      <th>...</th>
-      <th>PERSONAS_15_A_64_AÑOS</th>
-      <th>PERSONAS_MAS_65_AÑOS</th>
-      <th>PERSONAS_6_A_64_AÑOS</th>
-      <th>date</th>
-      <th>salidas</th>
-      <th>PERSONAS_MOVILIZADAS</th>
-      <th>index</th>
-      <th>PERSONAS_6_A_64_AÑOS_COMUNA</th>
-      <th>PERSONAS_6_A_64_AÑOS_FACTOR</th>
-      <th>salidas_comunal_ponderada</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16109011002</td>
-      <td>YUNGAY</td>
-      <td>REGIÓN DE ÑUBLE</td>
-      <td>36</td>
-      <td>[-40%,-21%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>2738.0</td>
-      <td>585.0</td>
-      <td>3105.0</td>
-      <td>2020-09-12</td>
-      <td>-30.5</td>
-      <td>2157.975</td>
-      <td>315.0</td>
-      <td>10143.0</td>
-      <td>0.306122</td>
-      <td>-9.336735</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4106011001</td>
-      <td>VICUÑA</td>
-      <td>REGIÓN DE COQUIMBO</td>
-      <td>31</td>
-      <td>[-40%,-21%,]</td>
-      <td>[-21%,+20%,]</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>2626.0</td>
-      <td>355.0</td>
-      <td>3166.0</td>
-      <td>2020-08-08</td>
-      <td>-30.5</td>
-      <td>2200.370</td>
-      <td>306.0</td>
-      <td>13188.0</td>
-      <td>0.240067</td>
-      <td>-7.322035</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>13119161003</td>
-      <td>MAIPÚ</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>42</td>
-      <td>[-40%,-21%,]</td>
-      <td>[+41%,+60%,]</td>
-      <td>41</td>
-      <td>60</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>3870.0</td>
-      <td>474.0</td>
-      <td>4290.0</td>
-      <td>2020-10-24</td>
-      <td>-30.5</td>
-      <td>2981.550</td>
-      <td>151.0</td>
-      <td>424316.0</td>
-      <td>0.010110</td>
-      <td>-0.308367</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>7304021005</td>
-      <td>MOLINA</td>
-      <td>REGIÓN DEL MAULE</td>
-      <td>9</td>
-      <td>[-21%,+20%,]</td>
-      <td>[-21%,+20%,]</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>2001.0</td>
-      <td>346.0</td>
-      <td>2267.0</td>
-      <td>2020-03-07</td>
-      <td>-0.5</td>
-      <td>2255.665</td>
-      <td>162.0</td>
-      <td>29234.0</td>
-      <td>0.077547</td>
-      <td>-0.038773</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4101031003</td>
-      <td>LA SERENA</td>
-      <td>REGIÓN DE COQUIMBO</td>
-      <td>30</td>
-      <td>[-40%,-21%,]</td>
-      <td>[-40%,-21%,]</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>3292.0</td>
-      <td>198.0</td>
-      <td>3575.0</td>
-      <td>2020-08-01</td>
-      <td>-30.5</td>
-      <td>2484.625</td>
-      <td>117.0</td>
-      <td>157671.0</td>
-      <td>0.022674</td>
-      <td>-0.691551</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>214055</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>48</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-05</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
-    </tr>
-    <tr>
-      <th>214056</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>49</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-12</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
-    </tr>
-    <tr>
-      <th>214057</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>50</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-19</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
-    </tr>
-    <tr>
-      <th>214058</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>51</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2020-12-26</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
-    </tr>
-    <tr>
-      <th>214059</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>52</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2080.0</td>
-      <td>2021-01-02</td>
-      <td>-0.5</td>
-      <td>2069.600</td>
-      <td>242.0</td>
-      <td>124824.0</td>
-      <td>0.016663</td>
-      <td>-0.008332</td>
-    </tr>
-  </tbody>
-</table>
-<p>214060 rows × 37 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;isci_entel&#39;</span>
@@ -14856,10 +14405,533 @@ a.anchor-link {
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span><span class="o">=</span><span class="s2">&quot;select * from geo.zonas_censales&quot;</span>
+<span class="n">zonas</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span>
+<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_14_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span>
+<span class="n">crs</span><span class="o">=</span><span class="n">zonas</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">cnx</span><span class="o">.</span><span class="n">has_table</span><span class="p">(</span><span class="s2">&quot;isci_entel&quot;</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="s2">&quot;movilidad&quot;</span><span class="p">):</span>
+
+    <span class="c1">#request = request(url)</span>
+    <span class="n">csv_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rows in csv url:&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">csv_len</span><span class="p">))</span>
+    
+    <span class="n">sql_len</span><span class="o">=</span><span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM &quot;&#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39;&quot;.&quot;&#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;&quot;;&#39;</span><span class="p">)</span>
+    <span class="n">sql_len</span><span class="o">=</span><span class="n">sql_len</span><span class="o">.</span><span class="n">scalar</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rows in sql table :&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">sql_len</span><span class="p">))</span>
+    
+    <span class="n">rows</span><span class="o">=</span><span class="n">csv_len</span><span class="o">-</span><span class="n">sql_len</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rows &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">rows</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading last &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; from csv in url&#39;</span><span class="p">)</span>
+        <span class="c1"># The row indices to skip - make sure 0 is not included to keep the header!</span>
+        <span class="n">skip_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">csv_len</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        
+        <span class="c1"># Read the data</span>
+        <span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="n">skip_idx</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no data to update from url&#39;</span><span class="p">)</span>
+        <span class="c1">#ISCIentel=pd.read_csv(url,encoding=&#39;utf-8&#39;)</span>
+        <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;fail&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading all data from url&#39;</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>rows in csv url:223791
+rows in sql table :223790
+rows 1
+no data to update from url
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">if_exists</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;fail&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
+    <span class="c1">#diferencias entre entradas y salidas de zonas censales estimadas por ISCI-entel Ocean</span>
+    <span class="c1">#ISCIentel=pd.read_csv(url,encoding=&#39;utf-8&#39;)</span>
+    <span class="c1">#diferencias entre entradas</span>
+    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_entrada&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="c1">#diferencias entre salidas</span>
+    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;the_geom&#39;</span><span class="p">,</span><span class="s1">&#39;cartodb_id&#39;</span><span class="p">,</span><span class="s1">&#39;the_geom_webmercator&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zonas</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;2020&#39;</span>
+    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">53</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;2021&#39;</span>
+    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">53</span><span class="p">,</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">53</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-6&#39;</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%W-%w&#39;</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">]</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
+    <span class="c1">#Variabilidad PONDERADA</span>
+    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="s1">&#39;comuna&#39;</span><span class="p">])[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;comuna&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">})</span>
+    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="c1">#ISCIentel[&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;]</span>
+    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pop_comuna</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;comuna&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="c1">#% de personas 15 a 64 años comunal por zona censal</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">]</span>
+    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas_comunal_ponderada&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
+    <span class="n">ISCIentel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
+    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[38]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>zona_censal</th>
+      <th>comuna</th>
+      <th>region</th>
+      <th>week</th>
+      <th>dif_salida</th>
+      <th>dif_entrada</th>
+      <th>dif_entrada_lim_inf</th>
+      <th>dif_entrada_lim_sup</th>
+      <th>dif_salida_lim_inf</th>
+      <th>dif_salida_lim_sup</th>
+      <th>...</th>
+      <th>PERSONAS_MAS_65_AÑOS</th>
+      <th>PERSONAS_6_A_64_AÑOS</th>
+      <th>year</th>
+      <th>date</th>
+      <th>salidas</th>
+      <th>PERSONAS_MOVILIZADAS</th>
+      <th>index</th>
+      <th>PERSONAS_6_A_64_AÑOS_COMUNA</th>
+      <th>PERSONAS_6_A_64_AÑOS_FACTOR</th>
+      <th>salidas_comunal_ponderada</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4106011001</td>
+      <td>VICUÑA</td>
+      <td>REGIÓN DE COQUIMBO</td>
+      <td>35</td>
+      <td>[-21%,+20%,]</td>
+      <td>[-21%,+20%,]</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>355.0</td>
+      <td>3166.0</td>
+      <td>2020</td>
+      <td>2020-09-05</td>
+      <td>-0.5</td>
+      <td>3150.170</td>
+      <td>306.0</td>
+      <td>13188.0</td>
+      <td>0.240067</td>
+      <td>-0.120033</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7101121010</td>
+      <td>TALCA</td>
+      <td>REGIÓN DEL MAULE</td>
+      <td>13</td>
+      <td>[-21%,+20%,]</td>
+      <td>[+21%,+40%,]</td>
+      <td>21</td>
+      <td>40</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>327.0</td>
+      <td>1847.0</td>
+      <td>2020</td>
+      <td>2020-04-04</td>
+      <td>-0.5</td>
+      <td>1837.765</td>
+      <td>286.0</td>
+      <td>164188.0</td>
+      <td>0.011249</td>
+      <td>-0.005625</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>16207021001</td>
+      <td>TREGUACO</td>
+      <td>REGIÓN DE ÑUBLE</td>
+      <td>15</td>
+      <td>[-40%,-21%,]</td>
+      <td>[-60%,-41%,]</td>
+      <td>-60</td>
+      <td>-41</td>
+      <td>-40</td>
+      <td>-21</td>
+      <td>...</td>
+      <td>147.0</td>
+      <td>1393.0</td>
+      <td>2020</td>
+      <td>2020-04-18</td>
+      <td>-30.5</td>
+      <td>968.135</td>
+      <td>299.0</td>
+      <td>1393.0</td>
+      <td>1.000000</td>
+      <td>-30.500000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8101201001</td>
+      <td>CONCEPCIÓN</td>
+      <td>REGIÓN DEL BIOBÍO</td>
+      <td>15</td>
+      <td>[-40%,-21%,]</td>
+      <td>[-60%,-41%,]</td>
+      <td>-60</td>
+      <td>-41</td>
+      <td>-40</td>
+      <td>-21</td>
+      <td>...</td>
+      <td>455.0</td>
+      <td>2497.0</td>
+      <td>2020</td>
+      <td>2020-04-18</td>
+      <td>-30.5</td>
+      <td>1735.415</td>
+      <td>55.0</td>
+      <td>171653.0</td>
+      <td>0.014547</td>
+      <td>-0.443677</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7101041002</td>
+      <td>TALCA</td>
+      <td>REGIÓN DEL MAULE</td>
+      <td>16</td>
+      <td>[-21%,+20%,]</td>
+      <td>[-40%,-21%,]</td>
+      <td>-40</td>
+      <td>-21</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>278.0</td>
+      <td>1182.0</td>
+      <td>2020</td>
+      <td>2020-04-25</td>
+      <td>-0.5</td>
+      <td>1176.090</td>
+      <td>286.0</td>
+      <td>164188.0</td>
+      <td>0.007199</td>
+      <td>-0.003600</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>223785</th>
+      <td>13127041004</td>
+      <td>RECOLETA</td>
+      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
+      <td>50</td>
+      <td>[-21%,+20%,]</td>
+      <td>[+61%,+100%,]</td>
+      <td>61</td>
+      <td>100</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>383.0</td>
+      <td>2080.0</td>
+      <td>2020</td>
+      <td>2020-12-19</td>
+      <td>-0.5</td>
+      <td>2069.600</td>
+      <td>242.0</td>
+      <td>124824.0</td>
+      <td>0.016663</td>
+      <td>-0.008332</td>
+    </tr>
+    <tr>
+      <th>223786</th>
+      <td>13127041004</td>
+      <td>RECOLETA</td>
+      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
+      <td>51</td>
+      <td>[-21%,+20%,]</td>
+      <td>[+61%,+100%,]</td>
+      <td>61</td>
+      <td>100</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>383.0</td>
+      <td>2080.0</td>
+      <td>2020</td>
+      <td>2020-12-26</td>
+      <td>-0.5</td>
+      <td>2069.600</td>
+      <td>242.0</td>
+      <td>124824.0</td>
+      <td>0.016663</td>
+      <td>-0.008332</td>
+    </tr>
+    <tr>
+      <th>223787</th>
+      <td>13127041004</td>
+      <td>RECOLETA</td>
+      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
+      <td>52</td>
+      <td>[-40%,-21%,]</td>
+      <td>[+61%,+100%,]</td>
+      <td>61</td>
+      <td>100</td>
+      <td>-40</td>
+      <td>-21</td>
+      <td>...</td>
+      <td>383.0</td>
+      <td>2080.0</td>
+      <td>2020</td>
+      <td>2021-01-02</td>
+      <td>-30.5</td>
+      <td>1445.600</td>
+      <td>242.0</td>
+      <td>124824.0</td>
+      <td>0.016663</td>
+      <td>-0.508236</td>
+    </tr>
+    <tr>
+      <th>223788</th>
+      <td>13127041004</td>
+      <td>RECOLETA</td>
+      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
+      <td>53</td>
+      <td>[-21%,+20%,]</td>
+      <td>[+61%,+100%,]</td>
+      <td>61</td>
+      <td>100</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>383.0</td>
+      <td>2080.0</td>
+      <td>2020</td>
+      <td>2021-01-09</td>
+      <td>-0.5</td>
+      <td>2069.600</td>
+      <td>242.0</td>
+      <td>124824.0</td>
+      <td>0.016663</td>
+      <td>-0.008332</td>
+    </tr>
+    <tr>
+      <th>223789</th>
+      <td>13127041004</td>
+      <td>RECOLETA</td>
+      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
+      <td>1</td>
+      <td>[-21%,+20%,]</td>
+      <td>[+61%,+100%,]</td>
+      <td>61</td>
+      <td>100</td>
+      <td>-21</td>
+      <td>20</td>
+      <td>...</td>
+      <td>383.0</td>
+      <td>2080.0</td>
+      <td>2021</td>
+      <td>2021-01-09</td>
+      <td>-0.5</td>
+      <td>2069.600</td>
+      <td>242.0</td>
+      <td>124824.0</td>
+      <td>0.016663</td>
+      <td>-0.008332</td>
+    </tr>
+  </tbody>
+</table>
+<p>223790 rows × 38 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span>
@@ -14886,7 +14958,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-15-f461c9b017e0&gt;:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;centroid&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+<pre>&lt;ipython-input-39-f461c9b017e0&gt;:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;centroid&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
 
   ISCIentel[&#39;geometry&#39;]=ISCIentel[&#39;geometry&#39;].centroid
 </pre>
@@ -14900,7 +14972,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for r in ISCIentel[&#39;REGION&#39;].unique():</span>
@@ -14918,7 +14990,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#geojson=ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;]</span>
@@ -14934,7 +15006,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;].to_file(&quot;../ETLcache/mov_temp.geojson&quot;, driver=&#39;GeoJSON&#39;)</span>
@@ -14948,7 +15020,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#with open(&quot;../ETLcache/mov_temp.geojson&quot;, &#39;rb&#39;) as src:</span>
@@ -14965,10 +15037,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;isci_entel&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;isci_entel&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="n">if_exists</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14979,7 +15051,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[82]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_movilidad.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
@@ -14999,7 +15071,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[82]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[47]:</div>
 
 
 
@@ -15012,55 +15084,6 @@ a.anchor-link {
 
 </div>
 
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[83]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div>
