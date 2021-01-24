@@ -41,27 +41,27 @@ def regression(_df,term1='LOG',term2='_TOT'):
         
     return dfm
     
-def log_log_plot(df,timestamp='',path='',x='',y='',z='',xlabel='',ylabel='',x_label='',y_label='',title='',ax=''):
+def log_log_plot(df,space=100,timestamp='',path='',x='',y='',z='',xlabel='',ylabel='',x_label='',y_label='',title='',ax='',dpi=100):
     
     if ax!='':
         ax = sns.lineplot(x=x, y=y, data=df,marker="o",ax=axes[ax])
         ax = sns.lineplot(x=x, y=z, data=df,ax=axes[ax])
     else:
         ax = sns.lineplot(x=x, y=y, data=df,marker="o")
-        ax = sns.lineplot(x=x, y=z, data=df)        
-    x_ticks=df[x].dropna().iloc[::30]
+        ax = sns.lineplot(x=x, y=z, data=df)
+    x_ticks=df[x].dropna().iloc[::space]
     if xlabel=='Fecha':
         x_labels=df.loc[x_ticks.index,xlabel].dt.strftime('%Y-%m-%d')
     else:
         x_labels=df.loc[x_ticks.index,xlabel]
-    y_ticks=df[y].dropna().iloc[::30]
+    y_ticks=df[y].dropna().iloc[::space]
     y_labels=df.loc[y_ticks.index,ylabel]
     ax.set(xticks=x_ticks,yticks=y_ticks,xlabel=x_label,ylabel=y_label,title=title)
-    ax.set_xticklabels(x_labels, rotation='vertical', fontsize=9)
+    ax.set_xticklabels(x_labels, rotation=45, fontsize=9)
     ax.set_yticklabels(y_labels, fontsize=9)
     filename=path+title.replace(' ','_').replace('ó','o')+'.png'
     print('saving to file: '+filename)
-    plt.savefig(filename)
+    plt.savefig(filename,dpi=dpi)
     backup=path+title.replace(' ','_').replace('ó','o')+timestamp+'.png'
     print('saving backup: '+backup)
     plt.savefig(backup)
