@@ -14673,7 +14673,7 @@ Date exists on archive
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">csvs_to_sql</span><span class="p">(</span><span class="n">deis</span><span class="p">,</span><span class="n">headers</span><span class="p">):</span>
@@ -14718,6 +14718,7 @@ Date exists on archive
     <span class="n">edad_fecha</span><span class="o">=</span><span class="n">edad_fecha</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;EDAD_CANT&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;7d&#39;</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     <span class="n">edad_fecha</span><span class="o">=</span><span class="n">edad_fecha</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DEIS_EDAD_FECHA_ROLLING&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
     <span class="n">edad_fecha</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -14729,12 +14730,12 @@ Date exists on archive
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">db_flag</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reading files&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reading files&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;.csv&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">deis</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">f</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;.xlsx&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
@@ -14762,7 +14763,6 @@ Date exists on archive
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Reading files
-Reading files
 </pre>
 </div>
 </div>
@@ -14774,71 +14774,11 @@ Reading files
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-21-71b181473cdc&gt;:7: FutureWarning: Your version of xlrd is 1.2.0. In xlrd &gt;= 2.0, only the xls format is supported. As a result, the openpyxl engine will be used if it is installed and the engine argument is not specified. Install openpyxl instead.
+<pre>&lt;ipython-input-23-134013f5df97&gt;:7: FutureWarning: Your version of xlrd is 1.2.0. In xlrd &gt;= 2.0, only the xls format is supported. As a result, the openpyxl engine will be used if it is installed and the engine argument is not specified. Install openpyxl instead.
   headers=pd.read_excel(path+file.rsplit(&#39;.rar&#39;)[0]+&#39;/&#39;+f,header=3,index_col=1)
 </pre>
 </div>
 </div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&#39;/data/ETLcache/DEFUNCIONES_FUENTE_DEIS_2016_2021_14012021&#39;</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ls</span> <span class="s1">&#39;/data/ETLcache/DEFUNCIONES_FUENTE_DEIS_2016_2021_14012021&#39;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
 
@@ -14847,8 +14787,19 @@ Reading files
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre> DEFUNCIONES_FUENTE_DEIS_2016_2021_14012021.csv
-&#39;Diccionario de Datos BBDD-COVID19 liberada.xlsx&#39;
+<pre>creating table DEIS_2021 ,schema: DEIS
+creating table (not overwrite mode)DEIS_2020 ,schema: DEIS
+table DEIS_2020 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2019 ,schema: DEIS
+table DEIS_2019 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2018 ,schema: DEIS
+table DEIS_2018 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2017 ,schema: DEIS
+table DEIS_2017 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2016 ,schema: DEIS
+table DEIS_2016 ,schema: DEIS already exists
+creating table DEIS_COVID ,schema: DEIS
+creating table DEIS_EDAD_FECHA_ROLLING ,schema: DEIS
 </pre>
 </div>
 </div>
@@ -14860,7 +14811,7 @@ Reading files
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_DEIS.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
@@ -14880,7 +14831,7 @@ Reading files
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
 
 
 
