@@ -148,6 +148,7 @@ def transpose(DF,date_col='Region',header_row='Comuna'):
         if header_row in list(df[date_col].unique()):
             df.columns=df[df[date_col]==header_row].iloc[0]
             df['Fecha']=pd.to_datetime(df[header_row],errors='coerce')
+            #df['Fecha']=pd.Timestamp(df['Fecha'])
         else:
             df['Fecha']=pd.to_datetime(df[date_col],errors='coerce')
             df=df.dropna(subset=['Fecha'])

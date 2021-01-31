@@ -77,3 +77,51 @@ def log_inv(_df,term1='LOG',term2='_Regress'):
         df[name]=np.exp(df[y])
         
     return df
+
+def plt_loglog(df,x,y,z,dpi=150,filename=''):
+    ### DEIS-fallecidos
+    deis=df.loc[~df[x].isnull(),(x,y)]
+    deis=deis.rolling(7).mean()
+
+    #dates=nacional.loc[~nacional[x].isnull(),z]
+    dates=nacional[z]
+    dates=dates.dt.date.astype(str)
+    #dates=dates.values
+    #x_ticks=dates[::50].index
+    #notin=list(set(dates.index) - set(x_ticks))
+    #dates.loc[notin]=None
+
+    grid = sns.lineplot(x=x,y=y,data=deis)
+    ax2 = plt.twiny()
+    ax2.grid(False)
+    
+    sns.lineplot(x,y,data=deis, marker='o', linestyle='',ax=ax2,alpha=0)
+    ax2.set(xscale="log", yscale="log",xlabel='Fecha')
+
+    x_ticks=ax2.get_xticks()
+    x_ticks=np.append(x_ticks,deis[x].max())
+
+    grid.set(xscale="log", yscale="log",xticks=x_ticks)
+    grid.grid(True,which="both",ls="-",c='white',alpha=0.8)  
+
+    
+    
+
+    
+    fechas=[]
+    for xtick in x_ticks:
+        #print(xtick)
+        idx=(nacional[x].fillna(0)-xtick).abs().argsort()[:2][1]
+        #fechas.append(nacional.loc[idx,'Fecha'])
+        fechas.append(idx)
+        
+    fechas=dates.loc[fechas].values
+    
+    ax2.set_xticks(x_ticks)
+    ax2.set_xticklabels(fechas, rotation=45, fontsize=9)
+    ax2.set_xlim(deis[x].min(), deis[x].max())
+    
+    grid.set_xlim(deis[x].min(), deis[x].max())
+    plt.savefig(filename,format='svg',bbox_inches='tight')
+    
+    #return dates,fechas
