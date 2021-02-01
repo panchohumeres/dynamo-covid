@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>movilidad</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>DEIS</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14273,11 +14273,9 @@ a.anchor-link {
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">mapbox</span> <span class="kn">import</span> <span class="n">Uploader</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
-<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="c1">#from sqlalchemy.sql import text</span>
 </pre></div>
 
      </div>
@@ -14291,26 +14289,10 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">]</span>
 <span class="n">postgres_psswd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">]</span>
 <span class="n">postgres_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">]</span>
 <span class="n">postgres_port</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">])</span>
-<span class="n">mapbox_api</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAPBOX_API_KEY&#39;</span><span class="p">]</span>
-<span class="n">mapbox_up</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAPBOX_API_UPLOAD_KEY&#39;</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14324,21 +14306,6 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#usar en caso de requerir borrar la tabla para cargar todo de nuevo</span>
-<span class="c1">#cnx.execute(&#39;DROP TABLE IF EXISTS &quot;movilidad&quot;.&quot;isci_entel&quot;;&#39;)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A long string that contains the necessary Postgres login information</span>
 <span class="n">postgres_str</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;postgresql://&#39;</span><span class="o">+</span><span class="n">postgres_user</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">postgres_psswd</span><span class="o">+</span><span class="s1">&#39;@&#39;</span><span class="o">+</span><span class="n">DBname</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">postgres_port</span><span class="o">+</span><span class="s1">&#39;/superset&#39;</span><span class="p">)</span>
 <span class="c1"># Create the connection</span>
@@ -14350,33 +14317,18 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://matiascerda.carto.com/api/v2/sql?format=CSV&amp;filename=datos-movilidad-isci.csv&amp;q=select%20*</span><span class="si">%20f</span><span class="s1">rom</span><span class="si">%20d</span><span class="s1">ata_variacion&#39;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;isci_entel&#39;</span>
-<span class="n">schema</span><span class="o">=</span><span class="s1">&#39;movilidad&#39;</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
-    <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">schema</span><span class="p">))</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;DEIS&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
+        <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14396,7 +14348,150 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>schema movilidad exists, will not be created
+<pre>schema DEIS exists, will not be created
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">now</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">delta</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">status</span><span class="o">=</span><span class="mi">400</span>
+<span class="k">while</span> <span class="n">status</span><span class="o">!=</span><span class="mi">200</span><span class="p">:</span>
+    <span class="n">date</span><span class="o">=</span><span class="n">now</span><span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;testing date:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span>
+    <span class="n">dia</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">mes</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%m&quot;</span><span class="p">)</span>
+    <span class="n">year</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://deis.minsal.cl/wp-content/uploads/&#39;</span><span class="o">+</span><span class="n">year</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">mes</span><span class="o">+</span><span class="s1">&#39;/DEFUNCIONES_FUENTE_DEIS_2016_&#39;</span><span class="o">+</span><span class="n">year</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">dia</span><span class="o">+</span><span class="n">mes</span><span class="o">+</span><span class="n">year</span><span class="o">+</span><span class="s1">&#39;.rar&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;url: &#39;</span><span class="o">+</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/data/ETLcache/&#39;</span>
+    <span class="n">file</span><span class="o">=</span><span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">mes</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Date exists on archive&quot;</span><span class="p">)</span>
+        <span class="n">flag</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">status</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">status_code</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status</span><span class="o">==</span><span class="mi">200</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Creating file &quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="p">)</span>
+            <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+            <span class="n">flag</span><span class="o">=</span><span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;failure, trying previous date&#39;</span><span class="p">)</span>
+            <span class="n">delta</span><span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>testing date:2021-01-23 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_23012021.rar
+404
+failure, trying previous date
+testing date:2021-01-22 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_22012021.rar
+404
+failure, trying previous date
+testing date:2021-01-21 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_21012021.rar
+404
+failure, trying previous date
+testing date:2021-01-20 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_20012021.rar
+404
+failure, trying previous date
+testing date:2021-01-19 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_19012021.rar
+404
+failure, trying previous date
+testing date:2021-01-18 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_18012021.rar
+404
+failure, trying previous date
+testing date:2021-01-17 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_17012021.rar
+404
+failure, trying previous date
+testing date:2021-01-16 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_16012021.rar
+404
+failure, trying previous date
+testing date:2021-01-15 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_15012021.rar
+404
+failure, trying previous date
+testing date:2021-01-14 06:49:18.670745
+url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_14012021.rar
+Date exists on archive
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;unpacking RAR file&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">patoolib</span><span class="o">.</span><span class="n">extract_archive</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">+</span><span class="s1">&#39; already in archive, no unpacking&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>/data/ETLcache/DEFUNCIONES_FUENTE_DEIS_2016_2021_14012021.rar already in archive, no unpacking
 </pre>
 </div>
 </div>
@@ -14411,11 +14506,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span><span class="o">=</span><span class="s2">&quot;select * from geo.zonas_censales&quot;</span>
-<span class="n">zonas</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span>
-<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_14_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span>
-<span class="n">crs</span><span class="o">=</span><span class="n">zonas</span><span class="o">.</span><span class="n">crs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">current_year</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span>
 </pre></div>
 
      </div>
@@ -14423,70 +14514,19 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">cnx</span><span class="o">.</span><span class="n">has_table</span><span class="p">(</span><span class="s2">&quot;isci_entel&quot;</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="s2">&quot;movilidad&quot;</span><span class="p">):</span>
-
-    <span class="c1">#request = request(url)</span>
-    <span class="n">csv_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rows in csv url:&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">csv_len</span><span class="p">))</span>
-    
-    <span class="n">sql_len</span><span class="o">=</span><span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM &quot;&#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39;&quot;.&quot;&#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;&quot;;&#39;</span><span class="p">)</span>
-    <span class="n">sql_len</span><span class="o">=</span><span class="n">sql_len</span><span class="o">.</span><span class="n">scalar</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rows in sql table :&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">sql_len</span><span class="p">))</span>
-    
-    <span class="n">rows</span><span class="o">=</span><span class="n">csv_len</span><span class="o">-</span><span class="n">sql_len</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rows &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
-    
-    <span class="k">if</span> <span class="n">rows</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading last &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; from csv in url&#39;</span><span class="p">)</span>
-        <span class="c1"># The row indices to skip - make sure 0 is not included to keep the header!</span>
-        <span class="n">skip_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">csv_len</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
-        
-        <span class="c1"># Read the data</span>
-        <span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="n">skip_idx</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no data to update from url&#39;</span><span class="p">)</span>
-        <span class="c1">#ISCIentel=pd.read_csv(url,encoding=&#39;utf-8&#39;)</span>
-        <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;fail&#39;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading all data from url&#39;</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-    <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBlast_date</span><span class="o">=</span><span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT max(&quot;FECHA_DEF&quot;) FROM &quot;DEIS&quot;.&quot;DEIS_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">current_year</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&quot;;&#39;</span><span class="p">)</span>
+<span class="n">DBlast_date</span><span class="o">=</span><span class="n">DBlast_date</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>rows in csv url:223791
-rows in sql table :223790
-rows 1
-no data to update from url
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14495,7 +14535,7 @@ no data to update from url
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">if_exists</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBlast_date</span>
 </pre></div>
 
      </div>
@@ -14517,7 +14557,7 @@ no data to update from url
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&#39;fail&#39;</pre>
+<pre>datetime.datetime(2021, 1, 13, 0, 0)</pre>
 </div>
 
 </div>
@@ -14532,163 +14572,9 @@ no data to update from url
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
-    <span class="c1">#diferencias entre entradas y salidas de zonas censales estimadas por ISCI-entel Ocean</span>
-    <span class="c1">#ISCIentel=pd.read_csv(url,encoding=&#39;utf-8&#39;)</span>
-    <span class="c1">#diferencias entre entradas</span>
-    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_entrada&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="c1">#diferencias entre salidas</span>
-    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;the_geom&#39;</span><span class="p">,</span><span class="s1">&#39;cartodb_id&#39;</span><span class="p">,</span><span class="s1">&#39;the_geom_webmercator&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zonas</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;2020&#39;</span>
-    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">53</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;2021&#39;</span>
-    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">53</span><span class="p">,</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">53</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-6&#39;</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%W-%w&#39;</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">]</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
-    <span class="c1">#Variabilidad PONDERADA</span>
-    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="s1">&#39;comuna&#39;</span><span class="p">])[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;comuna&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">})</span>
-    <span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="c1">#ISCIentel[&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;]</span>
-    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pop_comuna</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;comuna&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="c1">#% de personas 15 a 64 años comunal por zona censal</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_COMUNA&#39;</span><span class="p">]</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas_comunal_ponderada&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_6_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
-    <span class="n">ISCIentel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;Lon&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
-    <span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
-    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for r in ISCIentel[&#39;REGION&#39;].unique():</span>
-<span class="c1">#    name=&#39;isci_entel&#39;+str(r)</span>
-<span class="c1">#    print(&#39;saving table &#39;+name)</span>
-    <span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==r].to_postgis(name=name+&#39;_&#39;+str(r), schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
-<span class="c1">#    ISCIentel[ISCIentel[&#39;REGION&#39;]==r].to_sql(name, schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#geojson=ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;]</span>
-<span class="c1">#geojson[&#39;date&#39;]=geojson[&#39;date&#39;].astype(str)</span>
-<span class="c1">#geojson=geojson.to_json()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;].to_file(&quot;../ETLcache/mov_temp.geojson&quot;, driver=&#39;GeoJSON&#39;)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#with open(&quot;../ETLcache/mov_temp.geojson&quot;, &#39;rb&#39;) as src:</span>
-<span class="c1">#    upload_resp = service.upload(src, &#39;test_dataset&#39;)</span>
-<span class="c1">#upload_resp</span>
-<span class="c1">#upload_id = upload_resp.json()[&#39;id&#39;]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">if_exists</span><span class="o">!=</span><span class="s1">&#39;fail&#39;</span><span class="p">:</span>
-    <span class="n">ISCIentel</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;isci_entel&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="n">if_exists</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_last_date</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">file_last_date</span><span class="o">=</span><span class="n">file_last_date</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">file_last_date</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">file_last_date</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+<span class="n">file_last_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">file_last_date</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14699,11 +14585,10 @@ no data to update from url
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_movilidad.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
-          <span class="s1">&#39;/home/jovyan/work/ETL/movilidad.ipynb&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_last_date</span>
 </pre></div>
 
      </div>
@@ -14719,7 +14604,234 @@ no data to update from url
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>datetime.datetime(2021, 1, 14, 0, 0)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_flag</span><span class="o">=</span><span class="n">file_last_date</span><span class="o">&gt;</span><span class="n">DBlast_date</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_flag</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">csvs_to_sql</span><span class="p">(</span><span class="n">deis</span><span class="p">,</span><span class="n">headers</span><span class="p">):</span>
+    <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;DEIS&#39;</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Nombre de la variable&#39;</span><span class="p">]</span>
+    <span class="c1">#headers=headers[1:]</span>
+    <span class="n">deis</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">headers</span>
+    <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">deis</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;GLOSA_REG_RES&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Metropolitana de Santiago&#39;</span><span class="p">,</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Resto de Chile&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Región Metropolitana&#39;</span><span class="p">})</span>
+    <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">],</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+    <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
+    <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_STR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
+    <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;DIAG1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;U071&#39;</span><span class="p">:</span><span class="s1">&#39;Covid PCR+&#39;</span><span class="p">,</span><span class="s1">&#39;U072&#39;</span><span class="p">:</span><span class="s1">&#39;Covid Sospechoso&#39;</span><span class="p">})</span>
+    <span class="n">deis</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;DIAG1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;U071&#39;</span><span class="p">,</span><span class="s1">&#39;U072&#39;</span><span class="p">]),</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;ANO_DEF&#39;</span> <span class="ow">in</span> <span class="n">deis</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;creando columna: ANO_DEF&#39;</span><span class="p">)</span>
+        <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;ANO_DEF&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+        
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;ANO_DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DEIS_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;ANO_DEF&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">y</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">==</span><span class="n">current_year</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table (not overwrite mode)&quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;fail&#39;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;table &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; already exists&#39;</span><span class="p">)</span>
+                
+            
+    <span class="n">deis_covid</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DEIS_COVID&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+    <span class="n">deis_covid</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+    
+    <span class="n">edad_fecha</span><span class="o">=</span><span class="n">deis</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;ANO_DEF&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2020</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">())]</span>
+    <span class="n">edad_fecha</span><span class="o">=</span><span class="n">edad_fecha</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">,</span><span class="s1">&#39;EDAD_CANT&#39;</span><span class="p">])[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">edad_fecha</span><span class="o">=</span><span class="n">edad_fecha</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;EDAD_CANT&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;7d&#39;</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="s1">&#39;COVID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">edad_fecha</span><span class="o">=</span><span class="n">edad_fecha</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DEIS_EDAD_FECHA_ROLLING&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+    <span class="n">edad_fecha</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">db_flag</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reading files&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="s1">&#39;.csv&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">deis</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">f</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;.xlsx&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">f</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">csvs_to_sql</span><span class="p">(</span><span class="n">deis</span><span class="p">,</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Files already loaded into DBASE, not reading&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Reading files
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>&lt;ipython-input-23-134013f5df97&gt;:7: FutureWarning: Your version of xlrd is 1.2.0. In xlrd &gt;= 2.0, only the xls format is supported. As a result, the openpyxl engine will be used if it is installed and the engine argument is not specified. Install openpyxl instead.
+  headers=pd.read_excel(path+file.rsplit(&#39;.rar&#39;)[0]+&#39;/&#39;+f,header=3,index_col=1)
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>creating table DEIS_2021 ,schema: DEIS
+creating table (not overwrite mode)DEIS_2020 ,schema: DEIS
+table DEIS_2020 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2019 ,schema: DEIS
+table DEIS_2019 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2018 ,schema: DEIS
+table DEIS_2018 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2017 ,schema: DEIS
+table DEIS_2017 ,schema: DEIS already exists
+creating table (not overwrite mode)DEIS_2016 ,schema: DEIS
+table DEIS_2016 ,schema: DEIS already exists
+creating table DEIS_COVID ,schema: DEIS
+creating table DEIS_EDAD_FECHA_ROLLING ,schema: DEIS
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_DEIS.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
+          <span class="s1">&#39;/home/jovyan/work/ETL/DEIS.ipynb&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
 
 
 
