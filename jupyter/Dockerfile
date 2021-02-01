@@ -45,7 +45,8 @@ RUN conda install --quiet --yes -c \
     dateparser \
     carto \
     gspread \
-    oauth2client
+    oauth2client \
+    plotly
 
 
 RUN pip install --upgrade pip && \

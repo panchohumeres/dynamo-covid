@@ -20,4 +20,10 @@
 
 10. **Domingo Moreno**, Cuarentenas y Cordones Sanitarios en Chile, año 2020 (hasta implementación de plan Paso a Paso): https://docs.google.com/spreadsheets/d/1IjirW9zoW5H-x8AnQcQaKXZXiS1tCuTs0PxSkNxYE0g/edit#gid=0
 
-11. **Magdalena Bennett**, Cuarentenas y Cordones Sanitarios, incluyendo Plan Paso a Paso, en Chile, año 2020: https://docs.google.com/spreadsheets/d/1IjirW9zoW5H-x8AnQcQaKXZXiS1tCuTs0PxSkNxYE0g/edit#gid=0
+11. **Magdalena Bennett**, Cuarentenas y Cordones Sanitarios, incluyendo Plan Paso a Paso, en Chile, año 2020, ver comentarios en: https://docs.google.com/spreadsheets/d/1IjirW9zoW5H-x8AnQcQaKXZXiS1tCuTs0PxSkNxYE0g/edit#gid=0
+
+12. **SOCHIMI**, Encuesta Diaria Realidad Nacional Medicina Intensiva, en repo GitHub Ministerio de Ciencias (actualización semanal): https://github.com/MinCiencia/Datos-COVID19/tree/master/output/producto48
+
+13. **Unidad de Gestión de Camas Críticas, MINSAL**, Hospitalización de pacientes COVID-19 en sistema integrado: https://github.com/MinCiencia/Datos-COVID19/tree/master/output/producto24
+
+13. **Desconocido**, Compilación Cuaretenas y Detalle Etapas Plan Paso a Paso por Comuna https://docs.google.com/spreadsheets/d/1WieweYNSPdpmjUIyYcbKp1oaqwlnD61_/edit#gid=1282224748
