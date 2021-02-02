@@ -14259,7 +14259,7 @@ a.anchor-link {
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -14276,7 +14276,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
@@ -14290,7 +14290,21 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mkdir</span> <span class="o">../</span><span class="n">CRONTAB</span><span class="o">/</span><span class="n">logs</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">logspath</span><span class="o">=</span><span class="s1">&#39;../CRONTAB/logs&#39;</span>
@@ -14304,7 +14318,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cachepath</span><span class="o">=</span><span class="s1">&#39;../ETLcache&#39;</span>
@@ -14318,7 +14332,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">paths_to_df</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -14343,7 +14357,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">remove_files</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span><span class="n">MBthreshold</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
@@ -14357,10 +14371,10 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">logspaths</span><span class="o">=</span><span class="n">paths_to_df</span><span class="p">(</span><span class="n">logspath</span><span class="p">)</span>
@@ -14371,50 +14385,10 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-2ad51de7e513&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>logspaths<span class="ansi-blue-fg">=</span>paths_to_df<span class="ansi-blue-fg">(</span>logspath<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">&lt;ipython-input-5-b816488740c3&gt;</span> in <span class="ansi-cyan-fg">paths_to_df</span><span class="ansi-blue-fg">(root)</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">def</span> paths_to_df<span class="ansi-blue-fg">(</span>root<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg">     </span>paths<span class="ansi-blue-fg">=</span>sorted<span class="ansi-blue-fg">(</span>Path<span class="ansi-blue-fg">(</span>root<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>iterdir<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">=</span>os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>getmtime<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span>     paths_str<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     size<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>     <span class="ansi-green-fg">for</span> p <span class="ansi-green-fg">in</span> paths<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/lib/python3.8/pathlib.py</span> in <span class="ansi-cyan-fg">iterdir</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1119</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_closed<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1120</span>             self<span class="ansi-blue-fg">.</span>_raise_closed<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-&gt; 1121</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> name <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>_accessor<span class="ansi-blue-fg">.</span>listdir<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1122</span>             <span class="ansi-green-fg">if</span> name <span class="ansi-green-fg">in</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">&#39;.&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;..&#39;</span><span class="ansi-blue-fg">}</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1123</span>                 <span class="ansi-red-fg"># Yielding a path object for these makes little sense</span>
-
-<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../CRONTAB/logs&#39;</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[64]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">logspaths</span>
@@ -14433,7 +14407,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[64]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
 
 
 
@@ -14463,27 +14437,6 @@ a.anchor-link {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>../CRONTAB/logs/cron.log</td>
-      <td>96</td>
-      <td>0.000096</td>
-      <td>0.000096</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>../CRONTAB/logs/covid-chile_20200819065741.ipynb</td>
-      <td>691316</td>
-      <td>0.691316</td>
-      <td>0.691412</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>../CRONTAB/logs/.ipynb_checkpoints</td>
-      <td>4096</td>
-      <td>0.004096</td>
-      <td>0.695508</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -14498,7 +14451,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[65]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">remove_files</span><span class="p">(</span><span class="n">logspaths</span><span class="p">,</span><span class="n">MBthreshold</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -14512,7 +14465,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[66]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">logspaths</span><span class="o">=</span><span class="n">paths_to_df</span><span class="p">(</span><span class="n">logspath</span><span class="p">)</span>
@@ -14526,7 +14479,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">logspaths</span>
@@ -14545,7 +14498,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[67]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[32]:</div>
 
 
 
@@ -14575,27 +14528,6 @@ a.anchor-link {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>../CRONTAB/logs/cron.log</td>
-      <td>96</td>
-      <td>0.000096</td>
-      <td>0.000096</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>../CRONTAB/logs/covid-chile_20200819065741.ipynb</td>
-      <td>691316</td>
-      <td>0.691316</td>
-      <td>0.691412</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>../CRONTAB/logs/.ipynb_checkpoints</td>
-      <td>4096</td>
-      <td>0.004096</td>
-      <td>0.695508</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -14610,7 +14542,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[68]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cachepaths</span><span class="o">=</span><span class="n">paths_to_df</span><span class="p">(</span><span class="n">cachepath</span><span class="p">)</span>
@@ -14624,7 +14556,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cachepaths</span>
@@ -14643,7 +14575,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[69]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
 
 
 
@@ -14675,38 +14607,38 @@ a.anchor-link {
   <tbody>
     <tr>
       <th>0</th>
-      <td>../ETLcache/producto1_Covid_19_19082020_045926...</td>
-      <td>92265</td>
-      <td>0.092265</td>
-      <td>0.092265</td>
+      <td>../ETLcache/producto1_Covid_19_01122020_011540...</td>
+      <td>163245</td>
+      <td>0.163245</td>
+      <td>0.163245</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>../ETLcache/producto1_Covid_19_T_19082020_0459...</td>
-      <td>88391</td>
-      <td>0.088391</td>
-      <td>0.180656</td>
+      <td>../ETLcache/producto1_Covid_19_T_01122020_0115...</td>
+      <td>153669</td>
+      <td>0.153669</td>
+      <td>0.316914</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>../ETLcache/producto1_Covid_19_std_19082020_04...</td>
-      <td>895442</td>
-      <td>0.895442</td>
-      <td>1.076098</td>
+      <td>../ETLcache/producto1_Covid_19_std_01122020_01...</td>
+      <td>1972025</td>
+      <td>1.972025</td>
+      <td>2.288939</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>../ETLcache/producto10_FallecidosEtario_190820...</td>
-      <td>4984</td>
-      <td>0.004984</td>
-      <td>1.081082</td>
+      <td>../ETLcache/producto10_FallecidosEtario_011220...</td>
+      <td>9556</td>
+      <td>0.009556</td>
+      <td>2.298495</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>../ETLcache/producto10_FallecidosEtario_T_1908...</td>
-      <td>4068</td>
-      <td>0.004068</td>
-      <td>1.085150</td>
+      <td>../ETLcache/producto10_FallecidosEtario_T_0112...</td>
+      <td>8016</td>
+      <td>0.008016</td>
+      <td>2.306511</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14716,43 +14648,43 @@ a.anchor-link {
       <td>...</td>
     </tr>
     <tr>
-      <th>1091</th>
-      <td>../ETLcache/producto14_fallecidos_diff__t_1908...</td>
-      <td>12839</td>
-      <td>0.012839</td>
-      <td>749.166872</td>
+      <th>1963</th>
+      <td>../ETLcache/cuarentenas.xlsx</td>
+      <td>123679</td>
+      <td>0.123679</td>
+      <td>3952.848699</td>
     </tr>
     <tr>
-      <th>1092</th>
-      <td>../ETLcache/producto14_fallecidos_diff__std_19...</td>
-      <td>201932</td>
-      <td>0.201932</td>
-      <td>749.368804</td>
+      <th>1964</th>
+      <td>../ETLcache/paso_a_paso_2021.xlsx</td>
+      <td>47547</td>
+      <td>0.047547</td>
+      <td>3952.896246</td>
     </tr>
     <tr>
-      <th>1093</th>
-      <td>../ETLcache/producto3_casostotales_diff__19082...</td>
-      <td>21510</td>
-      <td>0.021510</td>
-      <td>749.390314</td>
+      <th>1965</th>
+      <td>../ETLcache/paso_a_paso_2020.xlsx</td>
+      <td>142177</td>
+      <td>0.142177</td>
+      <td>3953.038423</td>
     </tr>
     <tr>
-      <th>1094</th>
-      <td>../ETLcache/producto3_casostotales_diff__t_190...</td>
-      <td>16859</td>
-      <td>0.016859</td>
-      <td>749.407173</td>
+      <th>1966</th>
+      <td>../ETLcache/Muertes_DEIS.html</td>
+      <td>3508849</td>
+      <td>3.508849</td>
+      <td>3956.547272</td>
     </tr>
     <tr>
-      <th>1095</th>
-      <td>../ETLcache/producto3_casostotales_diff__std_1...</td>
-      <td>255107</td>
-      <td>0.255107</td>
-      <td>749.662280</td>
+      <th>1967</th>
+      <td>../ETLcache/Contagios_ICOVID.html</td>
+      <td>3511980</td>
+      <td>3.511980</td>
+      <td>3960.059252</td>
     </tr>
   </tbody>
 </table>
-<p>1096 rows × 4 columns</p>
+<p>1968 rows × 4 columns</p>
 </div>
 </div>
 
@@ -14765,7 +14697,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[70]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">remove_files</span><span class="p">(</span><span class="n">cachepaths</span><span class="p">,</span><span class="n">MBthreshold</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
@@ -14788,786 +14720,144 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>deleting file: ../ETLcache/producto15_FechaInicioSintomasHistorico_19082020_063125.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomasHistorico_std_19082020_063125.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomas_T_19082020_063125.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomas_std_19082020_063125.csv
-deleting file: ../ETLcache/producto15_SemanasEpidemiologica_19082020_063125.csv
-deleting file: ../ETLcache/producto16_CasosGeneroEtario_19082020_063125.csv
-deleting file: ../ETLcache/producto16_CasosGeneroEtario_T_19082020_063125.csv
-deleting file: ../ETLcache/producto16_CasosGeneroEtario_std_19082020_063125.csv
-deleting file: ../ETLcache/producto17_PCREstablecimiento_19082020_063125.csv
-deleting file: ../ETLcache/producto17_PCREstablecimiento_T_19082020_063125.csv
-deleting file: ../ETLcache/producto17_PCREstablecimiento_std_19082020_063125.csv
-deleting file: ../ETLcache/producto18_TasaDeIncidencia_19082020_063125.csv
-deleting file: ../ETLcache/producto18_TasaDeIncidencia_T_19082020_063125.csv
-deleting file: ../ETLcache/producto18_TasaDeIncidencia_std_19082020_063125.csv
-deleting file: ../ETLcache/producto19_CasosActivosPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto19_CasosActivosPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto19_CasosActivosPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_03_30_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_01_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_03_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_06_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_08_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_10_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_13_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_15_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_17_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_20_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_24_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_04_27_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_01_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_04_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_08_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_11_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_15_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_18_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_22_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_25_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_05_29_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_01_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_05_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_08_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_12_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_15_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_19_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_23_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_06_28_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_01_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_05_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_10_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_13_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_17_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_20_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_24_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_27_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_07_31_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_08_03_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_08_07_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_08_10_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto2_2020_08_14_CasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto20_NumeroVentiladore_19082020_063125.csv
-deleting file: ../ETLcache/producto20_NumeroVentiladores_T_19082020_063125.csv
-deleting file: ../ETLcache/producto20_NumeroVentiladores_std_19082020_063125.csv
-deleting file: ../ETLcache/producto21_Sintoma_19082020_063125.csv
-deleting file: ../ETLcache/producto21_SintomasCasosConfirmado_19082020_063125.csv
-deleting file: ../ETLcache/producto21_SintomasCasosConfirmados_T_19082020_063125.csv
-deleting file: ../ETLcache/producto21_SintomasCasosConfirmados_std_19082020_063125.csv
-deleting file: ../ETLcache/producto21_SintomasHospitalizado_19082020_063125.csv
-deleting file: ../ETLcache/producto21_SintomasHospitalizados_T_19082020_063125.csv
-deleting file: ../ETLcache/producto21_SintomasHospitalizados_std_19082020_063125.csv
-deleting file: ../ETLcache/producto21_Sintomas_T_19082020_063125.csv
-deleting file: ../ETLcache/producto21_Sintomas_std_19082020_063125.csv
-deleting file: ../ETLcache/producto22_HospitalizadosEtario_Acumulado_19082020_063125.csv
-deleting file: ../ETLcache/producto22_HospitalizadosEtario_Acumulado_T_19082020_063125.csv
-deleting file: ../ETLcache/producto22_HospitalizadosEtario_Acumulado_std_19082020_063125.csv
-deleting file: ../ETLcache/producto22_HospitalizadosUCI_Acumulado_19082020_063125.csv
-deleting file: ../ETLcache/producto22_HospitalizadosUCI_Acumulado_T_19082020_063125.csv
-deleting file: ../ETLcache/producto22_HospitalizadosUCI_Acumulado_std_19082020_063125.csv
-deleting file: ../ETLcache/producto23_PacientesCritico_19082020_063125.csv
-deleting file: ../ETLcache/producto23_PacientesCriticos_T_19082020_063125.csv
-deleting file: ../ETLcache/producto23_PacientesCriticos_std_19082020_063125.csv
-deleting file: ../ETLcache/producto24_CamasHospital_Diario_19082020_063125.csv
-deleting file: ../ETLcache/producto24_CamasHospital_Diario_T_19082020_063125.csv
-deleting file: ../ETLcache/producto24_CamasHospital_Diario_std_19082020_063125.csv
-deleting file: ../ETLcache/producto25_CasosActualesPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto25_CasosActualesPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto25_CasosActualesPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto26_CasosNuevosConSintoma_19082020_063125.csv
-deleting file: ../ETLcache/producto26_CasosNuevosConSintomas_T_19082020_063125.csv
-deleting file: ../ETLcache/producto26_CasosNuevosConSintomas_std_19082020_063125.csv
-deleting file: ../ETLcache/producto27_CasosNuevosSinSintoma_19082020_063125.csv
-deleting file: ../ETLcache/producto27_CasosNuevosSinSintomas_T_19082020_063125.csv
-deleting file: ../ETLcache/producto27_CasosNuevosSinSintomas_std_19082020_063125.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMI_19082020_063125.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMIHistorico_19082020_063125.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMIHistorico_std_19082020_063125.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMI_T_19082020_063125.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMI_std_19082020_063125.csv
-deleting file: ../ETLcache/producto29_Cuarentenas_Activa_19082020_063125.csv
-deleting file: ../ETLcache/producto29_Cuarentenas_Historica_19082020_063125.csv
-deleting file: ../ETLcache/producto29_Cuarentenas_Totale_19082020_063125.csv
-deleting file: ../ETLcache/producto3_CasosTotalesCumulativo_19082020_063125.csv
-deleting file: ../ETLcache/producto3_CasosTotalesCumulativo_T_19082020_063125.csv
-deleting file: ../ETLcache/producto3_CasosTotalesCumulativo_std_19082020_063125.csv
-deleting file: ../ETLcache/producto3_TotalesPorRegion_19082020_063125.csv
-deleting file: ../ETLcache/producto3_TotalesPorRegion_T_19082020_063125.csv
-deleting file: ../ETLcache/producto3_TotalesPorRegion_std_19082020_063125.csv
-deleting file: ../ETLcache/producto30_PacientesVMI_19082020_063125.csv
-deleting file: ../ETLcache/producto30_PacientesVMI_T_19082020_063125.csv
-deleting file: ../ETLcache/producto30_PacientesVMI_std_19082020_063125.csv
-deleting file: ../ETLcache/producto31_2020_Nacimiento_19082020_063125.csv
-deleting file: ../ETLcache/producto31_2020_Nacimientos_T_19082020_063125.csv
-deleting file: ../ETLcache/producto31_2020_Nacimientos_std_19082020_063125.csv
-deleting file: ../ETLcache/producto31_Nacimientos_T_19082020_063125.csv
-deleting file: ../ETLcache/producto31_Nacimientos_std_19082020_063125.csv
-deleting file: ../ETLcache/producto32_2020_Defuncione_19082020_063125.csv
-deleting file: ../ETLcache/producto32_2020_Defunciones_T_19082020_063125.csv
-deleting file: ../ETLcache/producto32_2020_Defunciones_std_19082020_063125.csv
-deleting file: ../ETLcache/producto32_Defunciones_T_19082020_063125.csv
-deleting file: ../ETLcache/producto32_Defunciones_std_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_T_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_externo_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_externo_T_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_interno_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_interno_T_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_19082020_063125.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_std_19082020_063125.csv
-deleting file: ../ETLcache/producto34_Cuarentenas_Censo17_19082020_063125.csv
-deleting file: ../ETLcache/producto35_Comorbilidad_19082020_063125.csv
-deleting file: ../ETLcache/producto35_Comorbilidad_T_19082020_063125.csv
-deleting file: ../ETLcache/producto35_Comorbilidad_std_19082020_063125.csv
-deleting file: ../ETLcache/producto36_ResidenciasSanitaria_19082020_063125.csv
-deleting file: ../ETLcache/producto36_ResidenciasSanitarias_T_19082020_063125.csv
-deleting file: ../ETLcache/producto36_ResidenciasSanitarias_std_19082020_063125.csv
-deleting file: ../ETLcache/producto37_Defuncione_19082020_063125.csv
-deleting file: ../ETLcache/producto37_Defunciones_T_19082020_063125.csv
-deleting file: ../ETLcache/producto37_Defunciones_dei_19082020_063125.csv
-deleting file: ../ETLcache/producto37_Defunciones_deis_T_19082020_063125.csv
-deleting file: ../ETLcache/producto37_Defunciones_deis_std_19082020_063125.csv
-deleting file: ../ETLcache/producto37_Defunciones_std_19082020_063125.csv
-deleting file: ../ETLcache/producto38_CasosFallecidosPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto38_CasosFallecidosPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto38_CasosFallecidosPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto39_NotificacionInicioSintoma_19082020_063125.csv
-deleting file: ../ETLcache/producto39_NotificacionInicioSintomas_T_19082020_063125.csv
-deleting file: ../ETLcache/producto39_NotificacionInicioSintomas_std_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_03_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_04_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_05_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_06_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_07_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_08_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_09_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_10_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_11_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_12_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_13_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_14_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_15_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_16_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_17_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_18_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_19_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_20_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_21_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_22_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_23_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_24_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_25_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_26_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_27_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_28_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_29_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_30_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_03_31_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_04_01_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_04_02_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_04_03_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_04_04_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_21_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_22_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_23_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_24_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_25_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_26_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_27_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_28_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_29_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_06_30_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_01_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_02_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_03_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_04_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_05_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_06_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_07_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_08_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_09_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_10_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_11_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_12_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_13_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_14_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_15_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_16_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_17_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_18_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_19_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_20_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_21_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_22_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_23_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_24_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_25_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_26_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_27_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_28_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_29_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_30_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_07_31_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_01_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_02_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_03_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_04_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_05_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_06_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_07_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_08_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_09_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_10_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_11_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_12_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_13_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_14_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_15_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_16_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_17_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto4_2020_08_18_CasosConfirmados_totalRegional_19082020_063125.csv
-deleting file: ../ETLcache/producto40_TransporteAereo_std_19082020_063125.csv
-deleting file: ../ETLcache/producto41_BIPComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto41_BIPTotal_std_19082020_063125.csv
-deleting file: ../ETLcache/producto42_ViajesComunas_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2010_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2011_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2012_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2013_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2014_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2015_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2016_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2017_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2018_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2019_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_CO_2020_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2010_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2011_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2012_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2013_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2014_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2015_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2016_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2017_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2018_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2019_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP10_2020_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2010_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2011_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2012_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2013_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2014_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2015_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2016_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2017_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2018_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2019_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_MP2.5_2020_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2010_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2011_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2012_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2013_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2014_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2015_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2016_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2017_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2018_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2019_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_NO2_2020_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2010_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2011_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2012_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2013_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2014_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2015_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2016_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2017_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2018_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2019_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_O3_2020_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2010_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2011_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2012_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2013_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2014_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2015_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2016_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2017_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2018_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2019_std_19082020_063125.csv
-deleting file: ../ETLcache/producto43_SO2_2020_std_19082020_063125.csv
-deleting file: ../ETLcache/producto44_EgresosHospitalario_19082020_063125.csv
-deleting file: ../ETLcache/producto44_EgresosHospitalarios_T_19082020_063125.csv
-deleting file: ../ETLcache/producto44_EgresosHospitalarios_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComunaHistorico_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComunaHistorico_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComunaHistorico_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComunaHistorico_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComunaHistorico_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComunaHistorico_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto45_SemanasEpidemiologica_19082020_063125.csv
-deleting file: ../ETLcache/producto46_activos_vs_recuperado_19082020_063125.csv
-deleting file: ../ETLcache/producto46_activos_vs_recuperados_std_19082020_063125.csv
-deleting file: ../ETLcache/producto46_activos_vs_recuperados_t_19082020_063125.csv
-deleting file: ../ETLcache/producto47_MediaMovil_19082020_063125.csv
-deleting file: ../ETLcache/producto47_MediaMovil_T_19082020_063125.csv
-deleting file: ../ETLcache/producto47_MediaMovil_std_19082020_063125.csv
-deleting file: ../ETLcache/producto48_SOCHIMI_19082020_063125.csv
-deleting file: ../ETLcache/producto48_SOCHIMI_T_19082020_063125.csv
-deleting file: ../ETLcache/producto48_SOCHIMI_std_19082020_063125.csv
-deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_19082020_063125.csv
-deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_T_19082020_063125.csv
-deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_std_19082020_063125.csv
-deleting file: ../ETLcache/producto5_TotalesNacionale_19082020_063125.csv
-deleting file: ../ETLcache/producto5_TotalesNacionales_T_19082020_063125.csv
-deleting file: ../ETLcache/producto5_TotalesNacionales_std_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_T_19082020_063125.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_std_19082020_063125.csv
-deleting file: ../ETLcache/producto51_ISCI_std_19082020_063125.csv
-deleting file: ../ETLcache/producto52_Camas_UCI_19082020_063125.csv
-deleting file: ../ETLcache/producto52_Camas_UCI_std_19082020_063125.csv
-deleting file: ../ETLcache/producto52_Camas_UCI_t_19082020_063125.csv
-deleting file: ../ETLcache/producto53_confirmados_nacional_19082020_063125.csv
-deleting file: ../ETLcache/producto53_confirmados_provinciale_19082020_063125.csv
-deleting file: ../ETLcache/producto53_confirmados_regionale_19082020_063125.csv
-deleting file: ../ETLcache/producto54_r.nacional_19082020_063125.csv
-deleting file: ../ETLcache/producto54_r.provincial_19082020_063125.csv
-deleting file: ../ETLcache/producto54_r.regional_19082020_063125.csv
-deleting file: ../ETLcache/producto54_r_19082020_063125.csv
-deleting file: ../ETLcache/producto55_Positividad_nacional_19082020_063125.csv
-deleting file: ../ETLcache/producto55_Positividad_por_comuna_19082020_063125.csv
-deleting file: ../ETLcache/producto55_Positividad_por_provincia_19082020_063125.csv
-deleting file: ../ETLcache/producto7_PCR_19082020_063125.csv
-deleting file: ../ETLcache/producto7_PCR_T_19082020_063125.csv
-deleting file: ../ETLcache/producto7_PCR_std_19082020_063125.csv
-deleting file: ../ETLcache/producto8_UCI_19082020_063125.csv
-deleting file: ../ETLcache/producto8_UCI_T_19082020_063125.csv
-deleting file: ../ETLcache/producto8_UCI_std_19082020_063125.csv
-deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_19082020_063125.csv
-deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_T_19082020_063125.csv
-deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_std_19082020_063125.csv
-deleting file: ../ETLcache/producto13_casosnuevos_diff__19082020_063125.csv
-deleting file: ../ETLcache/producto13_casosnuevos_diff__t_19082020_063125.csv
-deleting file: ../ETLcache/producto13_casosnuevos_diff__std_19082020_063125.csv
-deleting file: ../ETLcache/producto14_fallecidos_diff__19082020_063125.csv
-deleting file: ../ETLcache/producto14_fallecidos_diff__t_19082020_063125.csv
-deleting file: ../ETLcache/producto14_fallecidos_diff__std_19082020_063125.csv
-deleting file: ../ETLcache/producto3_casostotales_diff__19082020_063125.csv
-deleting file: ../ETLcache/producto3_casostotales_diff__t_19082020_063125.csv
-deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_063125.csv
-deleting file: ../ETLcache/producto1_Covid_19_19082020_065744.csv
-deleting file: ../ETLcache/producto1_Covid_19_T_19082020_065744.csv
-deleting file: ../ETLcache/producto1_Covid_19_std_19082020_065744.csv
-deleting file: ../ETLcache/producto10_FallecidosEtario_19082020_065744.csv
-deleting file: ../ETLcache/producto10_FallecidosEtario_T_19082020_065744.csv
-deleting file: ../ETLcache/producto10_FallecidosEtario_std_19082020_065744.csv
-deleting file: ../ETLcache/producto13_CasosNuevosCumulativo_19082020_065744.csv
-deleting file: ../ETLcache/producto13_CasosNuevosCumulativo_T_19082020_065744.csv
-deleting file: ../ETLcache/producto13_CasosNuevosCumulativo_std_19082020_065744.csv
-deleting file: ../ETLcache/producto14_FallecidosCumulativo_19082020_065744.csv
-deleting file: ../ETLcache/producto14_FallecidosCumulativo_T_19082020_065744.csv
-deleting file: ../ETLcache/producto14_FallecidosCumulativo_std_19082020_065744.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintoma_19082020_065744.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomasHistorico_19082020_065744.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomasHistorico_std_19082020_065744.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomas_T_19082020_065744.csv
-deleting file: ../ETLcache/producto15_FechaInicioSintomas_std_19082020_065744.csv
-deleting file: ../ETLcache/producto15_SemanasEpidemiologica_19082020_065744.csv
-deleting file: ../ETLcache/producto16_CasosGeneroEtario_19082020_065744.csv
-deleting file: ../ETLcache/producto16_CasosGeneroEtario_T_19082020_065744.csv
-deleting file: ../ETLcache/producto16_CasosGeneroEtario_std_19082020_065744.csv
-deleting file: ../ETLcache/producto17_PCREstablecimiento_19082020_065744.csv
-deleting file: ../ETLcache/producto17_PCREstablecimiento_T_19082020_065744.csv
-deleting file: ../ETLcache/producto17_PCREstablecimiento_std_19082020_065744.csv
-deleting file: ../ETLcache/producto18_TasaDeIncidencia_19082020_065744.csv
-deleting file: ../ETLcache/producto18_TasaDeIncidencia_T_19082020_065744.csv
-deleting file: ../ETLcache/producto18_TasaDeIncidencia_std_19082020_065744.csv
-deleting file: ../ETLcache/producto19_CasosActivosPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto19_CasosActivosPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto19_CasosActivosPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_03_30_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_01_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_03_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_06_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_08_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_10_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_13_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_15_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_17_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_20_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_24_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_04_27_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_01_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_04_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_08_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_11_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_15_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_18_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_22_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_25_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_05_29_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_01_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_05_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_08_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_12_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_15_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_19_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_23_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_06_28_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_01_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_05_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_10_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_13_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_17_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_20_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_24_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_27_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_07_31_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_08_03_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_08_07_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_08_10_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto2_2020_08_14_CasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto20_NumeroVentiladore_19082020_065744.csv
-deleting file: ../ETLcache/producto20_NumeroVentiladores_T_19082020_065744.csv
-deleting file: ../ETLcache/producto20_NumeroVentiladores_std_19082020_065744.csv
-deleting file: ../ETLcache/producto21_Sintoma_19082020_065744.csv
-deleting file: ../ETLcache/producto21_SintomasCasosConfirmado_19082020_065744.csv
-deleting file: ../ETLcache/producto21_SintomasCasosConfirmados_T_19082020_065744.csv
-deleting file: ../ETLcache/producto21_SintomasCasosConfirmados_std_19082020_065744.csv
-deleting file: ../ETLcache/producto21_SintomasHospitalizado_19082020_065744.csv
-deleting file: ../ETLcache/producto21_SintomasHospitalizados_T_19082020_065744.csv
-deleting file: ../ETLcache/producto21_SintomasHospitalizados_std_19082020_065744.csv
-deleting file: ../ETLcache/producto21_Sintomas_T_19082020_065744.csv
-deleting file: ../ETLcache/producto21_Sintomas_std_19082020_065744.csv
-deleting file: ../ETLcache/producto22_HospitalizadosEtario_Acumulado_19082020_065744.csv
-deleting file: ../ETLcache/producto22_HospitalizadosEtario_Acumulado_T_19082020_065744.csv
-deleting file: ../ETLcache/producto22_HospitalizadosEtario_Acumulado_std_19082020_065744.csv
-deleting file: ../ETLcache/producto22_HospitalizadosUCI_Acumulado_19082020_065744.csv
-deleting file: ../ETLcache/producto22_HospitalizadosUCI_Acumulado_T_19082020_065744.csv
-deleting file: ../ETLcache/producto22_HospitalizadosUCI_Acumulado_std_19082020_065744.csv
-deleting file: ../ETLcache/producto23_PacientesCritico_19082020_065744.csv
-deleting file: ../ETLcache/producto23_PacientesCriticos_T_19082020_065744.csv
-deleting file: ../ETLcache/producto23_PacientesCriticos_std_19082020_065744.csv
-deleting file: ../ETLcache/producto24_CamasHospital_Diario_19082020_065744.csv
-deleting file: ../ETLcache/producto24_CamasHospital_Diario_T_19082020_065744.csv
-deleting file: ../ETLcache/producto24_CamasHospital_Diario_std_19082020_065744.csv
-deleting file: ../ETLcache/producto25_CasosActualesPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto25_CasosActualesPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto25_CasosActualesPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto26_CasosNuevosConSintoma_19082020_065744.csv
-deleting file: ../ETLcache/producto26_CasosNuevosConSintomas_T_19082020_065744.csv
-deleting file: ../ETLcache/producto26_CasosNuevosConSintomas_std_19082020_065744.csv
-deleting file: ../ETLcache/producto27_CasosNuevosSinSintoma_19082020_065744.csv
-deleting file: ../ETLcache/producto27_CasosNuevosSinSintomas_T_19082020_065744.csv
-deleting file: ../ETLcache/producto27_CasosNuevosSinSintomas_std_19082020_065744.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMI_19082020_065744.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMIHistorico_19082020_065744.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMIHistorico_std_19082020_065744.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMI_T_19082020_065744.csv
-deleting file: ../ETLcache/producto28_FechaInicioSintomas_reportadosSEREMI_std_19082020_065744.csv
-deleting file: ../ETLcache/producto29_Cuarentenas_Activa_19082020_065744.csv
-deleting file: ../ETLcache/producto29_Cuarentenas_Historica_19082020_065744.csv
-deleting file: ../ETLcache/producto29_Cuarentenas_Totale_19082020_065744.csv
-deleting file: ../ETLcache/producto3_CasosTotalesCumulativo_19082020_065744.csv
-deleting file: ../ETLcache/producto3_CasosTotalesCumulativo_T_19082020_065744.csv
-deleting file: ../ETLcache/producto3_CasosTotalesCumulativo_std_19082020_065744.csv
-deleting file: ../ETLcache/producto3_TotalesPorRegion_19082020_065744.csv
-deleting file: ../ETLcache/producto3_TotalesPorRegion_T_19082020_065744.csv
-deleting file: ../ETLcache/producto3_TotalesPorRegion_std_19082020_065744.csv
-deleting file: ../ETLcache/producto30_PacientesVMI_19082020_065744.csv
-deleting file: ../ETLcache/producto30_PacientesVMI_T_19082020_065744.csv
-deleting file: ../ETLcache/producto30_PacientesVMI_std_19082020_065744.csv
-deleting file: ../ETLcache/producto31_2020_Nacimiento_19082020_065744.csv
-deleting file: ../ETLcache/producto31_2020_Nacimientos_T_19082020_065744.csv
-deleting file: ../ETLcache/producto31_2020_Nacimientos_std_19082020_065744.csv
-deleting file: ../ETLcache/producto31_Nacimientos_T_19082020_065744.csv
-deleting file: ../ETLcache/producto31_Nacimientos_std_19082020_065744.csv
-deleting file: ../ETLcache/producto32_2020_Defuncione_19082020_065744.csv
-deleting file: ../ETLcache/producto32_2020_Defunciones_T_19082020_065744.csv
-deleting file: ../ETLcache/producto32_2020_Defunciones_std_19082020_065744.csv
-deleting file: ../ETLcache/producto32_Defunciones_T_19082020_065744.csv
-deleting file: ../ETLcache/producto32_Defunciones_std_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_T_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_externo_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_externo_T_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_interno_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_IM_interno_T_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_19082020_065744.csv
-deleting file: ../ETLcache/producto33_IndiceDeMovilidad_std_19082020_065744.csv
-deleting file: ../ETLcache/producto34_Cuarentenas_Censo17_19082020_065744.csv
-deleting file: ../ETLcache/producto35_Comorbilidad_19082020_065744.csv
-deleting file: ../ETLcache/producto35_Comorbilidad_T_19082020_065744.csv
-deleting file: ../ETLcache/producto35_Comorbilidad_std_19082020_065744.csv
-deleting file: ../ETLcache/producto36_ResidenciasSanitaria_19082020_065744.csv
-deleting file: ../ETLcache/producto36_ResidenciasSanitarias_T_19082020_065744.csv
-deleting file: ../ETLcache/producto36_ResidenciasSanitarias_std_19082020_065744.csv
-deleting file: ../ETLcache/producto37_Defuncione_19082020_065744.csv
-deleting file: ../ETLcache/producto37_Defunciones_T_19082020_065744.csv
-deleting file: ../ETLcache/producto37_Defunciones_dei_19082020_065744.csv
-deleting file: ../ETLcache/producto37_Defunciones_deis_T_19082020_065744.csv
-deleting file: ../ETLcache/producto37_Defunciones_deis_std_19082020_065744.csv
-deleting file: ../ETLcache/producto37_Defunciones_std_19082020_065744.csv
-deleting file: ../ETLcache/producto38_CasosFallecidosPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto38_CasosFallecidosPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto38_CasosFallecidosPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto39_NotificacionInicioSintoma_19082020_065744.csv
-deleting file: ../ETLcache/producto39_NotificacionInicioSintomas_T_19082020_065744.csv
-deleting file: ../ETLcache/producto39_NotificacionInicioSintomas_std_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_03_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_04_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_05_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_06_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_07_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_08_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_09_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_10_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_11_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_12_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_13_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_14_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_15_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_16_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_17_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_18_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_19_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_20_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_21_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_22_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_23_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_24_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_25_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_26_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_27_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_28_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_29_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_30_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_03_31_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_04_01_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_04_02_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_04_03_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_04_04_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_21_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_22_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_23_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_24_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_25_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_26_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_27_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_28_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_29_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_06_30_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_01_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_02_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_03_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_04_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_05_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_06_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_07_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_08_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_09_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_10_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_11_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_12_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_13_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_14_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_15_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_16_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_17_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_18_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_19_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_20_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_21_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_22_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_23_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_24_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_25_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_26_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_27_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_28_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_29_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_30_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_07_31_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_01_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_02_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_03_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_04_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_05_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_06_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_07_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_08_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_09_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_10_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_11_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_12_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_13_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_14_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_15_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_16_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_17_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto4_2020_08_18_CasosConfirmados_totalRegional_19082020_065744.csv
-deleting file: ../ETLcache/producto40_TransporteAereo_std_19082020_065744.csv
-deleting file: ../ETLcache/producto41_BIPComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto41_BIPTotal_std_19082020_065744.csv
-deleting file: ../ETLcache/producto42_ViajesComunas_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2010_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2011_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2012_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2013_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2014_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2015_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2016_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2017_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2018_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2019_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_CO_2020_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2010_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2011_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2012_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2013_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2014_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2015_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2016_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2017_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2018_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2019_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP10_2020_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2010_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2011_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2012_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2013_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2014_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2015_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2016_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2017_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2018_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2019_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_MP2.5_2020_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2010_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2011_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2012_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2013_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2014_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2015_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2016_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2017_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2018_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2019_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_NO2_2020_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2010_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2011_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2012_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2013_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2014_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2015_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2016_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2017_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2018_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2019_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_O3_2020_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2010_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2011_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2012_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2013_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2014_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2015_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2016_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2017_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2018_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2019_std_19082020_065744.csv
-deleting file: ../ETLcache/producto43_SO2_2020_std_19082020_065744.csv
-deleting file: ../ETLcache/producto44_EgresosHospitalario_19082020_065744.csv
-deleting file: ../ETLcache/producto44_EgresosHospitalarios_T_19082020_065744.csv
-deleting file: ../ETLcache/producto44_EgresosHospitalarios_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComunaHistorico_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComunaHistorico_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComunaHistorico_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComunaHistorico_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComunaHistorico_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComunaHistorico_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto45_SemanasEpidemiologica_19082020_065744.csv
-deleting file: ../ETLcache/producto46_activos_vs_recuperado_19082020_065744.csv
-deleting file: ../ETLcache/producto46_activos_vs_recuperados_std_19082020_065744.csv
-deleting file: ../ETLcache/producto46_activos_vs_recuperados_t_19082020_065744.csv
-deleting file: ../ETLcache/producto47_MediaMovil_19082020_065744.csv
-deleting file: ../ETLcache/producto47_MediaMovil_T_19082020_065744.csv
-deleting file: ../ETLcache/producto47_MediaMovil_std_19082020_065744.csv
-deleting file: ../ETLcache/producto48_SOCHIMI_19082020_065744.csv
-deleting file: ../ETLcache/producto48_SOCHIMI_T_19082020_065744.csv
-deleting file: ../ETLcache/producto48_SOCHIMI_std_19082020_065744.csv
-deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_19082020_065744.csv
-deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_T_19082020_065744.csv
-deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_std_19082020_065744.csv
-deleting file: ../ETLcache/producto5_TotalesNacionale_19082020_065744.csv
-deleting file: ../ETLcache/producto5_TotalesNacionales_T_19082020_065744.csv
-deleting file: ../ETLcache/producto5_TotalesNacionales_std_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_T_19082020_065744.csv
-deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_std_19082020_065744.csv
-deleting file: ../ETLcache/producto51_ISCI_std_19082020_065744.csv
-deleting file: ../ETLcache/producto52_Camas_UCI_19082020_065744.csv
-deleting file: ../ETLcache/producto52_Camas_UCI_std_19082020_065744.csv
-deleting file: ../ETLcache/producto52_Camas_UCI_t_19082020_065744.csv
-deleting file: ../ETLcache/producto53_confirmados_nacional_19082020_065744.csv
-deleting file: ../ETLcache/producto53_confirmados_provinciale_19082020_065744.csv
-deleting file: ../ETLcache/producto53_confirmados_regionale_19082020_065744.csv
-deleting file: ../ETLcache/producto54_r.nacional_19082020_065744.csv
-deleting file: ../ETLcache/producto54_r.provincial_19082020_065744.csv
-deleting file: ../ETLcache/producto54_r.regional_19082020_065744.csv
-deleting file: ../ETLcache/producto54_r_19082020_065744.csv
-deleting file: ../ETLcache/producto55_Positividad_nacional_19082020_065744.csv
-deleting file: ../ETLcache/producto55_Positividad_por_comuna_19082020_065744.csv
-deleting file: ../ETLcache/producto55_Positividad_por_provincia_19082020_065744.csv
-deleting file: ../ETLcache/producto7_PCR_19082020_065744.csv
-deleting file: ../ETLcache/producto7_PCR_T_19082020_065744.csv
-deleting file: ../ETLcache/producto7_PCR_std_19082020_065744.csv
-deleting file: ../ETLcache/producto8_UCI_19082020_065744.csv
-deleting file: ../ETLcache/producto8_UCI_T_19082020_065744.csv
-deleting file: ../ETLcache/producto8_UCI_std_19082020_065744.csv
-deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_19082020_065744.csv
-deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_T_19082020_065744.csv
-deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_std_19082020_065744.csv
-deleting file: ../ETLcache/producto13_casosnuevos_diff__19082020_065744.csv
-deleting file: ../ETLcache/producto13_casosnuevos_diff__t_19082020_065744.csv
-deleting file: ../ETLcache/producto13_casosnuevos_diff__std_19082020_065744.csv
-deleting file: ../ETLcache/producto14_fallecidos_diff__19082020_065744.csv
-deleting file: ../ETLcache/producto14_fallecidos_diff__t_19082020_065744.csv
-deleting file: ../ETLcache/producto14_fallecidos_diff__std_19082020_065744.csv
-deleting file: ../ETLcache/producto3_casostotales_diff__19082020_065744.csv
-deleting file: ../ETLcache/producto3_casostotales_diff__t_19082020_065744.csv
-deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
+<pre>deleting file: ../ETLcache/producto45_CasosConfirmadosPorComunaHistorico_std_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosConfirmadosPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComunaHistorico_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComunaHistorico_std_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosNoNotificadosPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosProbablesPorComunaHistorico_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosProbablesPorComunaHistorico_std_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto45_CasosProbablesPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto45_SemanasEpidemiologica_01122020_011540.csv
+deleting file: ../ETLcache/producto46_activos_vs_recuperado_01122020_011540.csv
+deleting file: ../ETLcache/producto46_activos_vs_recuperados_std_01122020_011540.csv
+deleting file: ../ETLcache/producto46_activos_vs_recuperados_t_01122020_011540.csv
+deleting file: ../ETLcache/producto47_MediaMovil_01122020_011540.csv
+deleting file: ../ETLcache/producto47_MediaMovil_T_01122020_011540.csv
+deleting file: ../ETLcache/producto47_MediaMovil_std_01122020_011540.csv
+deleting file: ../ETLcache/producto48_SOCHIMI_01122020_011540.csv
+deleting file: ../ETLcache/producto48_SOCHIMI_T_01122020_011540.csv
+deleting file: ../ETLcache/producto48_SOCHIMI_std_01122020_011540.csv
+deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_01122020_011540.csv
+deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_T_01122020_011540.csv
+deleting file: ../ETLcache/producto49_Positividad_Diaria_Media_std_01122020_011540.csv
+deleting file: ../ETLcache/producto5_TotalesNacionale_01122020_011540.csv
+deleting file: ../ETLcache/producto5_TotalesNacionales_T_01122020_011540.csv
+deleting file: ../ETLcache/producto5_TotalesNacionales_std_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEISPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEIS_confirmadosPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto50_DefuncionesDEIS_sospechososPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto51_ISCI_std_01122020_011540.csv
+deleting file: ../ETLcache/producto52_Camas_UCI_01122020_011540.csv
+deleting file: ../ETLcache/producto52_Camas_UCI_std_01122020_011540.csv
+deleting file: ../ETLcache/producto52_Camas_UCI_t_01122020_011540.csv
+deleting file: ../ETLcache/producto53_confirmados_nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto53_confirmados_provinciale_01122020_011540.csv
+deleting file: ../ETLcache/producto53_confirmados_regionale_01122020_011540.csv
+deleting file: ../ETLcache/producto53_confirmados__01122020_011540.csv
+deleting file: ../ETLcache/producto54_r.nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto54_r.provincial_01122020_011540.csv
+deleting file: ../ETLcache/producto54_r.regional_01122020_011540.csv
+deleting file: ../ETLcache/producto54_r_01122020_011540.csv
+deleting file: ../ETLcache/producto55_Positividad_nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto55_Positividad_por_comuna_01122020_011540.csv
+deleting file: ../ETLcache/producto55_Positividad_por_provincia_01122020_011540.csv
+deleting file: ../ETLcache/producto55_Positividad_por_region_01122020_011540.csv
+deleting file: ../ETLcache/producto56_prob48.nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto56_prob48.provincial_01122020_011540.csv
+deleting file: ../ETLcache/producto56_prob48.regional_01122020_011540.csv
+deleting file: ../ETLcache/producto57_fallecidos_hospitalizado_01122020_011540.csv
+deleting file: ../ETLcache/producto57_fallecidos_hospitalizados_std_01122020_011540.csv
+deleting file: ../ETLcache/producto58_Camas_UCI_diaria_01122020_011540.csv
+deleting file: ../ETLcache/producto58_Camas_UCI_diarias_std_01122020_011540.csv
+deleting file: ../ETLcache/producto58_Camas_UCI_diarias_t_01122020_011540.csv
+deleting file: ../ETLcache/producto59_etapa_clinica_por_fecha_notificacion_01122020_011540.csv
+deleting file: ../ETLcache/producto60_etapa_clinica_por_fi_01122020_011540.csv
+deleting file: ../ETLcache/producto61_serie_fallecidos_comuna_01122020_011540.csv
+deleting file: ../ETLcache/producto62_casos_nuevos_acumulados_por_fecha_01122020_011540.csv
+deleting file: ../ETLcache/producto63_NNotificacionPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto63_NNotificacionPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto63_NNotificacionPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto64_BACPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto64_BACPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto64_BACPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto65_PositividadPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto65_PositividadPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto65_PositividadPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto66_CoberturaPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto66_CoberturaPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto66_CoberturaPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto67_OportunidadPorComuna_01122020_011540.csv
+deleting file: ../ETLcache/producto67_OportunidadPorComuna_T_01122020_011540.csv
+deleting file: ../ETLcache/producto67_OportunidadPorComuna_std_01122020_011540.csv
+deleting file: ../ETLcache/producto68_tasa_test_semanal_comunal_01122020_011540.csv
+deleting file: ../ETLcache/producto68_tasa_test_semanal_nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto68_tasa_test_semanal_provincial_01122020_011540.csv
+deleting file: ../ETLcache/producto68_tasa_test_semanal_regional_01122020_011540.csv
+deleting file: ../ETLcache/producto69_carga.nacional.ajustada_01122020_011540.csv
+deleting file: ../ETLcache/producto69_carga.provincial.ajustada_01122020_011540.csv
+deleting file: ../ETLcache/producto69_carga.regional.ajustada_01122020_011540.csv
+deleting file: ../ETLcache/producto69_carga.ss.ajustada_01122020_011540.csv
+deleting file: ../ETLcache/producto7_PCR_01122020_011540.csv
+deleting file: ../ETLcache/producto7_PCR_T_01122020_011540.csv
+deleting file: ../ETLcache/producto7_PCR_std_01122020_011540.csv
+deleting file: ../ETLcache/producto70_total72.nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto70_total72.provincial_01122020_011540.csv
+deleting file: ../ETLcache/producto70_total72.regional_01122020_011540.csv
+deleting file: ../ETLcache/producto71_not48.nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto71_not48.provincial_01122020_011540.csv
+deleting file: ../ETLcache/producto71_not48.regional_01122020_011540.csv
+deleting file: ../ETLcache/producto72_lab24.nacional_01122020_011540.csv
+deleting file: ../ETLcache/producto72_lab24.provincial_01122020_011540.csv
+deleting file: ../ETLcache/producto72_lab24.regional_01122020_011540.csv
+deleting file: ../ETLcache/producto8_UCI_01122020_011540.csv
+deleting file: ../ETLcache/producto8_UCI_T_01122020_011540.csv
+deleting file: ../ETLcache/producto8_UCI_std_01122020_011540.csv
+deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_01122020_011540.csv
+deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_T_01122020_011540.csv
+deleting file: ../ETLcache/producto9_HospitalizadosUCIEtario_std_01122020_011540.csv
+deleting file: ../ETLcache/contagios_comunal@ivanMSC_02122020_002915.csv
+deleting file: ../ETLcache/info_comunal@ivanMSC_02122020_002915.csv
+deleting file: ../ETLcache/Muertes_DEIS_06122020_224126.png
+deleting file: ../ETLcache/Muertes_SOCHIMI_06122020_224126.png
+deleting file: ../ETLcache/Muertes_ConfirmadosPCR+_06122020_224126.png
+deleting file: ../ETLcache/muertes@perez_06122020_224126.csv
+deleting file: ../ETLcache/nacional@perez_06122020_224126.csv
+deleting file: ../ETLcache/DEIS_06122020_235946
 </pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">IsADirectoryError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-35-d4c10d24b2a2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>remove_files<span class="ansi-blue-fg">(</span>cachepaths<span class="ansi-blue-fg">,</span>MBthreshold<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">500</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-27-86bf578c1a9a&gt;</span> in <span class="ansi-cyan-fg">remove_files</span><span class="ansi-blue-fg">(paths, MBthreshold)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span>     <span class="ansi-green-fg">for</span> p <span class="ansi-green-fg">in</span> paths<span class="ansi-blue-fg">.</span>loc<span class="ansi-blue-fg">[</span>paths<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;sizeCUMSUM&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">&gt;</span>MBthreshold<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;paths&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>to_list<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>         print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;deleting file: &#39;</span><span class="ansi-blue-fg">+</span>p<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg">         </span>os<span class="ansi-blue-fg">.</span>remove<span class="ansi-blue-fg">(</span>p<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">IsADirectoryError</span>: [Errno 21] Is a directory: &#39;../ETLcache/DEIS_06122020_235946&#39;</pre>
 </div>
 </div>
 
@@ -15578,7 +14868,7 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cachepaths</span><span class="o">=</span><span class="n">paths_to_df</span><span class="p">(</span><span class="n">cachepath</span><span class="p">)</span>
@@ -15592,7 +14882,7 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[72]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cachepaths</span>
@@ -15611,7 +14901,7 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[72]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
 
 
 
@@ -15643,38 +14933,38 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
   <tbody>
     <tr>
       <th>0</th>
-      <td>../ETLcache/producto1_Covid_19_19082020_045926...</td>
-      <td>92265</td>
-      <td>0.092265</td>
-      <td>0.092265</td>
+      <td>../ETLcache/producto1_Covid_19_01122020_011540...</td>
+      <td>163245</td>
+      <td>0.163245</td>
+      <td>0.163245</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>../ETLcache/producto1_Covid_19_T_19082020_0459...</td>
-      <td>88391</td>
-      <td>0.088391</td>
-      <td>0.180656</td>
+      <td>../ETLcache/producto1_Covid_19_T_01122020_0115...</td>
+      <td>153669</td>
+      <td>0.153669</td>
+      <td>0.316914</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>../ETLcache/producto1_Covid_19_std_19082020_04...</td>
-      <td>895442</td>
-      <td>0.895442</td>
-      <td>1.076098</td>
+      <td>../ETLcache/producto1_Covid_19_std_01122020_01...</td>
+      <td>1972025</td>
+      <td>1.972025</td>
+      <td>2.288939</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>../ETLcache/producto10_FallecidosEtario_190820...</td>
-      <td>4984</td>
-      <td>0.004984</td>
-      <td>1.081082</td>
+      <td>../ETLcache/producto10_FallecidosEtario_011220...</td>
+      <td>9556</td>
+      <td>0.009556</td>
+      <td>2.298495</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>../ETLcache/producto10_FallecidosEtario_T_1908...</td>
-      <td>4068</td>
-      <td>0.004068</td>
-      <td>1.085150</td>
+      <td>../ETLcache/producto10_FallecidosEtario_T_0112...</td>
+      <td>8016</td>
+      <td>0.008016</td>
+      <td>2.306511</td>
     </tr>
     <tr>
       <th>...</th>
@@ -15684,43 +14974,43 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
       <td>...</td>
     </tr>
     <tr>
-      <th>312</th>
-      <td>../ETLcache/producto13_CasosNuevosCumulativo_s...</td>
-      <td>88196</td>
-      <td>0.088196</td>
-      <td>199.769818</td>
+      <th>1849</th>
+      <td>../ETLcache/cuarentenas.xlsx</td>
+      <td>123679</td>
+      <td>0.123679</td>
+      <td>3687.124024</td>
     </tr>
     <tr>
-      <th>313</th>
-      <td>../ETLcache/producto14_FallecidosCumulativo_19...</td>
-      <td>9310</td>
-      <td>0.009310</td>
-      <td>199.779128</td>
+      <th>1850</th>
+      <td>../ETLcache/paso_a_paso_2021.xlsx</td>
+      <td>47547</td>
+      <td>0.047547</td>
+      <td>3687.171571</td>
     </tr>
     <tr>
-      <th>314</th>
-      <td>../ETLcache/producto14_FallecidosCumulativo_T_...</td>
-      <td>14790</td>
-      <td>0.014790</td>
-      <td>199.793918</td>
+      <th>1851</th>
+      <td>../ETLcache/paso_a_paso_2020.xlsx</td>
+      <td>142177</td>
+      <td>0.142177</td>
+      <td>3687.313748</td>
     </tr>
     <tr>
-      <th>315</th>
-      <td>../ETLcache/producto14_FallecidosCumulativo_st...</td>
-      <td>77981</td>
-      <td>0.077981</td>
-      <td>199.871899</td>
+      <th>1852</th>
+      <td>../ETLcache/Muertes_DEIS.html</td>
+      <td>3508849</td>
+      <td>3.508849</td>
+      <td>3690.822597</td>
     </tr>
     <tr>
-      <th>316</th>
-      <td>../ETLcache/producto15_FechaInicioSintoma_1908...</td>
-      <td>57610</td>
-      <td>0.057610</td>
-      <td>199.929509</td>
+      <th>1853</th>
+      <td>../ETLcache/Contagios_ICOVID.html</td>
+      <td>3511980</td>
+      <td>3.511980</td>
+      <td>3694.334577</td>
     </tr>
   </tbody>
 </table>
-<p>317 rows × 4 columns</p>
+<p>1854 rows × 4 columns</p>
 </div>
 </div>
 
@@ -15730,10 +15020,10 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_cleanETL.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
@@ -15743,6 +15033,29 @@ deleting file: ../ETLcache/producto3_casostotales_diff__std_19082020_065744.csv
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[38]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
