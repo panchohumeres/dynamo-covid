@@ -12,6 +12,11 @@ from sqlalchemy import create_engine
 import datetime
 from datetime import datetime as dt
 
+def reverse_idx(df,date_field='fecha'):
+    df['reverse_idx']=df.index.values-df.index.values.max()
+    df['MAX_DATE']=(df[date_field].max()-df[date_field]).dt.days
+    
+    return df
 
 def to_diff(df):
     DF=df.copy()
