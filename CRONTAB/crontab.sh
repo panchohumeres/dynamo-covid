@@ -4,6 +4,6 @@
 0 15 * * * papermill /home/jovyan/work/ETL/Cuarentenas.ipynb /home/jovyan/work/CRONTAB/logs/Cuarentenas_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
 30 15 * * * papermill /home/jovyan/work/ETL/consolidado_nacional.ipynb /home/jovyan/work/CRONTAB/logs/consolidado_nacional_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
 0 16 * * *  papermill /home/jovyan/work/ETL/LOGLOG.ipynb /home/jovyan/work/CRONTAB/logs/LOGLOG_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
-0 0 * * SAT papermill /home/jovyan/work/ETL/movilidad.ipynb /home/jovyan/work/CRONTAB/logs/movilidad_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
+0 0 * * MON papermill /home/jovyan/work/ETL/movilidad.ipynb /home/jovyan/work/CRONTAB/logs/movilidad_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
 26 */6 * * * papermill /home/jovyan/work/ETL/cleanETL.ipynb /home/jovyan/work/CRONTAB/logs/cleanETL_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
 45 23 * * * papermill /home/jovyan/work/ETL/WORLD.ipynb /home/jovyan/work/CRONTAB/logs/WORLD_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
