@@ -46,7 +46,8 @@ RUN conda install --quiet --yes -c \
     carto \
     gspread \
     oauth2client \
-    plotly
+    plotly \
+    plotly chart-studio
 
 
 RUN pip install --upgrade pip && \
