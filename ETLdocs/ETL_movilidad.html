@@ -14477,10 +14477,10 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>rows in csv url:223791
+<pre>rows in csv url:228656
 rows in sql table :223790
-rows 1
-no data to update from url
+rows 4866
+reading last 4866 from csv in url
 </pre>
 </div>
 </div>
@@ -14517,7 +14517,7 @@ no data to update from url
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&#39;fail&#39;</pre>
+<pre>&#39;append&#39;</pre>
 </div>
 
 </div>
@@ -14526,7 +14526,7 @@ no data to update from url
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
@@ -14555,6 +14555,34 @@ no data to update from url
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>&lt;ipython-input-11-1fe7f7b232c3&gt;:5: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
+  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
+&lt;ipython-input-11-1fe7f7b232c3&gt;:5: FutureWarning: The default value of regex will change from True to False in a future version.
+  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
+&lt;ipython-input-11-1fe7f7b232c3&gt;:8: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
+  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
+&lt;ipython-input-11-1fe7f7b232c3&gt;:8: FutureWarning: The default value of regex will change from True to False in a future version.
+  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14597,7 +14625,7 @@ no data to update from url
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
@@ -14614,6 +14642,29 @@ no data to update from url
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>&lt;ipython-input-14-fe51752aedeb&gt;:2: UserWarning: Geometry is in a geographic CRS. Results from &#39;centroid&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+  ISCIentel[&#39;geometry&#39;]=ISCIentel[&#39;geometry&#39;].centroid
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
