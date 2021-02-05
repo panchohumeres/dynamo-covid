@@ -14256,7 +14256,7 @@ a.anchor-link {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14279,11 +14279,42 @@ a.anchor-link {
 <span class="kn">from</span> <span class="nn">plotly.subplots</span> <span class="kn">import</span> <span class="n">make_subplots</span>
 <span class="kn">from</span> <span class="nn">plotly.graph_objs.layout</span> <span class="kn">import</span> <span class="n">YAxis</span><span class="p">,</span><span class="n">XAxis</span><span class="p">,</span><span class="n">Margin</span>
 <span class="kn">import</span> <span class="nn">chart_studio</span>
+<span class="kn">import</span> <span class="nn">chart_studio.plotly</span> <span class="k">as</span> <span class="nn">py</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-1-7639b950828d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> <span class="ansi-green-fg">import</span> boto3
+<span class="ansi-green-intense-fg ansi-bold">     13</span> <span class="ansi-green-fg">import</span> os
+<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> plotly<span class="ansi-blue-fg">.</span>graph_objects <span class="ansi-green-fg">as</span> go
+<span class="ansi-green-intense-fg ansi-bold">     15</span> <span class="ansi-green-fg">from</span> plotly<span class="ansi-blue-fg">.</span>subplots <span class="ansi-green-fg">import</span> make_subplots
+<span class="ansi-green-intense-fg ansi-bold">     16</span> <span class="ansi-green-fg">from</span> plotly<span class="ansi-blue-fg">.</span>graph_objs<span class="ansi-blue-fg">.</span>layout <span class="ansi-green-fg">import</span> YAxis<span class="ansi-blue-fg">,</span>XAxis<span class="ansi-blue-fg">,</span>Margin
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;plotly&#39;</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14371,7 +14402,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">loglog</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
@@ -14437,10 +14468,11 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">chart_studio.plotly</span> <span class="k">as</span> <span class="nn">py</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">PLOTLY_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PLOTLY_API_KEY&#39;</span><span class="p">]</span>
+<span class="n">PLOTLY_USER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PLOTLY_USER&#39;</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14451,10 +14483,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chart_studio</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">set_credentials_file</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;fhumeres&#39;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;8X4ldWUR49SDnEi8wFQH&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chart_studio</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">set_credentials_file</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">PLOTLY_USER</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">PLOTLY_API_KEY</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14465,7 +14497,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">chart_studio</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">set_config_file</span><span class="p">(</span><span class="n">world_readable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -14477,10 +14509,10 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">loglog</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s1">&#39;Fallecidos DEIS Acumulado&#39;</span><span class="p">,</span><span class="s1">&#39;Fallecidos DEIS Diarios&#39;</span><span class="p">,</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;Muertes_DEIS.html&#39;</span><span class="p">)</span>
@@ -14489,6 +14521,120 @@ a.anchor-link {
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">PlotlyRequestError</span>                        Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-8496b590a0de&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>loglog<span class="ansi-blue-fg">(</span>df<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;Fallecidos DEIS Acumulado&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;Fallecidos DEIS Diarios&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;Fecha&#39;</span><span class="ansi-blue-fg">,</span>dpi<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">,</span>filename<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;Muertes_DEIS.html&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-7-d14f373ce1aa&gt;</span> in <span class="ansi-cyan-fg">loglog</span><span class="ansi-blue-fg">(df, x, y, z, dpi, filename)</span>
+<span class="ansi-green-intense-fg ansi-bold">     51</span> 
+<span class="ansi-green-intense-fg ansi-bold">     52</span>     <span class="ansi-red-fg">#fig.write_html(filename)</span>
+<span class="ansi-green-fg">---&gt; 53</span><span class="ansi-red-fg">     </span>py<span class="ansi-blue-fg">.</span>iplot<span class="ansi-blue-fg">(</span>fig<span class="ansi-blue-fg">,</span> filename <span class="ansi-blue-fg">=</span> filename<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/plotly/plotly.py</span> in <span class="ansi-cyan-fg">iplot</span><span class="ansi-blue-fg">(figure_or_data, **plot_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">    133</span>     <span class="ansi-green-fg">if</span> <span class="ansi-blue-fg">&#34;auto_open&#34;</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> plot_options<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    134</span>         plot_options<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;auto_open&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+<span class="ansi-green-fg">--&gt; 135</span><span class="ansi-red-fg">     </span>url <span class="ansi-blue-fg">=</span> plot<span class="ansi-blue-fg">(</span>figure_or_data<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>plot_options<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    136</span> 
+<span class="ansi-green-intense-fg ansi-bold">    137</span>     <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>figure_or_data<span class="ansi-blue-fg">,</span> dict<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/plotly/plotly.py</span> in <span class="ansi-cyan-fg">plot</span><span class="ansi-blue-fg">(figure_or_data, validate, **plot_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">    274</span>             grid_filename <span class="ansi-blue-fg">=</span> filename <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">&#34;_grid&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">    275</span> 
+<span class="ansi-green-fg">--&gt; 276</span><span class="ansi-red-fg">         grid_ops.upload(
+</span><span class="ansi-green-intense-fg ansi-bold">    277</span>             grid<span class="ansi-blue-fg">=</span>grid<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    278</span>             filename<span class="ansi-blue-fg">=</span>grid_filename<span class="ansi-blue-fg">,</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/plotly/plotly.py</span> in <span class="ansi-cyan-fg">upload</span><span class="ansi-blue-fg">(cls, grid, filename, world_readable, auto_open, meta)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1085</span>                 payload<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;parent_path&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> parent_path
+<span class="ansi-green-intense-fg ansi-bold">   1086</span> 
+<span class="ansi-green-fg">-&gt; 1087</span><span class="ansi-red-fg">         </span>file_info <span class="ansi-blue-fg">=</span> _create_or_overwrite_grid<span class="ansi-blue-fg">(</span>payload<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1088</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1089</span>         cols <span class="ansi-blue-fg">=</span> file_info<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;cols&#34;</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/plotly/plotly.py</span> in <span class="ansi-cyan-fg">_create_or_overwrite_grid</span><span class="ansi-blue-fg">(data, max_retries)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1548</span>     <span class="ansi-red-fg"># Create file</span>
+<span class="ansi-green-intense-fg ansi-bold">   1549</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1550</span><span class="ansi-red-fg">         </span>res <span class="ansi-blue-fg">=</span> api_module<span class="ansi-blue-fg">.</span>create<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1551</span>     <span class="ansi-green-fg">except</span> exceptions<span class="ansi-blue-fg">.</span>PlotlyRequestError <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1552</span>         <span class="ansi-green-fg">if</span> max_retries <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">0</span> <span class="ansi-green-fg">and</span> <span class="ansi-blue-fg">&#34;already exists&#34;</span> <span class="ansi-green-fg">in</span> e<span class="ansi-blue-fg">.</span>message<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/api/v2/grids.py</span> in <span class="ansi-cyan-fg">create</span><span class="ansi-blue-fg">(body)</span>
+<span class="ansi-green-intense-fg ansi-bold">     16</span>     &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">     17</span>     url <span class="ansi-blue-fg">=</span> build_url<span class="ansi-blue-fg">(</span>RESOURCE<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 18</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> request<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;post&#34;</span><span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> json<span class="ansi-blue-fg">=</span>body<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     19</span> 
+<span class="ansi-green-intense-fg ansi-bold">     20</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/retrying.py</span> in <span class="ansi-cyan-fg">wrapped_f</span><span class="ansi-blue-fg">(*args, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">     47</span>             <span class="ansi-blue-fg">@</span>six<span class="ansi-blue-fg">.</span>wraps<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     48</span>             <span class="ansi-green-fg">def</span> wrapped_f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 49</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> Retrying<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>dargs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>dkw<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>call<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     50</span> 
+<span class="ansi-green-intense-fg ansi-bold">     51</span>             <span class="ansi-green-fg">return</span> wrapped_f
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/retrying.py</span> in <span class="ansi-cyan-fg">call</span><span class="ansi-blue-fg">(self, fn, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    204</span> 
+<span class="ansi-green-intense-fg ansi-bold">    205</span>             <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>should_reject<span class="ansi-blue-fg">(</span>attempt<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 206</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> attempt<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_wrap_exception<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    207</span> 
+<span class="ansi-green-intense-fg ansi-bold">    208</span>             delay_since_first_attempt_ms <span class="ansi-blue-fg">=</span> int<span class="ansi-blue-fg">(</span>round<span class="ansi-blue-fg">(</span>time<span class="ansi-blue-fg">.</span>time<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">*</span> <span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-</span> start_time
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/retrying.py</span> in <span class="ansi-cyan-fg">get</span><span class="ansi-blue-fg">(self, wrap_exception)</span>
+<span class="ansi-green-intense-fg ansi-bold">    245</span>                 <span class="ansi-green-fg">raise</span> RetryError<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    246</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 247</span><span class="ansi-red-fg">                 </span>six<span class="ansi-blue-fg">.</span>reraise<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>value<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>value<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>value<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    248</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    249</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>value
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/six.py</span> in <span class="ansi-cyan-fg">reraise</span><span class="ansi-blue-fg">(tp, value, tb)</span>
+<span class="ansi-green-intense-fg ansi-bold">    701</span>             <span class="ansi-green-fg">if</span> value<span class="ansi-blue-fg">.</span>__traceback__ <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> tb<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    702</span>                 <span class="ansi-green-fg">raise</span> value<span class="ansi-blue-fg">.</span>with_traceback<span class="ansi-blue-fg">(</span>tb<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 703</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> value
+<span class="ansi-green-intense-fg ansi-bold">    704</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    705</span>             value <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/retrying.py</span> in <span class="ansi-cyan-fg">call</span><span class="ansi-blue-fg">(self, fn, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    198</span>         <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    199</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 200</span><span class="ansi-red-fg">                 </span>attempt <span class="ansi-blue-fg">=</span> Attempt<span class="ansi-blue-fg">(</span>fn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> attempt_number<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    201</span>             <span class="ansi-green-fg">except</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    202</span>                 tb <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>exc_info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/api/v2/utils.py</span> in <span class="ansi-cyan-fg">request</span><span class="ansi-blue-fg">(method, url, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    178</span>         content <span class="ansi-blue-fg">=</span> response<span class="ansi-blue-fg">.</span>content <span class="ansi-green-fg">if</span> response <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">&#34;No content&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">    179</span>         <span class="ansi-green-fg">raise</span> exceptions<span class="ansi-blue-fg">.</span>PlotlyRequestError<span class="ansi-blue-fg">(</span>message<span class="ansi-blue-fg">,</span> status_code<span class="ansi-blue-fg">,</span> content<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 180</span><span class="ansi-red-fg">     </span>validate_response<span class="ansi-blue-fg">(</span>response<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    181</span>     <span class="ansi-green-fg">return</span> response
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/chart_studio/api/v2/utils.py</span> in <span class="ansi-cyan-fg">validate_response</span><span class="ansi-blue-fg">(response)</span>
+<span class="ansi-green-intense-fg ansi-bold">     80</span>         message <span class="ansi-blue-fg">=</span> content <span class="ansi-green-fg">if</span> content <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">&#34;No Content&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span> 
+<span class="ansi-green-fg">---&gt; 82</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">raise</span> exceptions<span class="ansi-blue-fg">.</span>PlotlyRequestError<span class="ansi-blue-fg">(</span>message<span class="ansi-blue-fg">,</span> status_code<span class="ansi-blue-fg">,</span> content<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     83</span> 
+<span class="ansi-green-intense-fg ansi-bold">     84</span> 
+
+<span class="ansi-red-fg">PlotlyRequestError</span>: Bad API key</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14508,7 +14654,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ACCESS_KEY = os.environ[&#39;S3_ACCESS_KEY&#39;]</span>
@@ -14524,11 +14670,11 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
-                      <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#s3 = boto3.client(&#39;s3&#39;, aws_access_key_id=ACCESS_KEY,</span>
+<span class="c1">#                      aws_secret_access_key=SECRET_KEY)</span>
 </pre></div>
 
      </div>
@@ -14539,62 +14685,39 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">filelist</span><span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.html&#39;</span><span class="p">)]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#filelist= [file for file in os.listdir(path) if file.endswith(&#39;.html&#39;)]</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">filelist</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&#39;Contagios_ICOVID.html&#39;, &#39;Muertes_DEIS.html&#39;, &#39;index.html&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filelist</span><span class="p">:</span>
-    <span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">f</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ExtraArgs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ACL&#39;</span><span class="p">:</span><span class="s1">&#39;public-read&#39;</span><span class="p">,</span><span class="s1">&#39;ContentType&#39;</span><span class="p">:</span><span class="s1">&#39;text/html&#39;</span><span class="p">})</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#filelist</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for f in filelist:</span>
+<span class="c1">#    s3.upload_file(path+&#39;/&#39;+f, bucket, f, ExtraArgs={&#39;ACL&#39;:&#39;public-read&#39;,&#39;ContentType&#39;:&#39;text/html&#39;})</span>
 </pre></div>
 
      </div>
@@ -14605,7 +14728,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_LOGLOG.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
@@ -14625,7 +14748,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
 
 
 
