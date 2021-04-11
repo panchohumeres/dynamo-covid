@@ -14413,36 +14413,32 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>testing date:2021-02-04 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_04022021.rar
+<pre>testing date:2021-02-17 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_17022021.rar
 404
 failure, trying previous date
-testing date:2021-02-03 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_03022021.rar
+testing date:2021-02-16 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_16022021.rar
 404
 failure, trying previous date
-testing date:2021-02-02 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_02022021.rar
+testing date:2021-02-15 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_15022021.rar
 404
 failure, trying previous date
-testing date:2021-02-01 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_01022021.rar
+testing date:2021-02-14 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_14022021.rar
 404
 failure, trying previous date
-testing date:2021-01-31 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_31012021.rar
+testing date:2021-02-13 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_13022021.rar
 404
 failure, trying previous date
-testing date:2021-01-30 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_30012021.rar
+testing date:2021-02-12 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_12022021.rar
 404
 failure, trying previous date
-testing date:2021-01-29 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_29012021.rar
-404
-failure, trying previous date
-testing date:2021-01-28 03:27:03.845120
-url: http://deis.minsal.cl/wp-content/uploads/2021/01/DEFUNCIONES_FUENTE_DEIS_2016_2021_28012021.rar
+testing date:2021-02-11 03:11:35.727587
+url: http://deis.minsal.cl/wp-content/uploads/2021/02/DEFUNCIONES_FUENTE_DEIS_2016_2021_11022021.rar
 Date exists on archive
 </pre>
 </div>
@@ -14483,7 +14479,7 @@ Date exists on archive
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>/data/ETLcache/DEFUNCIONES_FUENTE_DEIS_2016_2021_28012021.rar already in archive, no unpacking
+<pre>/data/ETLcache/DEFUNCIONES_FUENTE_DEIS_2016_2021_11022021.rar already in archive, no unpacking
 </pre>
 </div>
 </div>
@@ -14521,13 +14517,30 @@ Date exists on archive
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBlast_date</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">col_names</span><span class="o">=</span><span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT &quot;column_name&quot; FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;</span><span class="o">+</span><span class="s2">&quot;&#39;DEIS_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">current_year</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;&#39; ;&quot;</span><span class="p">)</span>
+<span class="n">col_names</span> <span class="o">=</span> <span class="p">(</span> <span class="n">col_names</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span> <span class="p">)</span>
+<span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">col_names</span><span class="p">]</span>
+<span class="n">col_names</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">col_names</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">,</span><span class="s1">&#39;FECHA_STR&#39;</span><span class="p">,</span><span class="s1">&#39;COVID&#39;</span><span class="p">,</span><span class="s1">&#39;ANO_DEF&#39;</span><span class="p">,</span><span class="s1">&#39;index&#39;</span><span class="p">]))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">col_names</span>
 </pre></div>
 
      </div>
@@ -14543,35 +14556,43 @@ Date exists on archive
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>datetime.datetime(2021, 1, 27, 0, 0)</pre>
+<pre>[&#39;GLOSA_SUBCATEGORIA_DIAG1&#39;,
+ &#39;CODIGO_SUBCATEGORIA_DIAG2&#39;,
+ &#39;GLOSA_CATEGORIA_DIAG1&#39;,
+ &#39;DIAG1&#39;,
+ &#39;GLOSA_CAPITULO_DIAG2&#39;,
+ &#39;CODIGO_GRUPO_DIAG2&#39;,
+ &#39;GLOSA_COMUNA_RESIDENCIA&#39;,
+ &#39;DIAG2&#39;,
+ &#39;CODIGO_GRUPO_DIAG1&#39;,
+ &#39;GLOSA_CAPITULO_DIAG1&#39;,
+ &#39;GLOSA_CATEGORIA_DIAG2&#39;,
+ &#39;GLOSA_REG_RES&#39;,
+ &#39;CAPITULO_DIAG2&#39;,
+ &#39;GLOSA_SEXO&#39;,
+ &#39;CODIGO_COMUNA_RESIDENCIA&#39;,
+ &#39;CODIGO_CATEGORIA_DIAG2&#39;,
+ &#39;CODIGO_CATEGORIA_DIAG1&#39;,
+ &#39;GLOSA_GRUPO_DIAG2&#39;,
+ &#39;EDAD_CANT&#39;,
+ &#39;CODIGO_SUBCATEGORIA_DIAG1&#39;,
+ &#39;CAPITULO_DIAG1&#39;,
+ &#39;EDAD_TIPO&#39;,
+ &#39;FECHA_DEF&#39;,
+ &#39;GLOSA_SUBCATEGORIA_DIAG2&#39;,
+ &#39;GLOSA_GRUPO_DIAG1&#39;]</pre>
 </div>
 
 </div>
 
 </div>
 
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_last_date</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">file_last_date</span><span class="o">=</span><span class="n">file_last_date</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">file_last_date</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">file_last_date</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
-<span class="n">file_last_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">file_last_date</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14580,7 +14601,7 @@ Date exists on archive
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_last_date</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBlast_date</span>
 </pre></div>
 
      </div>
@@ -14602,7 +14623,7 @@ Date exists on archive
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>datetime.datetime(2021, 1, 28, 0, 0)</pre>
+<pre>datetime.datetime(2021, 2, 3, 0, 0)</pre>
 </div>
 
 </div>
@@ -14617,7 +14638,9 @@ Date exists on archive
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_flag</span><span class="o">=</span><span class="n">file_last_date</span><span class="o">&gt;</span><span class="n">DBlast_date</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_last_date</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">file_last_date</span><span class="o">=</span><span class="n">file_last_date</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">file_last_date</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">file_last_date</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+<span class="n">file_last_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">file_last_date</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14631,7 +14654,7 @@ Date exists on archive
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_flag</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_last_date</span>
 </pre></div>
 
      </div>
@@ -14653,7 +14676,7 @@ Date exists on archive
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>True</pre>
+<pre>datetime.datetime(2021, 2, 11, 0, 0)</pre>
 </div>
 
 </div>
@@ -14668,14 +14691,69 @@ Date exists on archive
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_flag</span><span class="o">=</span><span class="n">file_last_date</span><span class="o">&gt;</span><span class="n">DBlast_date</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_flag</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">csvs_to_sql</span><span class="p">(</span><span class="n">deis</span><span class="p">,</span><span class="n">headers</span><span class="p">):</span>
     <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;DEIS&#39;</span>
     <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Nombre de la variable&#39;</span><span class="p">]</span>
+    <span class="n">headers_diff</span><span class="o">=</span><span class="n">deis</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">headers_diff</span><span class="p">)</span>
+    <span class="n">deis</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="n">deis</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">headers_diff</span><span class="p">:]]</span>
     <span class="c1">#headers=headers[1:]</span>
     <span class="n">deis</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">headers</span>
     <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
     <span class="n">deis</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;GLOSA_REG_RES&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Metropolitana de Santiago&#39;</span><span class="p">,</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
     <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;Metropolitana&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Resto de Chile&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Región Metropolitana&#39;</span><span class="p">})</span>
+    <span class="c1">#deis[&#39;FECHA_DEF_OR&#39;]=deis[&#39;FECHA_DEF&#39;]</span>
     <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">],</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
     <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
     <span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_STR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">deis</span><span class="p">[</span><span class="s1">&#39;FECHA_DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
@@ -14712,6 +14790,8 @@ Date exists on archive
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DEIS_EDAD_FECHA_ROLLING&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
     <span class="n">edad_fecha</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">deis</span>
 </pre></div>
 
      </div>
@@ -14722,7 +14802,7 @@ Date exists on archive
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">db_flag</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
@@ -14732,7 +14812,9 @@ Date exists on archive
             <span class="n">deis</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">f</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;.xlsx&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">file</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.rar&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">f</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">csvs_to_sql</span><span class="p">(</span><span class="n">deis</span><span class="p">,</span><span class="n">headers</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;.xslx&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Nombre de la variable&#39;</span><span class="p">:</span><span class="n">col_names</span><span class="p">}</span>
+    <span class="n">deis</span><span class="o">=</span><span class="n">csvs_to_sql</span><span class="p">(</span><span class="n">deis</span><span class="p">,</span><span class="n">headers</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Files already loaded into DBASE, not reading&#39;</span><span class="p">)</span>
 </pre></div>
@@ -14759,41 +14841,349 @@ Date exists on archive
 </div>
 </div>
 
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deis</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-15-134013f5df97&gt;:7: FutureWarning: Your version of xlrd is 1.2.0. In xlrd &gt;= 2.0, only the xls format is supported. As a result, the openpyxl engine will be used if it is installed and the engine argument is not specified. Install openpyxl instead.
-  headers=pd.read_excel(path+file.rsplit(&#39;.rar&#39;)[0]+&#39;/&#39;+f,header=3,index_col=1)
-</pre>
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2021</th>
+      <th>2021-01-21</th>
+      <th>Mujer</th>
+      <th>1</th>
+      <th>89</th>
+      <th>10202</th>
+      <th>Ancud</th>
+      <th>De Los Lagos</th>
+      <th>C20X</th>
+      <th>C00-D48</th>
+      <th>...</th>
+      <th>TUMOR MALIGNO DEL RECTO</th>
+      <th></th>
+      <th>Unnamed: 18</th>
+      <th>Unnamed: 19</th>
+      <th>Unnamed: 20</th>
+      <th>Unnamed: 21</th>
+      <th>Unnamed: 22</th>
+      <th>Unnamed: 23</th>
+      <th>Unnamed: 24</th>
+      <th>Unnamed: 25</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021</td>
+      <td>2021-01-05</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>94</td>
+      <td>5109</td>
+      <td>Viña del Mar</td>
+      <td>De Valparaíso</td>
+      <td>C229</td>
+      <td>C00-D48</td>
+      <td>...</td>
+      <td>TUMOR MALIGNO DEL HÍGADO NO ESPECIFICADO</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021</td>
+      <td>2021-01-19</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>95</td>
+      <td>13403</td>
+      <td>Calera de Tango</td>
+      <td>Metropolitana de Santiago</td>
+      <td>C61X</td>
+      <td>C00-D48</td>
+      <td>...</td>
+      <td>TUMOR MALIGNO DE LA PRÓSTATA</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021</td>
+      <td>2021-01-22</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>96</td>
+      <td>9120</td>
+      <td>Villarrica</td>
+      <td>De La Araucanía</td>
+      <td>N179</td>
+      <td>N00-N99</td>
+      <td>...</td>
+      <td>INSUFICIENCIA RENAL AGUDA NO ESPECIFICADA</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>2021-01-16</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>89</td>
+      <td>5506</td>
+      <td>Nogales</td>
+      <td>De Valparaíso</td>
+      <td>I509</td>
+      <td>I00-I99</td>
+      <td>...</td>
+      <td>INSUFICIENCIA CARDIACA NO ESPECIFICADA</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>2021-01-22</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>104</td>
+      <td>5501</td>
+      <td>Quillota</td>
+      <td>De Valparaíso</td>
+      <td>J441</td>
+      <td>J00-J99</td>
+      <td>...</td>
+      <td>ENFERMEDAD PULMÓNAR OBSTRUCTIVA CRONICA CON EX...</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>566539</th>
+      <td>2016</td>
+      <td>2016-08-28</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>74</td>
+      <td>10103</td>
+      <td>Cochamó</td>
+      <td>De Los Lagos</td>
+      <td>E119</td>
+      <td>E00-E90</td>
+      <td>...</td>
+      <td>DIABETES MELLITUS NO INSULINODEPENDIENTE SIN M...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566540</th>
+      <td>2016</td>
+      <td>2016-08-30</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>86</td>
+      <td>10209</td>
+      <td>Quemchi</td>
+      <td>De Los Lagos</td>
+      <td>J449</td>
+      <td>J00-J99</td>
+      <td>...</td>
+      <td>ENFERMEDAD PULMÓNAR OBSTRUCTIVA CRONICA NO ESP...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566541</th>
+      <td>2016</td>
+      <td>2016-08-26</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>84</td>
+      <td>10205</td>
+      <td>Dalcahue</td>
+      <td>De Los Lagos</td>
+      <td>C61X</td>
+      <td>C00-D48</td>
+      <td>...</td>
+      <td>TUMOR MALIGNO DE LA PRÓSTATA</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566542</th>
+      <td>2016</td>
+      <td>2016-09-02</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>90</td>
+      <td>10205</td>
+      <td>Dalcahue</td>
+      <td>De Los Lagos</td>
+      <td>J459</td>
+      <td>J00-J99</td>
+      <td>...</td>
+      <td>ASMA NO ESPECIFICADO</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566543</th>
+      <td>2016</td>
+      <td>2016-08-26</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>53</td>
+      <td>10201</td>
+      <td>Castro</td>
+      <td>De Los Lagos</td>
+      <td>S069</td>
+      <td>S00-T98</td>
+      <td>...</td>
+      <td>TRAUMATISMO INTRACRANEAL NO ESPECIFICADO</td>
+      <td>W179</td>
+      <td>V01-Y98</td>
+      <td>Causas externas de morbilidad y de mortalidad</td>
+      <td>W00-W19</td>
+      <td>Caídas</td>
+      <td>W17</td>
+      <td>Otras caídas de un nivel a otro</td>
+      <td>W179</td>
+      <td>OTRA CAÍDA DESDE UN NIVEL A OTRO OCURRIDA EN U...</td>
+    </tr>
+  </tbody>
+</table>
+<p>566544 rows × 26 columns</p>
 </div>
 </div>
 
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>creating table DEIS_2021 ,schema: DEIS
-creating table (not overwrite mode)DEIS_2020 ,schema: DEIS
-table DEIS_2020 ,schema: DEIS already exists
-creating table (not overwrite mode)DEIS_2019 ,schema: DEIS
-table DEIS_2019 ,schema: DEIS already exists
-creating table (not overwrite mode)DEIS_2018 ,schema: DEIS
-table DEIS_2018 ,schema: DEIS already exists
-creating table (not overwrite mode)DEIS_2017 ,schema: DEIS
-table DEIS_2017 ,schema: DEIS already exists
-creating table (not overwrite mode)DEIS_2016 ,schema: DEIS
-table DEIS_2016 ,schema: DEIS already exists
-creating table DEIS_COVID ,schema: DEIS
-creating table DEIS_EDAD_FECHA_ROLLING ,schema: DEIS
-</pre>
-</div>
 </div>
 
 </div>
@@ -14803,7 +15193,352 @@ creating table DEIS_EDAD_FECHA_ROLLING ,schema: DEIS
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deis</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GLOSA_CATEGORIA_DIAG1</th>
+      <th>GLOSA_SUBCATEGORIA_DIAG1</th>
+      <th>index</th>
+      <th>CAPITULO_DIAG2</th>
+      <th>CAPITULO_DIAG1</th>
+      <th>CODIGO_GRUPO_DIAG2</th>
+      <th>DIAG1</th>
+      <th>GLOSA_CAPITULO_DIAG2</th>
+      <th>GLOSA_CATEGORIA_DIAG2</th>
+      <th>GLOSA_SUBCATEGORIA_DIAG2</th>
+      <th>...</th>
+      <th>GLOSA_GRUPO_DIAG1</th>
+      <th>GLOSA_CAPITULO_DIAG1</th>
+      <th>CODIGO_CATEGORIA_DIAG2</th>
+      <th>GLOSA_SEXO</th>
+      <th>GLOSA_GRUPO_DIAG2</th>
+      <th>Metropolitana</th>
+      <th>FECHA_DEF_OR</th>
+      <th>FECHA_STR</th>
+      <th>COVID</th>
+      <th>ANO_DEF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021</td>
+      <td>2021-01-05</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>94</td>
+      <td>5109</td>
+      <td>Viña del Mar</td>
+      <td>De Valparaíso</td>
+      <td>C229</td>
+      <td>C00-D48</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Tumor maligno del hígado y de las vías biliare...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021</td>
+      <td>2021-01-19</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>95</td>
+      <td>13403</td>
+      <td>Calera de Tango</td>
+      <td>Metropolitana de Santiago</td>
+      <td>C61X</td>
+      <td>C00-D48</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Tumor maligno de la próstata</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021</td>
+      <td>2021-01-22</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>96</td>
+      <td>9120</td>
+      <td>Villarrica</td>
+      <td>De La Araucanía</td>
+      <td>N179</td>
+      <td>N00-N99</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Insuficiencia renal aguda</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021</td>
+      <td>2021-01-16</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>89</td>
+      <td>5506</td>
+      <td>Nogales</td>
+      <td>De Valparaíso</td>
+      <td>I509</td>
+      <td>I00-I99</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Insuficiencia cardíaca</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021</td>
+      <td>2021-01-22</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>104</td>
+      <td>5501</td>
+      <td>Quillota</td>
+      <td>De Valparaíso</td>
+      <td>J441</td>
+      <td>J00-J99</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Otras enfermedades pulmonares obstructivas cró...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>566539</th>
+      <td>2016</td>
+      <td>2016-08-28</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>74</td>
+      <td>10103</td>
+      <td>Cochamó</td>
+      <td>De Los Lagos</td>
+      <td>E119</td>
+      <td>E00-E90</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Diabetes mellitus no insulinodependiente</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566540</th>
+      <td>2016</td>
+      <td>2016-08-30</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>86</td>
+      <td>10209</td>
+      <td>Quemchi</td>
+      <td>De Los Lagos</td>
+      <td>J449</td>
+      <td>J00-J99</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Otras enfermedades pulmonares obstructivas cró...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566541</th>
+      <td>2016</td>
+      <td>2016-08-26</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>84</td>
+      <td>10205</td>
+      <td>Dalcahue</td>
+      <td>De Los Lagos</td>
+      <td>C61X</td>
+      <td>C00-D48</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Tumor maligno de la próstata</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566542</th>
+      <td>2016</td>
+      <td>2016-09-02</td>
+      <td>Mujer</td>
+      <td>1</td>
+      <td>90</td>
+      <td>10205</td>
+      <td>Dalcahue</td>
+      <td>De Los Lagos</td>
+      <td>J459</td>
+      <td>J00-J99</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Resto de Chile</td>
+      <td>Asma</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>566543</th>
+      <td>2016</td>
+      <td>2016-08-26</td>
+      <td>Hombre</td>
+      <td>1</td>
+      <td>53</td>
+      <td>10201</td>
+      <td>Castro</td>
+      <td>De Los Lagos</td>
+      <td>S069</td>
+      <td>S00-T98</td>
+      <td>...</td>
+      <td>Caídas</td>
+      <td>W17</td>
+      <td>Otras caídas de un nivel a otro</td>
+      <td>W179</td>
+      <td>OTRA CAÍDA DESDE UN NIVEL A OTRO OCURRIDA EN U...</td>
+      <td>Resto de Chile</td>
+      <td>Traumatismo intracraneal</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>566544 rows × 31 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_DEIS.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
@@ -14823,7 +15558,7 @@ creating table DEIS_EDAD_FECHA_ROLLING ,schema: DEIS
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
 
 
 
