@@ -25,7 +25,7 @@ RUN python --version
 USER $NB_UID
 
 RUN conda install --quiet --yes -c \
-    conda-forge pandas \
+    pandas \
     pymongo \
     matplotlib \
     papermill \
@@ -41,7 +41,7 @@ RUN conda install --quiet --yes -c \
     markdown \
     bs4 \
     geoalchemy2 \
-    conda-forge descartes \
+    descartes \
     dateparser \
     carto \
     gspread \
