@@ -47,7 +47,8 @@ RUN conda install --quiet --yes -c \
     gspread \
     oauth2client \
     plotly \
-    plotly chart-studio
+    plotly chart-studio \
+    openpyxl
 
 
 RUN pip install --upgrade pip && \
