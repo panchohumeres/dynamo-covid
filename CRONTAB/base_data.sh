@@ -1,0 +1,2 @@
+papermill /home/jovyan/work/ETL/geo.ipynb /home/jovyan/work/ETL/geo_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
+papermill /home/jovyan/work/ETL/@ivanMSC.ipynb /home/jovyan/work/ETL/@ivanMSC_`date +\%Y\%m\%d\%H\%M\%S`.ipynb
