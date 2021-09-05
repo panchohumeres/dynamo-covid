@@ -3,16 +3,16 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>movilidad</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>@ivanMSC</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
 
 <style type="text/css">
-    pre { line-height: 125%; margin: 0; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+    pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14262,20 +14262,25 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
-<span class="kn">import</span> <span class="nn">patoolib</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">sqlalchemy</span> 
 <span class="kn">import</span> <span class="nn">psycopg2</span>
-<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">mapbox</span> <span class="kn">import</span> <span class="n">Uploader</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_numeric_dtype</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">topojson</span> <span class="k">as</span> <span class="nn">tp</span>
+<span class="kn">from</span> <span class="nn">shapely</span> <span class="kn">import</span> <span class="n">geometry</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">modules.transforms</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
      </div>
@@ -14289,7 +14294,10 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">]</span>
+<span class="n">postgres_psswd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">]</span>
+<span class="n">postgres_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">]</span>
+<span class="n">postgres_port</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14301,25 +14309,6 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">]</span>
-<span class="n">postgres_psswd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">]</span>
-<span class="n">postgres_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">]</span>
-<span class="n">postgres_port</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">])</span>
-<span class="n">mapbox_api</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAPBOX_API_KEY&#39;</span><span class="p">]</span>
-<span class="n">mapbox_up</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MAPBOX_API_UPLOAD_KEY&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A long string that contains the necessary Postgres login information</span>
@@ -14336,10 +14325,27 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#guardar paso en csv</span>
+<span class="n">path</span><span class="o">=</span><span class="s1">&#39;/data/ETLcache/&#39;</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;_</span><span class="si">%d</span><span class="s2">%m%Y_%H%M%S&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://matiascerda.carto.com/api/v2/sql?format=CSV&amp;filename=datos-movilidad-isci.csv&amp;q=select%20*</span><span class="si">%20f</span><span class="s1">rom</span><span class="si">%20d</span><span class="s1">ata_variacion&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://raw.githubusercontent.com/ivanMSC/COVID19_Chile/master/historial_comunas.csv&#39;</span>
 </pre></div>
 
      </div>
@@ -14353,9 +14359,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span><span class="o">=</span><span class="s2">&quot;select * from geo.zonas_censales&quot;</span>
-<span class="n">zonas</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span>
-<span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">zonas</span><span class="p">[</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14363,325 +14368,18 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">zonas</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://raw.githubusercontent.com/ivanMSC/COVID19_Chile/master/utils/comunasChile.csv&#39;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>OBJECTID</th>
-      <th>REGION</th>
-      <th>NOM_REGION</th>
-      <th>PROVINCIA</th>
-      <th>NOM_PROVINCIA</th>
-      <th>COMUNA</th>
-      <th>NOM_COMUNA</th>
-      <th>URBANO</th>
-      <th>COD_DISTRITO</th>
-      <th>COD_ZONA</th>
-      <th>GEOCODIGO</th>
-      <th>Shape_Length</th>
-      <th>Shape_Area</th>
-      <th>geometry</th>
-      <th>TOTAL_PERSONAS</th>
-      <th>PERSONAS_0_A_5_AÑOS</th>
-      <th>PERSONAS_6_A_14_AÑOS</th>
-      <th>PERSONAS_15_A_64_AÑOS</th>
-      <th>PERSONAS_MAS_65_AÑOS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>13</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>134</td>
-      <td>MAIPO</td>
-      <td>13404</td>
-      <td>PAINE</td>
-      <td>PAINE</td>
-      <td>1</td>
-      <td>3</td>
-      <td>13404011003</td>
-      <td>0.030604</td>
-      <td>0.000043</td>
-      <td>POLYGON ((-70.72732 -33.80301, -70.72803 -33.8...</td>
-      <td>5608.0</td>
-      <td>430.0</td>
-      <td>918.0</td>
-      <td>3776.0</td>
-      <td>214.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>13</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>134</td>
-      <td>MAIPO</td>
-      <td>13404</td>
-      <td>PAINE</td>
-      <td>PAINE</td>
-      <td>1</td>
-      <td>2</td>
-      <td>13404011002</td>
-      <td>0.045283</td>
-      <td>0.000071</td>
-      <td>POLYGON ((-70.70792 -33.80101, -70.70805 -33.8...</td>
-      <td>2435.0</td>
-      <td>165.0</td>
-      <td>238.0</td>
-      <td>1697.0</td>
-      <td>292.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>13</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>134</td>
-      <td>MAIPO</td>
-      <td>13404</td>
-      <td>PAINE</td>
-      <td>PAINE</td>
-      <td>6</td>
-      <td>4</td>
-      <td>13404061004</td>
-      <td>0.084715</td>
-      <td>0.000102</td>
-      <td>POLYGON ((-70.70724 -33.80454, -70.70726 -33.8...</td>
-      <td>4074.0</td>
-      <td>239.0</td>
-      <td>429.0</td>
-      <td>2869.0</td>
-      <td>396.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>13</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>134</td>
-      <td>MAIPO</td>
-      <td>13404</td>
-      <td>PAINE</td>
-      <td>PAINE</td>
-      <td>6</td>
-      <td>1</td>
-      <td>13404061001</td>
-      <td>0.052736</td>
-      <td>0.000112</td>
-      <td>POLYGON ((-70.74243 -33.81015, -70.74229 -33.8...</td>
-      <td>4014.0</td>
-      <td>299.0</td>
-      <td>519.0</td>
-      <td>2747.0</td>
-      <td>403.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>13</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>134</td>
-      <td>MAIPO</td>
-      <td>13404</td>
-      <td>PAINE</td>
-      <td>PAINE</td>
-      <td>6</td>
-      <td>2</td>
-      <td>13404061002</td>
-      <td>0.024273</td>
-      <td>0.000035</td>
-      <td>POLYGON ((-70.73996 -33.80852, -70.73996 -33.8...</td>
-      <td>3738.0</td>
-      <td>221.0</td>
-      <td>309.0</td>
-      <td>2572.0</td>
-      <td>437.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>4860</th>
-      <td>50</td>
-      <td>12</td>
-      <td>REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA</td>
-      <td>121</td>
-      <td>MAGALLANES</td>
-      <td>12101</td>
-      <td>PUNTA ARENAS</td>
-      <td>PUNTA ARENAS</td>
-      <td>7</td>
-      <td>6</td>
-      <td>12101071006</td>
-      <td>0.085910</td>
-      <td>0.000389</td>
-      <td>POLYGON ((-70.93557 -53.20309, -70.93549 -53.2...</td>
-      <td>3159.0</td>
-      <td>280.0</td>
-      <td>459.0</td>
-      <td>2134.0</td>
-      <td>95.0</td>
-    </tr>
-    <tr>
-      <th>4861</th>
-      <td>51</td>
-      <td>12</td>
-      <td>REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA</td>
-      <td>121</td>
-      <td>MAGALLANES</td>
-      <td>12101</td>
-      <td>PUNTA ARENAS</td>
-      <td>PUNTA ARENAS</td>
-      <td>10</td>
-      <td>1</td>
-      <td>12101101001</td>
-      <td>0.071263</td>
-      <td>0.000042</td>
-      <td>POLYGON ((-70.93740 -53.23148, -70.93743 -53.2...</td>
-      <td>205.0</td>
-      <td>13.0</td>
-      <td>25.0</td>
-      <td>128.0</td>
-      <td>39.0</td>
-    </tr>
-    <tr>
-      <th>4862</th>
-      <td>52</td>
-      <td>12</td>
-      <td>REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA</td>
-      <td>121</td>
-      <td>MAGALLANES</td>
-      <td>12101</td>
-      <td>PUNTA ARENAS</td>
-      <td>PUNTA ARENAS</td>
-      <td>10</td>
-      <td>4</td>
-      <td>12101101004</td>
-      <td>0.157769</td>
-      <td>0.000532</td>
-      <td>POLYGON ((-70.94820 -53.14980, -70.94825 -53.1...</td>
-      <td>5280.0</td>
-      <td>342.0</td>
-      <td>659.0</td>
-      <td>3847.0</td>
-      <td>161.0</td>
-    </tr>
-    <tr>
-      <th>4863</th>
-      <td>53</td>
-      <td>12</td>
-      <td>REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA</td>
-      <td>121</td>
-      <td>MAGALLANES</td>
-      <td>12101</td>
-      <td>PUNTA ARENAS</td>
-      <td>PUNTA ARENAS</td>
-      <td>10</td>
-      <td>3</td>
-      <td>12101101003</td>
-      <td>0.049192</td>
-      <td>0.000072</td>
-      <td>POLYGON ((-70.91382 -53.12629, -70.91389 -53.1...</td>
-      <td>3937.0</td>
-      <td>167.0</td>
-      <td>456.0</td>
-      <td>2880.0</td>
-      <td>124.0</td>
-    </tr>
-    <tr>
-      <th>4864</th>
-      <td>54</td>
-      <td>12</td>
-      <td>REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA</td>
-      <td>121</td>
-      <td>MAGALLANES</td>
-      <td>12101</td>
-      <td>PUNTA ARENAS</td>
-      <td>PUNTA ARENAS</td>
-      <td>7</td>
-      <td>7</td>
-      <td>12101071007</td>
-      <td>0.028364</td>
-      <td>0.000033</td>
-      <td>POLYGON ((-70.94310 -53.18517, -70.94310 -53.1...</td>
-      <td>3543.0</td>
-      <td>254.0</td>
-      <td>557.0</td>
-      <td>2508.0</td>
-      <td>142.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>4865 rows × 19 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14690,85 +14388,21 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crs</span><span class="o">=</span><span class="n">zonas</span><span class="o">.</span><span class="n">crs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#diferencias entre entradas y salidas de zonas censales estimadas por ISCI-entel Ocean</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="c1">#diferencias entre entradas</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_entrada&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_entrada_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_entrada_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="c1">#diferencias entre salidas</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">,</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;the_geom&#39;</span><span class="p">,</span><span class="s1">&#39;cartodb_id&#39;</span><span class="p">,</span><span class="s1">&#39;the_geom_webmercator&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zonas</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;GEOCODIGO&#39;</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;zona_censal&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2020-&#39;</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;week&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-6&#39;</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%W-%w&#39;</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_sup&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;dif_salida_lim_inf&#39;</span><span class="p">]</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_MOVILIZADAS&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-71-7cf9814fbde6&gt;:4: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
-  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-71-7cf9814fbde6&gt;:4: FutureWarning: The default value of regex will change from True to False in a future version.
-  ISCIentel[[&#39;dif_entrada_lim_inf&#39;,&#39;dif_entrada_lim_sup&#39;]]=ISCIentel[&#39;dif_entrada&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-71-7cf9814fbde6&gt;:7: FutureWarning: The default value of regex will change from True to False in a future version. In addition, single character regular expressions will*not* be treated as literal strings when regex=True.
-  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-&lt;ipython-input-71-7cf9814fbde6&gt;:7: FutureWarning: The default value of regex will change from True to False in a future version.
-  ISCIentel[[&#39;dif_salida_lim_inf&#39;,&#39;dif_salida_lim_sup&#39;]]=ISCIentel[&#39;dif_salida&#39;].str.replace(&#39;[&#39;,&#39;&#39;).str.replace(&#39;,]&#39;,&#39;&#39;).str.replace(&#39;%&#39;,&#39;&#39;).str.replace(&#39;]&#39;,&#39;&#39;).str.split(&#39;,&#39;,expand=True)
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[72]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Variabilidad PONDERADA</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="s1">&#39;comuna&#39;</span><span class="p">])[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;comuna&#39;</span><span class="p">)[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">:</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;</span><span class="p">})</span>
-<span class="n">pop_comuna</span><span class="o">=</span><span class="n">pop_comuna</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="c1">#ISCIentel[&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;]</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pop_comuna</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;comuna&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="c1">#% de personas 15 a 64 años comunal por zona censal</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS_COMUNA&#39;</span><span class="p">]</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas_comunal_ponderada&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;salidas&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;PERSONAS_15_A_64_AÑOS_FACTOR&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="o">=</span><span class="n">info_comunal</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;CUT (Código Único Territorial)&#39;</span><span class="p">:</span><span class="s1">&#39;CUT&#39;</span><span class="p">})</span>
 </pre></div>
 
      </div>
@@ -14779,11 +14413,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[73]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="p">[</span><span class="s1">&#39;CUT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14799,321 +14432,14 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[73]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>zona_censal</th>
-      <th>comuna</th>
-      <th>region</th>
-      <th>week</th>
-      <th>dif_salida</th>
-      <th>dif_entrada</th>
-      <th>dif_entrada_lim_inf</th>
-      <th>dif_entrada_lim_sup</th>
-      <th>dif_salida_lim_inf</th>
-      <th>dif_salida_lim_sup</th>
-      <th>...</th>
-      <th>PERSONAS_6_A_14_AÑOS</th>
-      <th>PERSONAS_15_A_64_AÑOS</th>
-      <th>PERSONAS_MAS_65_AÑOS</th>
-      <th>date</th>
-      <th>salidas</th>
-      <th>PERSONAS_MOVILIZADAS</th>
-      <th>index</th>
-      <th>PERSONAS_15_A_64_AÑOS_COMUNA</th>
-      <th>PERSONAS_15_A_64_AÑOS_FACTOR</th>
-      <th>salidas_comunal_ponderada</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16109011002</td>
-      <td>YUNGAY</td>
-      <td>REGIÓN DE ÑUBLE</td>
-      <td>36</td>
-      <td>[-40%,-21%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>367.0</td>
-      <td>2738.0</td>
-      <td>585.0</td>
-      <td>2020-09-12</td>
-      <td>-30.5</td>
-      <td>1902.910</td>
-      <td>315.0</td>
-      <td>8672.0</td>
-      <td>0.315729</td>
-      <td>-9.629728</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4106011001</td>
-      <td>VICUÑA</td>
-      <td>REGIÓN DE COQUIMBO</td>
-      <td>31</td>
-      <td>[-40%,-21%,]</td>
-      <td>[-21%,+20%,]</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>540.0</td>
-      <td>2626.0</td>
-      <td>355.0</td>
-      <td>2020-08-08</td>
-      <td>-30.5</td>
-      <td>1825.070</td>
-      <td>306.0</td>
-      <td>11054.0</td>
-      <td>0.237561</td>
-      <td>-7.245612</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>13119161003</td>
-      <td>MAIPÚ</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>42</td>
-      <td>[-40%,-21%,]</td>
-      <td>[+41%,+60%,]</td>
-      <td>41</td>
-      <td>60</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>420.0</td>
-      <td>3870.0</td>
-      <td>474.0</td>
-      <td>2020-10-24</td>
-      <td>-30.5</td>
-      <td>2689.650</td>
-      <td>151.0</td>
-      <td>367879.0</td>
-      <td>0.010520</td>
-      <td>-0.320853</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>7304021005</td>
-      <td>MOLINA</td>
-      <td>REGIÓN DEL MAULE</td>
-      <td>9</td>
-      <td>[-21%,+20%,]</td>
-      <td>[-21%,+20%,]</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>266.0</td>
-      <td>2001.0</td>
-      <td>346.0</td>
-      <td>2020-03-07</td>
-      <td>-0.5</td>
-      <td>1990.995</td>
-      <td>162.0</td>
-      <td>25099.0</td>
-      <td>0.079724</td>
-      <td>-0.039862</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4101031003</td>
-      <td>LA SERENA</td>
-      <td>REGIÓN DE COQUIMBO</td>
-      <td>30</td>
-      <td>[-40%,-21%,]</td>
-      <td>[-40%,-21%,]</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>-40</td>
-      <td>-21</td>
-      <td>...</td>
-      <td>283.0</td>
-      <td>3292.0</td>
-      <td>198.0</td>
-      <td>2020-08-01</td>
-      <td>-30.5</td>
-      <td>2287.940</td>
-      <td>117.0</td>
-      <td>134667.0</td>
-      <td>0.024445</td>
-      <td>-0.745587</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>214055</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>48</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>227.0</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2020-12-05</td>
-      <td>-0.5</td>
-      <td>1843.735</td>
-      <td>242.0</td>
-      <td>109102.0</td>
-      <td>0.016984</td>
-      <td>-0.008492</td>
-    </tr>
-    <tr>
-      <th>214056</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>49</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>227.0</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2020-12-12</td>
-      <td>-0.5</td>
-      <td>1843.735</td>
-      <td>242.0</td>
-      <td>109102.0</td>
-      <td>0.016984</td>
-      <td>-0.008492</td>
-    </tr>
-    <tr>
-      <th>214057</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>50</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>227.0</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2020-12-19</td>
-      <td>-0.5</td>
-      <td>1843.735</td>
-      <td>242.0</td>
-      <td>109102.0</td>
-      <td>0.016984</td>
-      <td>-0.008492</td>
-    </tr>
-    <tr>
-      <th>214058</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>51</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>227.0</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2020-12-26</td>
-      <td>-0.5</td>
-      <td>1843.735</td>
-      <td>242.0</td>
-      <td>109102.0</td>
-      <td>0.016984</td>
-      <td>-0.008492</td>
-    </tr>
-    <tr>
-      <th>214059</th>
-      <td>13127041004</td>
-      <td>RECOLETA</td>
-      <td>REGIÓN METROPOLITANA DE SANTIAGO</td>
-      <td>52</td>
-      <td>[-21%,+20%,]</td>
-      <td>[+61%,+100%,]</td>
-      <td>61</td>
-      <td>100</td>
-      <td>-21</td>
-      <td>20</td>
-      <td>...</td>
-      <td>227.0</td>
-      <td>1853.0</td>
-      <td>383.0</td>
-      <td>2021-01-02</td>
-      <td>-0.5</td>
-      <td>1843.735</td>
-      <td>242.0</td>
-      <td>109102.0</td>
-      <td>0.016984</td>
-      <td>-0.008492</td>
-    </tr>
-  </tbody>
-</table>
-<p>214060 rows × 36 columns</p>
-</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>array([&#39;15&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;16&#39;, &#39;8&#39;, &#39;9&#39;, &#39;14&#39;,
+       &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;], dtype=object)</pre>
 </div>
 
 </div>
@@ -15125,16 +14451,15 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[74]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;isci_entel&#39;</span>
-<span class="n">schema</span><span class="o">=</span><span class="s1">&#39;movilidad&#39;</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
-    <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">schema</span><span class="p">))</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">schema</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;@ivanMSC&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
+        <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15154,7 +14479,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>schema movilidad exists, will not be created
+<pre>schema @ivanMSC does not exist, creating it
 </pre>
 </div>
 </div>
@@ -15163,17 +14488,361 @@ a.anchor-link {
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;activos&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">rolling</span><span class="p">(</span><span class="n">contagiados_comunal</span><span class="p">,</span><span class="n">numeric_col</span><span class="o">=</span><span class="s1">&#39;Nuevos Confirmados&#39;</span><span class="p">,</span><span class="n">group_col</span><span class="o">=</span><span class="s1">&#39;Comuna&#39;</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">info_comunal</span><span class="p">[[</span><span class="s1">&#39;CUT&#39;</span><span class="p">,</span><span class="s1">&#39;Provincia&#39;</span><span class="p">,</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;Lon&#39;</span><span class="p">]],</span>
+                         <span class="n">on</span><span class="o">=</span><span class="s1">&#39;CUT&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Indicencia Acumulados&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Confirmados Acumulados&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100000</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Indicencia Activos&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;activos&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100000</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[75]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;Lon&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
-<span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ISCIentel</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ISCIentel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ISCIentel</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CUT</th>
+      <th>Nombre</th>
+      <th>Provincia</th>
+      <th>Region</th>
+      <th>Superficie</th>
+      <th>Poblacion</th>
+      <th>Densidad</th>
+      <th>IDH 2005</th>
+      <th>IDH Categoria</th>
+      <th>Lat</th>
+      <th>Lon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15101</td>
+      <td>Arica</td>
+      <td>Arica</td>
+      <td>Arica y Parinacota</td>
+      <td>4799.4</td>
+      <td>247552.0</td>
+      <td>0.46</td>
+      <td>38.400</td>
+      <td>Alto</td>
+      <td>-18.45500</td>
+      <td>-70.29000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15102</td>
+      <td>Camarones</td>
+      <td>Arica</td>
+      <td>Arica y Parinacota</td>
+      <td>3927.0</td>
+      <td>1233.0</td>
+      <td>0.32</td>
+      <td>0.751</td>
+      <td>Alto</td>
+      <td>-19.01700</td>
+      <td>-69.86700</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15201</td>
+      <td>Putre</td>
+      <td>Parinacota</td>
+      <td>Arica y Parinacota</td>
+      <td>5902.5</td>
+      <td>2515.0</td>
+      <td>0.47</td>
+      <td>0.707</td>
+      <td>Alto</td>
+      <td>-18.20000</td>
+      <td>-69.58300</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15202</td>
+      <td>General Lagos</td>
+      <td>Parinacota</td>
+      <td>Arica y Parinacota</td>
+      <td>2244.4</td>
+      <td>810.0</td>
+      <td>0.31</td>
+      <td>0.670</td>
+      <td>Medio</td>
+      <td>-17.65300</td>
+      <td>-69.63500</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1101</td>
+      <td>Iquique</td>
+      <td>Iquique</td>
+      <td>Tarapacá</td>
+      <td>2242.1</td>
+      <td>223463.0</td>
+      <td>85.40</td>
+      <td>0.766</td>
+      <td>Alto</td>
+      <td>-20.24400</td>
+      <td>-70.13900</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>13603</td>
+      <td>Isla de Maipo</td>
+      <td>Talagante</td>
+      <td>Metropolitana</td>
+      <td>189.0</td>
+      <td>40171.0</td>
+      <td>191.60</td>
+      <td>0.724</td>
+      <td>Alto</td>
+      <td>-33.75400</td>
+      <td>-70.88600</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>13604</td>
+      <td>Padre Hurtado</td>
+      <td>Talagante</td>
+      <td>Metropolitana</td>
+      <td>80.8</td>
+      <td>74188.0</td>
+      <td>782.80</td>
+      <td>0.728</td>
+      <td>Alto</td>
+      <td>-33.57600</td>
+      <td>-70.80000</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>13605</td>
+      <td>Peñaflor</td>
+      <td>Talagante</td>
+      <td>Metropolitana</td>
+      <td>69.0</td>
+      <td>101058.0</td>
+      <td>1307.30</td>
+      <td>0.753</td>
+      <td>Alto</td>
+      <td>-33.60600</td>
+      <td>-70.87700</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>5999</td>
+      <td>Barco Isabela Island</td>
+      <td>Valparaíso</td>
+      <td>Valparaíso</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-33.01115</td>
+      <td>-71.59019</td>
+    </tr>
+    <tr>
+      <th>347</th>
+      <td>10999</td>
+      <td>Barco Silver Explorer</td>
+      <td>Los Lagos</td>
+      <td>Los Lagos</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-39.76115</td>
+      <td>-74.24939</td>
+    </tr>
+  </tbody>
+</table>
+<p>348 rows × 11 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="p">[</span><span class="s1">&#39;Codigo region&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">info_comunal</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">CUT</span><span class="p">)[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;contagios_comunal@ivanMSC&#39;</span>
+<span class="n">schema</span><span class="o">=</span><span class="s1">&#39;@ivanMSC&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+<span class="c1">#contagiados_comunal.to_sql(name, schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving table&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv in cache&#39;</span><span class="p">)</span>
+<span class="c1">#contagiados_comunal.to_csv(path+name+timestamp+&#39;.csv&#39;,encoding=&#39;utf-8&#39;)</span>
+<span class="n">name</span><span class="o">=</span><span class="s1">&#39;info_comunal@ivanMSC&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+<span class="n">info_comunal</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving table&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv in cache&#39;</span><span class="p">)</span>
+<span class="n">info_comunal</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15192,29 +14861,209 @@ a.anchor-link {
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-75-f461c9b017e0&gt;:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;centroid&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
-
-  ISCIentel[&#39;geometry&#39;]=ISCIentel[&#39;geometry&#39;].centroid
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>creating table contagios_comunal@ivanMSC ,schema: @ivanMSC
+saving table/data/ETLcache/contagios_comunal@ivanMSC_06062021_023347.csv in cache
+creating table info_comunal@ivanMSC ,schema: @ivanMSC
 </pre>
 </div>
 </div>
 
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">InsufficientPrivilege</span>                     Traceback (most recent call last)
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_execute_context</span><span class="ansi-blue-fg">(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1769</span>                 <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> evt_handled<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1770</span><span class="ansi-red-fg">                     self.dialect.do_execute(
+</span><span class="ansi-green-intense-fg ansi-bold">   1771</span>                         cursor<span class="ansi-blue-fg">,</span> statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">,</span> context
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/default.py</span> in <span class="ansi-cyan-fg">do_execute</span><span class="ansi-blue-fg">(self, cursor, statement, parameters, context)</span>
+<span class="ansi-green-intense-fg ansi-bold">    716</span>     <span class="ansi-green-fg">def</span> do_execute<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> cursor<span class="ansi-blue-fg">,</span> statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">,</span> context<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 717</span><span class="ansi-red-fg">         </span>cursor<span class="ansi-blue-fg">.</span>execute<span class="ansi-blue-fg">(</span>statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    718</span> 
+
+<span class="ansi-red-fg">InsufficientPrivilege</span>: could not create file &#34;base/16384/23630&#34;: Permission denied
+
+
+The above exception was the direct cause of the following exception:
+
+<span class="ansi-red-fg">ProgrammingError</span>                          Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-26-4d8d65535ce0&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span> name<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;info_comunal@ivanMSC&#39;</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;creating table &#34;</span><span class="ansi-blue-fg">+</span>name<span class="ansi-blue-fg">+</span><span class="ansi-blue-fg">&#39; ,schema: &#39;</span><span class="ansi-blue-fg">+</span>schema<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg"> </span>info_comunal<span class="ansi-blue-fg">.</span>to_sql<span class="ansi-blue-fg">(</span>name<span class="ansi-blue-fg">,</span> schema<span class="ansi-blue-fg">=</span>schema<span class="ansi-blue-fg">,</span>con<span class="ansi-blue-fg">=</span>cnx<span class="ansi-blue-fg">,</span>if_exists<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;replace&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     10</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;saving table&#34;</span><span class="ansi-blue-fg">+</span>path<span class="ansi-blue-fg">+</span>name<span class="ansi-blue-fg">+</span>timestamp<span class="ansi-blue-fg">+</span><span class="ansi-blue-fg">&#39;.csv in cache&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     11</span> info_comunal<span class="ansi-blue-fg">.</span>to_csv<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">+</span>name<span class="ansi-blue-fg">+</span>timestamp<span class="ansi-blue-fg">+</span><span class="ansi-blue-fg">&#39;.csv&#39;</span><span class="ansi-blue-fg">,</span>encoding<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;utf-8&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">to_sql</span><span class="ansi-blue-fg">(self, name, con, schema, if_exists, index, index_label, chunksize, dtype, method)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2777</span>         <span class="ansi-green-fg">from</span> pandas<span class="ansi-blue-fg">.</span>io <span class="ansi-green-fg">import</span> sql
+<span class="ansi-green-intense-fg ansi-bold">   2778</span> 
+<span class="ansi-green-fg">-&gt; 2779</span><span class="ansi-red-fg">         sql.to_sql(
+</span><span class="ansi-green-intense-fg ansi-bold">   2780</span>             self<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   2781</span>             name<span class="ansi-blue-fg">,</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/pandas/io/sql.py</span> in <span class="ansi-cyan-fg">to_sql</span><span class="ansi-blue-fg">(frame, name, con, schema, if_exists, index, index_label, chunksize, dtype, method)</span>
+<span class="ansi-green-intense-fg ansi-bold">    599</span>         )
+<span class="ansi-green-intense-fg ansi-bold">    600</span> 
+<span class="ansi-green-fg">--&gt; 601</span><span class="ansi-red-fg">     pandas_sql.to_sql(
+</span><span class="ansi-green-intense-fg ansi-bold">    602</span>         frame<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    603</span>         name<span class="ansi-blue-fg">,</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/pandas/io/sql.py</span> in <span class="ansi-cyan-fg">to_sql</span><span class="ansi-blue-fg">(self, frame, name, if_exists, index, index_label, schema, chunksize, dtype, method)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1404</span>             dtype<span class="ansi-blue-fg">=</span>dtype<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1405</span>         )
+<span class="ansi-green-fg">-&gt; 1406</span><span class="ansi-red-fg">         </span>table<span class="ansi-blue-fg">.</span>create<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1407</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1408</span>         <span class="ansi-green-fg">from</span> sqlalchemy <span class="ansi-green-fg">import</span> exc
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/pandas/io/sql.py</span> in <span class="ansi-cyan-fg">create</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    745</span>                 <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;&#39;{self.if_exists}&#39; is not valid for if_exists&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    746</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 747</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_execute_create<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    748</span> 
+<span class="ansi-green-intense-fg ansi-bold">    749</span>     <span class="ansi-green-fg">def</span> _execute_insert<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> conn<span class="ansi-blue-fg">,</span> keys<span class="ansi-blue-fg">,</span> data_iter<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/pandas/io/sql.py</span> in <span class="ansi-cyan-fg">_execute_create</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    731</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    732</span>             self<span class="ansi-blue-fg">.</span>table <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>table<span class="ansi-blue-fg">.</span>tometadata<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>pd_sql<span class="ansi-blue-fg">.</span>meta<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 733</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>table<span class="ansi-blue-fg">.</span>create<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    734</span> 
+<span class="ansi-green-intense-fg ansi-bold">    735</span>     <span class="ansi-green-fg">def</span> create<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/sql/schema.py</span> in <span class="ansi-cyan-fg">create</span><span class="ansi-blue-fg">(self, bind, checkfirst)</span>
+<span class="ansi-green-intense-fg ansi-bold">    941</span>         <span class="ansi-green-fg">if</span> bind <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    942</span>             bind <span class="ansi-blue-fg">=</span> _bind_or_error<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 943</span><span class="ansi-red-fg">         </span>bind<span class="ansi-blue-fg">.</span>_run_ddl_visitor<span class="ansi-blue-fg">(</span>ddl<span class="ansi-blue-fg">.</span>SchemaGenerator<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">,</span> checkfirst<span class="ansi-blue-fg">=</span>checkfirst<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    944</span> 
+<span class="ansi-green-intense-fg ansi-bold">    945</span>     <span class="ansi-green-fg">def</span> drop<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> bind<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> checkfirst<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_run_ddl_visitor</span><span class="ansi-blue-fg">(self, visitorcallable, element, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3077</span>     <span class="ansi-green-fg">def</span> _run_ddl_visitor<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> visitorcallable<span class="ansi-blue-fg">,</span> element<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   3078</span>         <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>begin<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> conn<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 3079</span><span class="ansi-red-fg">             </span>conn<span class="ansi-blue-fg">.</span>_run_ddl_visitor<span class="ansi-blue-fg">(</span>visitorcallable<span class="ansi-blue-fg">,</span> element<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3080</span> 
+<span class="ansi-green-intense-fg ansi-bold">   3081</span>     @util.deprecated_20(
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_run_ddl_visitor</span><span class="ansi-blue-fg">(self, visitorcallable, element, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2079</span> 
+<span class="ansi-green-intense-fg ansi-bold">   2080</span>         &#34;&#34;&#34;
+<span class="ansi-green-fg">-&gt; 2081</span><span class="ansi-red-fg">         </span>visitorcallable<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dialect<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>traverse_single<span class="ansi-blue-fg">(</span>element<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2082</span> 
+<span class="ansi-green-intense-fg ansi-bold">   2083</span>     @util.deprecated(
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/sql/visitors.py</span> in <span class="ansi-cyan-fg">traverse_single</span><span class="ansi-blue-fg">(self, obj, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">    483</span>             meth <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>v<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;visit_%s&#34;</span> <span class="ansi-blue-fg">%</span> obj<span class="ansi-blue-fg">.</span>__visit_name__<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    484</span>             <span class="ansi-green-fg">if</span> meth<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 485</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> meth<span class="ansi-blue-fg">(</span>obj<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    486</span> 
+<span class="ansi-green-intense-fg ansi-bold">    487</span>     <span class="ansi-green-fg">def</span> iterate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> obj<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/sql/ddl.py</span> in <span class="ansi-cyan-fg">visit_table</span><span class="ansi-blue-fg">(self, table, create_ok, include_foreign_key_constraints, _is_metadata_operation)</span>
+<span class="ansi-green-intense-fg ansi-bold">    888</span>             include_foreign_key_constraints <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-green-intense-fg ansi-bold">    889</span> 
+<span class="ansi-green-fg">--&gt; 890</span><span class="ansi-red-fg">         self.connection.execute(
+</span><span class="ansi-green-intense-fg ansi-bold">    891</span>             <span class="ansi-red-fg"># fmt: off</span>
+<span class="ansi-green-intense-fg ansi-bold">    892</span>             CreateTable(
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">execute</span><span class="ansi-blue-fg">(self, statement, *multiparams, **params)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1260</span>             )
+<span class="ansi-green-intense-fg ansi-bold">   1261</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1262</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> meth<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> multiparams<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">,</span> _EMPTY_EXECUTION_OPTS<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1263</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1264</span>     <span class="ansi-green-fg">def</span> _execute_function<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">,</span> multiparams<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">,</span> execution_options<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/sql/ddl.py</span> in <span class="ansi-cyan-fg">_execute_on_connection</span><span class="ansi-blue-fg">(self, connection, multiparams, params, execution_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">     75</span>         self<span class="ansi-blue-fg">,</span> connection<span class="ansi-blue-fg">,</span> multiparams<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">,</span> execution_options
+<span class="ansi-green-intense-fg ansi-bold">     76</span>     ):
+<span class="ansi-green-fg">---&gt; 77</span><span class="ansi-red-fg">         return connection._execute_ddl(
+</span><span class="ansi-green-intense-fg ansi-bold">     78</span>             self<span class="ansi-blue-fg">,</span> multiparams<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">,</span> execution_options
+<span class="ansi-green-intense-fg ansi-bold">     79</span>         )
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_execute_ddl</span><span class="ansi-blue-fg">(self, ddl, multiparams, params, execution_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1350</span>             dialect<span class="ansi-blue-fg">=</span>dialect<span class="ansi-blue-fg">,</span> schema_translate_map<span class="ansi-blue-fg">=</span>schema_translate_map
+<span class="ansi-green-intense-fg ansi-bold">   1351</span>         )
+<span class="ansi-green-fg">-&gt; 1352</span><span class="ansi-red-fg">         ret = self._execute_context(
+</span><span class="ansi-green-intense-fg ansi-bold">   1353</span>             dialect<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1354</span>             dialect<span class="ansi-blue-fg">.</span>execution_ctx_cls<span class="ansi-blue-fg">.</span>_init_ddl<span class="ansi-blue-fg">,</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_execute_context</span><span class="ansi-blue-fg">(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1811</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1812</span>         <span class="ansi-green-fg">except</span> BaseException <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1813</span><span class="ansi-red-fg">             self._handle_dbapi_exception(
+</span><span class="ansi-green-intense-fg ansi-bold">   1814</span>                 e<span class="ansi-blue-fg">,</span> statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">,</span> cursor<span class="ansi-blue-fg">,</span> context
+<span class="ansi-green-intense-fg ansi-bold">   1815</span>             )
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_handle_dbapi_exception</span><span class="ansi-blue-fg">(self, e, statement, parameters, cursor, context)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1992</span>                 util<span class="ansi-blue-fg">.</span>raise_<span class="ansi-blue-fg">(</span>newraise<span class="ansi-blue-fg">,</span> with_traceback<span class="ansi-blue-fg">=</span>exc_info<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> from_<span class="ansi-blue-fg">=</span>e<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1993</span>             <span class="ansi-green-fg">elif</span> should_wrap<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1994</span><span class="ansi-red-fg">                 util.raise_(
+</span><span class="ansi-green-intense-fg ansi-bold">   1995</span>                     sqlalchemy_exception<span class="ansi-blue-fg">,</span> with_traceback<span class="ansi-blue-fg">=</span>exc_info<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> from_<span class="ansi-blue-fg">=</span>e
+<span class="ansi-green-intense-fg ansi-bold">   1996</span>                 )
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/util/compat.py</span> in <span class="ansi-cyan-fg">raise_</span><span class="ansi-blue-fg">(***failed resolving arguments***)</span>
+<span class="ansi-green-intense-fg ansi-bold">    205</span> 
+<span class="ansi-green-intense-fg ansi-bold">    206</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 207</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> exception
+<span class="ansi-green-intense-fg ansi-bold">    208</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    209</span>             <span class="ansi-red-fg"># credit to</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/base.py</span> in <span class="ansi-cyan-fg">_execute_context</span><span class="ansi-blue-fg">(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1768</span>                             <span class="ansi-green-fg">break</span>
+<span class="ansi-green-intense-fg ansi-bold">   1769</span>                 <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> evt_handled<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1770</span><span class="ansi-red-fg">                     self.dialect.do_execute(
+</span><span class="ansi-green-intense-fg ansi-bold">   1771</span>                         cursor<span class="ansi-blue-fg">,</span> statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">,</span> context
+<span class="ansi-green-intense-fg ansi-bold">   1772</span>                     )
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.9/site-packages/sqlalchemy/engine/default.py</span> in <span class="ansi-cyan-fg">do_execute</span><span class="ansi-blue-fg">(self, cursor, statement, parameters, context)</span>
+<span class="ansi-green-intense-fg ansi-bold">    715</span> 
+<span class="ansi-green-intense-fg ansi-bold">    716</span>     <span class="ansi-green-fg">def</span> do_execute<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> cursor<span class="ansi-blue-fg">,</span> statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">,</span> context<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 717</span><span class="ansi-red-fg">         </span>cursor<span class="ansi-blue-fg">.</span>execute<span class="ansi-blue-fg">(</span>statement<span class="ansi-blue-fg">,</span> parameters<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    718</span> 
+<span class="ansi-green-intense-fg ansi-bold">    719</span>     <span class="ansi-green-fg">def</span> do_execute_no_params<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> cursor<span class="ansi-blue-fg">,</span> statement<span class="ansi-blue-fg">,</span> context<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">ProgrammingError</span>: (psycopg2.errors.InsufficientPrivilege) could not create file &#34;base/16384/23630&#34;: Permission denied
+
+[SQL: 
+CREATE TABLE &#34;@ivanMSC&#34;.&#34;info_comunal@ivanMSC&#34; (
+	index BIGINT, 
+	&#34;CUT&#34; BIGINT, 
+	&#34;Nombre&#34; TEXT, 
+	&#34;Provincia&#34; TEXT, 
+	&#34;Region&#34; TEXT, 
+	&#34;Superficie&#34; FLOAT(53), 
+	&#34;Poblacion&#34; FLOAT(53), 
+	&#34;Densidad&#34; FLOAT(53), 
+	&#34;IDH 2005&#34; FLOAT(53), 
+	&#34;IDH Categoria&#34; TEXT, 
+	&#34;Lat&#34; FLOAT(53), 
+	&#34;Lon&#34; FLOAT(53), 
+	&#34;Codigo region&#34; BIGINT
+)
+
+]
+(Background on this error at: http://sqlalche.me/e/14/f405)</pre>
+</div>
 </div>
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[76]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for r in ISCIentel[&#39;REGION&#39;].unique():</span>
-<span class="c1">#    name=&#39;isci_entel&#39;+str(r)</span>
-<span class="c1">#    print(&#39;saving table &#39;+name)</span>
-    <span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==r].to_postgis(name=name+&#39;_&#39;+str(r), schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
-<span class="c1">#    ISCIentel[ISCIentel[&#39;REGION&#39;]==r].to_sql(name, schema=schema,con=cnx,if_exists=&#39;replace&#39;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_covid-chile.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
+          <span class="s1">&#39;/home/jovyan/work/ETL/@ivanMSC.ipynb&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15222,79 +15071,27 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[77]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#geojson=ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;]</span>
-<span class="c1">#geojson[&#39;date&#39;]=geojson[&#39;date&#39;].astype(str)</span>
-<span class="c1">#geojson=geojson.to_json()</span>
-</pre></div>
+<div class="jp-Cell-outputWrapper">
 
-     </div>
-</div>
-</div>
-</div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[78]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#ISCIentel[ISCIentel[&#39;REGION&#39;]==&#39;13&#39;].to_file(&quot;../ETLcache/mov_temp.geojson&quot;, driver=&#39;GeoJSON&#39;)</span>
-</pre></div>
+<div class="jp-OutputArea jp-Cell-outputArea">
 
-     </div>
-</div>
-</div>
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>0</pre>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[79]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#with open(&quot;../ETLcache/mov_temp.geojson&quot;, &#39;rb&#39;) as src:</span>
-<span class="c1">#    upload_resp = service.upload(src, &#39;test_dataset&#39;)</span>
-<span class="c1">#upload_resp</span>
-<span class="c1">#upload_id = upload_resp.json()[&#39;id&#39;]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[80]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISCIentel</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;isci_entel&#39;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div>
