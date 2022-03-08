@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>@ivanMSC</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>1-RAW</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14526,17 +14526,13 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_numeric_dtype</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">topojson</span> <span class="k">as</span> <span class="nn">tp</span>
-<span class="kn">from</span> <span class="nn">shapely</span> <span class="kn">import</span> <span class="n">geometry</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">modules.transforms</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
 </pre></div>
 
      </div>
@@ -14550,10 +14546,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DBname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">]</span>
-<span class="n">postgres_psswd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">]</span>
-<span class="n">postgres_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">]</span>
-<span class="n">postgres_port</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14564,13 +14557,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A long string that contains the necessary Postgres login information</span>
-<span class="n">postgres_str</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;postgresql://&#39;</span><span class="o">+</span><span class="n">postgres_user</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">postgres_psswd</span><span class="o">+</span><span class="s1">&#39;@&#39;</span><span class="o">+</span><span class="n">DBname</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">postgres_port</span><span class="o">+</span><span class="s1">&#39;/superset&#39;</span><span class="p">)</span>
-<span class="c1"># Create the connection</span>
-<span class="n">cnx</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">postgres_str</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">modules.transforms</span>
 </pre></div>
 
      </div>
@@ -14578,21 +14568,41 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#guardar paso en csv</span>
-<span class="n">path</span><span class="o">=</span><span class="s1">&#39;/data/ETLcache/&#39;</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-<span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;_</span><span class="si">%d</span><span class="s2">%m%Y_%H%M%S&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">modules</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&lt;module &#39;modules.transforms&#39; from &#39;/home/jovyan/work/ETL/../modules/transforms.py&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14601,7 +14611,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://raw.githubusercontent.com/ivanMSC/COVID19_Chile/master/historial_comunas.csv&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">modules.transforms</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
      </div>
@@ -14615,8 +14625,10 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#guardar paso en csv</span>
+<span class="n">path</span><span class="o">=</span><span class="s1">&#39;/data/ETLcache/RAW&#39;</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;_</span><span class="si">%d</span><span class="s2">%m%Y_%H%M%S&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14630,7 +14642,19 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://raw.githubusercontent.com/ivanMSC/COVID19_Chile/master/utils/comunasChile.csv&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#OBTENER RUTAS DE CARPETAS DISPONIBLES EN REPO COVID DE MINISTERIO DE CIENCIAS DE CHILE</span>
+<span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://github.com/MinCiencia/Datos-COVID19/tree/master/output/&quot;</span>
+<span class="n">request</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">root</span><span class="o">=</span><span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;github.com&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">prefix</span><span class="o">=</span><span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/Min&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">folders</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+<span class="c1">#product folders</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">folders</span><span class="p">)):</span>
+    <span class="n">f</span><span class="o">=</span><span class="n">folders</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">folders</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="n">f</span>
+<span class="n">folders</span><span class="o">=</span><span class="p">[</span><span class="n">prefix</span><span class="o">+</span><span class="n">root</span><span class="o">+</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">folders</span> <span class="k">if</span> <span class="s1">&#39;producto&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14644,7 +14668,24 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#DEFINIR LISTADO DE PRODUCTOS QUE SE VAN A CONSULTAR DE REPO DE MINISTERIO DE CIENCIAS</span>
+
+<span class="n">productos</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;producto5&#39;</span><span class="p">,</span>
+           <span class="c1">#&#39;producto3&#39;,</span>
+           <span class="c1">#&#39;producto10&#39;,</span>
+           <span class="c1">#&#39;producto13&#39;,</span>
+           <span class="c1">#&#39;producto25&#39;,</span>
+           <span class="s1">&#39;producto14&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto19&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto37&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto53&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto54&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto52&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto50&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto48&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;producto24&#39;</span>
+    
+<span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14658,7 +14699,10 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="o">=</span><span class="n">info_comunal</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;CUT (Código Único Territorial)&#39;</span><span class="p">:</span><span class="s1">&#39;CUT&#39;</span><span class="p">})</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#LISTADO DE CARPETAS (RUTAS) FILTRADO, SEGÚN PRODUCTOS A CONSULTAR</span>
+<span class="n">fs</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">productos</span><span class="p">:</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">folders</span> <span class="k">if</span> <span class="n">p</span><span class="o">==</span><span class="n">x</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]])</span>
 </pre></div>
 
      </div>
@@ -14666,439 +14710,36 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="p">[</span><span class="s1">&#39;CUT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#guardar listado de productos consultados en DF (para posteriormente guardar en BD POstgres)</span>
+<span class="n">productos</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">productos</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([&#39;15&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;16&#39;, &#39;8&#39;, &#39;9&#39;, &#39;14&#39;,
-       &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;], dtype=object)</pre>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;@ivanMSC&#39;</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
-        <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>schema @ivanMSC does not exist, creating it
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;activos&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">rolling</span><span class="p">(</span><span class="n">contagiados_comunal</span><span class="p">,</span><span class="n">numeric_col</span><span class="o">=</span><span class="s1">&#39;Nuevos Confirmados&#39;</span><span class="p">,</span><span class="n">group_col</span><span class="o">=</span><span class="s1">&#39;Comuna&#39;</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span> 
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#crear esquema &quot;tracking&quot; si es que no existe en BD Postgres (para llevar registro de los productos consultados)</span>
+<span class="n">k</span><span class="o">=</span><span class="s1">&#39;tracking&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cnx</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_schema</span><span class="p">(</span><span class="n">cnx</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; does not exist, creating it&#39;</span><span class="p">)</span>
+    <span class="n">cnx</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">CreateSchema</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;schema &#39;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; exists, will not be created&#39;</span><span class="p">)</span>
 
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">info_comunal</span><span class="p">[[</span><span class="s1">&#39;CUT&#39;</span><span class="p">,</span><span class="s1">&#39;Provincia&#39;</span><span class="p">,</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;Lon&#39;</span><span class="p">]],</span>
-                         <span class="n">on</span><span class="o">=</span><span class="s1">&#39;CUT&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Indicencia Acumulados&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Confirmados Acumulados&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100000</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Indicencia Activos&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;activos&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">contagiados_comunal</span><span class="p">[</span><span class="s1">&#39;Poblacion&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100000</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CUT</th>
-      <th>Nombre</th>
-      <th>Provincia</th>
-      <th>Region</th>
-      <th>Superficie</th>
-      <th>Poblacion</th>
-      <th>Densidad</th>
-      <th>IDH 2005</th>
-      <th>IDH Categoria</th>
-      <th>Lat</th>
-      <th>Lon</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>15101</td>
-      <td>Arica</td>
-      <td>Arica</td>
-      <td>Arica y Parinacota</td>
-      <td>4799.4</td>
-      <td>247552.0</td>
-      <td>0.46</td>
-      <td>38.400</td>
-      <td>Alto</td>
-      <td>-18.45500</td>
-      <td>-70.29000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15102</td>
-      <td>Camarones</td>
-      <td>Arica</td>
-      <td>Arica y Parinacota</td>
-      <td>3927.0</td>
-      <td>1233.0</td>
-      <td>0.32</td>
-      <td>0.751</td>
-      <td>Alto</td>
-      <td>-19.01700</td>
-      <td>-69.86700</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>15201</td>
-      <td>Putre</td>
-      <td>Parinacota</td>
-      <td>Arica y Parinacota</td>
-      <td>5902.5</td>
-      <td>2515.0</td>
-      <td>0.47</td>
-      <td>0.707</td>
-      <td>Alto</td>
-      <td>-18.20000</td>
-      <td>-69.58300</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>15202</td>
-      <td>General Lagos</td>
-      <td>Parinacota</td>
-      <td>Arica y Parinacota</td>
-      <td>2244.4</td>
-      <td>810.0</td>
-      <td>0.31</td>
-      <td>0.670</td>
-      <td>Medio</td>
-      <td>-17.65300</td>
-      <td>-69.63500</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1101</td>
-      <td>Iquique</td>
-      <td>Iquique</td>
-      <td>Tarapacá</td>
-      <td>2242.1</td>
-      <td>223463.0</td>
-      <td>85.40</td>
-      <td>0.766</td>
-      <td>Alto</td>
-      <td>-20.24400</td>
-      <td>-70.13900</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>343</th>
-      <td>13603</td>
-      <td>Isla de Maipo</td>
-      <td>Talagante</td>
-      <td>Metropolitana</td>
-      <td>189.0</td>
-      <td>40171.0</td>
-      <td>191.60</td>
-      <td>0.724</td>
-      <td>Alto</td>
-      <td>-33.75400</td>
-      <td>-70.88600</td>
-    </tr>
-    <tr>
-      <th>344</th>
-      <td>13604</td>
-      <td>Padre Hurtado</td>
-      <td>Talagante</td>
-      <td>Metropolitana</td>
-      <td>80.8</td>
-      <td>74188.0</td>
-      <td>782.80</td>
-      <td>0.728</td>
-      <td>Alto</td>
-      <td>-33.57600</td>
-      <td>-70.80000</td>
-    </tr>
-    <tr>
-      <th>345</th>
-      <td>13605</td>
-      <td>Peñaflor</td>
-      <td>Talagante</td>
-      <td>Metropolitana</td>
-      <td>69.0</td>
-      <td>101058.0</td>
-      <td>1307.30</td>
-      <td>0.753</td>
-      <td>Alto</td>
-      <td>-33.60600</td>
-      <td>-70.87700</td>
-    </tr>
-    <tr>
-      <th>346</th>
-      <td>5999</td>
-      <td>Barco Isabela Island</td>
-      <td>Valparaíso</td>
-      <td>Valparaíso</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>-33.01115</td>
-      <td>-71.59019</td>
-    </tr>
-    <tr>
-      <th>347</th>
-      <td>10999</td>
-      <td>Barco Silver Explorer</td>
-      <td>Los Lagos</td>
-      <td>Los Lagos</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>-39.76115</td>
-      <td>-74.24939</td>
-    </tr>
-  </tbody>
-</table>
-<p>348 rows × 11 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info_comunal</span><span class="p">[</span><span class="s1">&#39;Codigo region&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">info_comunal</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">CUT</span><span class="p">)[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;contagios_comunal@ivanMSC&#39;</span>
-<span class="n">schema</span><span class="o">=</span><span class="s1">&#39;@ivanMSC&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
-<span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving table&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv in cache&#39;</span><span class="p">)</span>
-<span class="n">contagiados_comunal</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="n">name</span><span class="o">=</span><span class="s1">&#39;info_comunal@ivanMSC&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
-<span class="n">info_comunal</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving table&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv in cache&#39;</span><span class="p">)</span>
-<span class="n">info_comunal</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">productos</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;min_ciencias_products&#39;</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">schema</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15118,10 +14759,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>creating table contagios_comunal@ivanMSC ,schema: @ivanMSC
-saving table/data/ETLcache/contagios_comunal@ivanMSC_06062021_023347.csv in cache
-creating table info_comunal@ivanMSC ,schema: @ivanMSC
-saving table/data/ETLcache/info_comunal@ivanMSC_06062021_023347.csv in cache
+<pre>schema tracking exists, will not be created
 </pre>
 </div>
 </div>
@@ -15133,11 +14771,46 @@ saving table/data/ETLcache/info_comunal@ivanMSC_06062021_023347.csv in cache
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_covid-chile.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
-          <span class="s1">&#39;/home/jovyan/work/ETL/@ivanMSC.ipynb&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#LEER ARCHIVOS DENTRO DE RUTAS CORRESPONDIENTES A PRODUCTOS, GUARDARLOS EN DICCIONARIO &quot;TABLES&quot;</span>
+<span class="n">tables</span><span class="o">=</span><span class="p">{}</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="p">:</span>
+    <span class="n">files_folder</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">files_folder_prefix</span><span class="o">=</span><span class="s1">&#39;/MinCiencia/Datos-COVID19/blob/master/output/&#39;</span><span class="o">+</span><span class="n">files_folder</span><span class="o">+</span><span class="s1">&#39;/&#39;</span>
+    <span class="n">tables</span><span class="p">[</span><span class="n">files_folder</span><span class="p">]</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">raw_path</span><span class="o">=</span><span class="s1">&#39;https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/&#39;</span><span class="o">+</span><span class="n">files_folder</span><span class="o">+</span><span class="s1">&#39;/&#39;</span>
+    <span class="n">req</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">files</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">files_folder_prefix</span><span class="p">)</span>
+    
+    
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)):</span>
+        <span class="n">files</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="n">files</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="n">raw_path</span><span class="o">+</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.csv&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">fl</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading file: &#39;</span><span class="o">+</span><span class="n">fl</span><span class="p">)</span>
+            <span class="n">table</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+            <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fl</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+            
+
+            
+            <span class="n">outpath</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">files_folder</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outpath</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+            
+            
+            <span class="n">outfile</span><span class="o">=</span><span class="n">outpath</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">table_name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving raw table&quot;</span><span class="o">+</span><span class="n">outfile</span><span class="o">+</span><span class="s1">&#39;in cache&#39;</span><span class="p">)</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">pass</span>
 </pre></div>
 
      </div>
@@ -15153,19 +14826,103 @@ saving table/data/ETLcache/info_comunal@ivanMSC_06062021_023347.csv in cache
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>0</pre>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto5/TotalesNacionales.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto5/TotalesNacionales_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto5/TotalesNacionales_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto14/FallecidosCumulativo.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto14/FallecidosCumulativo_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto14/FallecidosCumulativo_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto19/CasosActivosPorComuna.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto19/CasosActivosPorComuna_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto19/CasosActivosPorComuna_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto37/Defunciones.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto37/Defunciones_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto37/Defunciones_deis.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto37/Defunciones_deis_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto37/Defunciones_deis_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto37/Defunciones_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto53/confirmados_nacional.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto53/confirmados_provinciales.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto53/confirmados_regionales.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto53/confirmados_ss.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.nacional.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.nacional_n.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.provincial.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.provincial_copy.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.provincial_n.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.regional.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.regional_n.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.ss.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto54/r.ss_n.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto52/Camas_UCI.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto52/Camas_UCI_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto52/Camas_UCI_t.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEISPorComuna.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEISPorComuna_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEISPorComuna_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEIS_confirmadosPorComuna.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEIS_confirmadosPorComuna_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEIS_confirmadosPorComuna_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEIS_sospechososPorComuna.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEIS_sospechososPorComuna_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto50/DefuncionesDEIS_sospechososPorComuna_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto48/SOCHIMI.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto48/SOCHIMI_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto48/SOCHIMI_std.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto24/CamasHospital_Diario.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto24/CamasHospital_Diario_T.csv
+reading file: https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto24/CamasHospital_Diario_std.csv
+</pre>
+</div>
 </div>
 
 </div>
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Guardar tablas en CSV</span>
+<span class="k">for</span> <span class="n">schema</span> <span class="ow">in</span> <span class="n">tables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">[</span><span class="n">schema</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">tables</span><span class="p">[</span><span class="n">schema</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;creating table &quot;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; ,schema: &#39;</span><span class="o">+</span><span class="n">schema</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span><span class="n">con</span><span class="o">=</span><span class="n">cnx</span><span class="p">,</span><span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span><span class="n">chunksize</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving table&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv in cache&#39;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="n">timestamp</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="k">pass</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;jupyter nbconvert --output /home/jovyan/work/ETLdocs/&#39;</span> <span class="o">+</span> <span class="s1">&#39;ETL_covid-chile.html&#39;</span> <span class="o">+</span> <span class="s1">&#39; --to html &#39;</span> <span class="o">+</span> 
+          <span class="s1">&#39;/home/jovyan/work/ETL/covid-chile.ipynb&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>
