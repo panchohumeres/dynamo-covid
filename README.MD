@@ -1,9 +1,10 @@
-# SuperJupyter  <img src="logo.png" alt="alt text" width="100px" height="100px">
+# Dynamo-Covid
 ## Chile COVID-19 Pandemic Monitoring Panel. Powered By:
+## SuperJupyter  <img src="logo.png" alt="alt text" width="100px" height="100px">
 ![enter image description here](arq.png)
 Business Intelligence stack, based on **Apache Superset-PostGres** for **data warehousing** and **visualization**, and **Jupyter Notebooks** for development of automated **ETL** (Extract, Transform, Load) routines.
 
-### [Offline][Discontinued due to changes in the source data, you can replicate and test the underlying stack with this repo]
+#### [Offline][Discontinued due to changes in the source data (government), you can replicate and test the underlying stack with this repo]
 
 ### Components:
  - **Apache Superset**: Airbnb Business Intelligence tool. Docker image based on amancevice docker-superset project:
